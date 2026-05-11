@@ -46,8 +46,8 @@ export const rootMetadata: Metadata = {
     },
   },
   icons: {
-    icon: '/Mutavaatir-circle.ico',
-    apple: '/Mutavaatir-circle.ico',
-    shortcut: '/Mutavaatir-circle.ico',
+    icon: '/mutavaatir-circle.ico',
+    apple: '/mutavaatir-circle.ico',
+    shortcut: '/mutavaatir-circle.ico',
   },
 }
