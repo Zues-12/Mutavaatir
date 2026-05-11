@@ -36,7 +36,7 @@ export default function Features() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="bg-amber-100 py-16 lg:py-20"
+      className="bg-brand-dust py-16 lg:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 id="about-heading" className="sr-only">
@@ -51,17 +51,17 @@ export default function Features() {
                 key={feature.title}
                 className={cn(
                   'flex flex-col items-start space-y-4 pb-8 md:pb-0',
-                  isNotLast ? 'md:border-r md:border-amber-800/30 md:pr-8 lg:pr-6' : ''
+                  isNotLast ? 'md:border-r md:border-brand-earth/30 md:pr-8 lg:pr-6' : ''
                 )}
               >
-                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-amber-900 shadow-md">
-                  <Icon size={32} className="text-amber-100" strokeWidth={1.5} aria-hidden />
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-brand-earth shadow-md">
+                  <Icon size={32} className="text-brand-mist" strokeWidth={1.5} aria-hidden />
                 </div>
                 <article className="space-y-2">
-                  <h3 className="text-sm leading-tight font-bold tracking-wider text-stone-900 font-display">
+                  <h3 className="text-sm leading-tight font-normal tracking-normal text-brand-void font-display">
                     {feature.title}
                   </h3>
-                  <p className="text-xs leading-relaxed text-stone-700">{feature.description}</p>
+                  <p className="text-xs leading-relaxed text-brand-earth">{feature.description}</p>
                 </article>
               </li>
             )

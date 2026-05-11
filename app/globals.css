@@ -78,6 +78,11 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-display: var(--font-oswald), ui-sans-serif, sans-serif;
+  --color-brand-void: #0d0d0d;
+  --color-brand-earth: #735e45;
+  --color-brand-clay: #9f8666;
+  --color-brand-dust: #bfb39b;
+  --color-brand-mist: #d9cdbf;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

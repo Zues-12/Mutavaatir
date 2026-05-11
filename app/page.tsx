@@ -10,7 +10,7 @@ export default function HomePage() {
     <>
       <OrganizationJsonLd />
       <Navbar />
-      <main id="main-content" className="min-h-screen bg-stone-950" tabIndex={-1}>
+      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
         <Hero />
         <Features />
         <HowItWorks />

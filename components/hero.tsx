@@ -4,60 +4,60 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-stone-950"
+      className="relative isolate overflow-hidden bg-black"
       aria-labelledby="hero-heading"
     >
-      <div className="absolute inset-0 opacity-20" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/10 to-stone-900/20" />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 -z-10 flex items-stretch justify-end"
+        aria-hidden
+      >
+        <Image
+          src="/hero-bg.png"
+          alt=""
+          width={1920}
+          height={1080}
+          className="h-full w-auto max-w-none object-contain object-right opacity-40 xl:opacity-100"
+          priority
+          sizes="(max-width: 1024px) 70vw, 55vw"
+        />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-32">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-24">
-          <div className="flex flex-col justify-center space-y-10">
-            <h1
-              id="hero-heading"
-              className="text-5xl leading-tight font-bold tracking-tighter text-amber-100 sm:text-6xl lg:text-7xl font-display"
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,rgb(0,0,0)_0%,rgba(0,0,0,0)_40%)]"
+        aria-hidden
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 sm:pt-8 sm:pb-20 lg:px-8 lg:pt-10 lg:pb-24">
+        <div className="flex flex-col justify-center space-y-6 sm:space-y-8">
+          <h1
+            id="hero-heading"
+            className="font-display flex flex-col gap-2 text-4xl leading-tight font-normal tracking-normal sm:text-6xl lg:gap-3 lg:text-7xl"
+          >
+            <span className="text-brand-mist">A BOOK.</span>
+            <span className="text-brand-clay">CHOSEN FOR YOU.</span>
+            <span className="text-brand-clay">DELIVERED MONTHLY.</span>
+          </h1>
+
+          <div className="h-px w-16 bg-brand-mist" aria-hidden />
+
+          <p className="max-w-2xl text-base leading-relaxed tracking-normal text-brand-dust sm:text-xl">
+            Mutavaatir is a monthly book subscription box that brings you handpicked books based
+            on meaning, value and timeless reading.
+          </p>
+
+          <div id="pricing" className="flex flex-col gap-6 pt-2 sm:flex-row sm:pt-4">
+            <button
+              type="button"
+              className="bg-brand-clay px-7 py-3.5 text-sm font-medium tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg lg:text-[0.95rem] font-display"
             >
-              A BOOK.
-              <br />
-              CHOSEN FOR YOU.
-              <br />
-              DELIVERED MONTHLY.
-            </h1>
-
-            <div className="h-px w-16 bg-amber-100" aria-hidden />
-
-            <p className="max-w-md text-sm leading-relaxed tracking-wide text-stone-300">
-              Mutavaatir is a monthly book subscription box that brings you handpicked books based
-              on meaning, value and timeless reading.
-            </p>
-
-            <div id="subscribe" className="flex flex-col gap-6 pt-6 sm:flex-row">
-              <button
-                type="button"
-                className="bg-amber-100 px-8 py-4 text-xs font-bold tracking-wider text-stone-950 shadow-lg transition-all duration-300 hover:bg-amber-200 hover:shadow-xl font-display"
-              >
-                SUBSCRIBE NOW
-              </button>
-              <button
-                type="button"
-                className="border-2 border-stone-500 px-8 py-4 text-xs font-bold tracking-wider text-stone-300 transition-all duration-300 hover:border-amber-100 hover:text-amber-100 font-display"
-              >
-                LEARN MORE
-              </button>
-            </div>
-          </div>
-
-          <div className="relative flex h-96 items-center justify-center lg:h-[500px]">
-            <Image
-              src="/mutavaatir-product.jpg"
-              alt="Mutavaatir book box with curated reading materials"
-              width={1200}
-              height={900}
-              className="h-full w-full rounded-lg object-cover shadow-2xl"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
+              SUBSCRIBE NOW
+            </button>
+            <button
+              type="button"
+              className="border-2 border-brand-clay px-8 py-4 text-xs font-medium tracking-normal text-brand-dust transition-all duration-300 hover:border-brand-mist hover:text-brand-mist font-display"
+            >
+              LEARN MORE
+            </button>
           </div>
         </div>
       </div>

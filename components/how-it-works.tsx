@@ -40,21 +40,21 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       aria-labelledby="how-heading"
-      className="bg-stone-100 py-16 lg:py-24"
+      className="bg-brand-mist py-16 lg:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
           <div className="flex flex-col justify-start lg:col-span-4">
             <h2
               id="how-heading"
-              className="mb-8 text-5xl leading-tight font-bold tracking-tight text-stone-900 lg:text-6xl font-display"
+              className="mb-8 text-5xl leading-tight font-normal tracking-normal text-brand-void lg:text-6xl font-display"
             >
               HOW IT
               <br />
               WORKS
             </h2>
-            <div className="mb-8 h-px w-12 bg-stone-400" aria-hidden />
-            <p className="text-sm leading-relaxed font-bold tracking-wide text-stone-700 font-display">
+            <div className="mb-8 h-px w-12 bg-brand-clay" aria-hidden />
+            <p className="text-sm leading-relaxed font-normal tracking-normal text-brand-earth font-display">
               Simple. Personal.
               <br />
               Meaningful.
@@ -62,16 +62,16 @@ export default function HowItWorks() {
           </div>
 
           <div className="lg:col-span-8">
-            <ol className="m-0 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-2 md:gap-12 lg:gap-12 [&>li:nth-child(-n+2)]:border-b [&>li:nth-child(-n+2)]:border-stone-300 [&>li:nth-child(-n+2)]:pb-8 lg:[&>li:nth-child(-n+2)]:border-b-0 lg:[&>li:nth-child(-n+2)]:pb-0">
+            <ol className="m-0 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-2 md:gap-12 lg:gap-12 [&>li:nth-child(-n+2)]:border-b [&>li:nth-child(-n+2)]:border-brand-dust [&>li:nth-child(-n+2)]:pb-8 lg:[&>li:nth-child(-n+2)]:border-b-0 lg:[&>li:nth-child(-n+2)]:pb-0">
               {steps.map((step) => {
                 const Icon = step.icon
                 return (
                   <li key={step.number}>
                     <div className="flex items-start gap-4">
                       <div className="flex flex-1 items-start gap-4">
-                        <div className="flex-shrink-0 pt-1">
+                        <div className="shrink-0 pt-1">
                           <span
-                            className="text-2xl font-bold text-stone-400 lg:text-3xl font-display"
+                            className="text-2xl font-normal tracking-normal text-brand-clay lg:text-3xl font-display"
                             aria-hidden
                           >
                             {step.number}
@@ -79,12 +79,12 @@ export default function HowItWorks() {
                         </div>
                         <div className="flex-1 space-y-3">
                           <div className="flex items-center gap-3">
-                            <Icon size={28} className="text-stone-500" strokeWidth={1.5} aria-hidden />
+                            <Icon size={28} className="text-brand-clay" strokeWidth={1.5} aria-hidden />
                           </div>
-                          <h3 className="text-sm leading-tight font-bold tracking-wide text-stone-900 font-display">
+                          <h3 className="text-sm leading-tight font-normal tracking-normal text-brand-void font-display">
                             {step.title}
                           </h3>
-                          <p className="text-xs leading-relaxed text-stone-600">{step.description}</p>
+                          <p className="text-xs leading-relaxed text-brand-earth">{step.description}</p>
                         </div>
                       </div>
                     </div>
