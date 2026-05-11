@@ -1,6 +1,14 @@
+import type { LucideIcon } from 'lucide-react'
 import { BookOpen, Package, Bookmark, Users } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-const features = [
+type Feature = {
+  readonly icon: LucideIcon
+  readonly title: string
+  readonly description: string
+}
+
+const features: Feature[] = [
   {
     icon: BookOpen,
     title: 'HANDPICKED BOOKS',
@@ -25,41 +33,40 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="bg-amber-100 py-16 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="bg-amber-100 py-16 lg:py-20"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="about-heading" className="sr-only">
+          What you get with Mutavaatir
+        </h2>
+        <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
             const isNotLast = index !== features.length - 1
-            
             return (
-              <div
-                key={index}
-                className={`flex flex-col items-start space-y-4 pb-8 md:pb-0 ${
+              <li
+                key={feature.title}
+                className={cn(
+                  'flex flex-col items-start space-y-4 pb-8 md:pb-0',
                   isNotLast ? 'md:border-r md:border-amber-800/30 md:pr-8 lg:pr-6' : ''
-                }`}
+                )}
               >
-                {/* Icon Container */}
-                <div className="w-20 h-20 bg-amber-900 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Icon size={32} className="text-amber-100" strokeWidth={1.5} />
+                <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-amber-900 shadow-md">
+                  <Icon size={32} className="text-amber-100" strokeWidth={1.5} aria-hidden />
                 </div>
-
-                {/* Content */}
-                <div className="space-y-2">
-                  <h3
-                    className="text-sm font-bold text-stone-900 tracking-wider leading-tight"
-                    style={{ fontFamily: 'Oswald, sans-serif' }}
-                  >
+                <article className="space-y-2">
+                  <h3 className="text-sm leading-tight font-bold tracking-wider text-stone-900 font-display">
                     {feature.title}
                   </h3>
-                  <p className="text-xs text-stone-700 leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
+                  <p className="text-xs leading-relaxed text-stone-700">{feature.description}</p>
+                </article>
+              </li>
             )
           })}
-        </div>
+        </ul>
       </div>
     </section>
   )

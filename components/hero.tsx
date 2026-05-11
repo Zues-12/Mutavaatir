@@ -2,61 +2,61 @@ import Image from 'next/image'
 
 export default function Hero() {
   return (
-    <section className="bg-stone-950 relative overflow-hidden">
-      {/* Background texture */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/10 to-stone-900/20"></div>
+    <section
+      id="home"
+      className="relative overflow-hidden bg-stone-950"
+      aria-labelledby="hero-heading"
+    >
+      <div className="absolute inset-0 opacity-20" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/10 to-stone-900/20" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
-          {/* Left Content */}
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-32">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-24">
           <div className="flex flex-col justify-center space-y-10">
-            {/* Headline */}
-            <div>
-              <h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-amber-100 leading-tight tracking-tighter"
-                style={{ fontFamily: 'Oswald, sans-serif' }}
-              >
-                A BOOK.
-                <br />
-                CHOSEN FOR YOU.
-                <br />
-                DELIVERED MONTHLY.
-              </h1>
-            </div>
+            <h1
+              id="hero-heading"
+              className="text-5xl leading-tight font-bold tracking-tighter text-amber-100 sm:text-6xl lg:text-7xl font-display"
+            >
+              A BOOK.
+              <br />
+              CHOSEN FOR YOU.
+              <br />
+              DELIVERED MONTHLY.
+            </h1>
 
-            {/* Divider */}
-            <div className="w-16 h-px bg-amber-100"></div>
+            <div className="h-px w-16 bg-amber-100" aria-hidden />
 
-            {/* Description */}
-            <p className="text-sm text-stone-300 max-w-md leading-relaxed tracking-wide">
-              Mutavaatir is a monthly book subscription box that brings you handpicked books based on meaning, value and timeless reading.
+            <p className="max-w-md text-sm leading-relaxed tracking-wide text-stone-300">
+              Mutavaatir is a monthly book subscription box that brings you handpicked books based
+              on meaning, value and timeless reading.
             </p>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 pt-6">
+            <div id="subscribe" className="flex flex-col gap-6 pt-6 sm:flex-row">
               <button
-                className="bg-amber-100 text-stone-950 px-8 py-4 font-bold text-xs hover:bg-amber-200 transition-all duration-300 tracking-wider shadow-lg hover:shadow-xl"
-                style={{ fontFamily: 'Oswald, sans-serif' }}
+                type="button"
+                className="bg-amber-100 px-8 py-4 text-xs font-bold tracking-wider text-stone-950 shadow-lg transition-all duration-300 hover:bg-amber-200 hover:shadow-xl font-display"
               >
                 SUBSCRIBE NOW
               </button>
               <button
-                className="border-2 border-stone-500 text-stone-300 px-8 py-4 font-bold text-xs hover:border-amber-100 hover:text-amber-100 transition-all duration-300 tracking-wider"
-                style={{ fontFamily: 'Oswald, sans-serif' }}
+                type="button"
+                className="border-2 border-stone-500 px-8 py-4 text-xs font-bold tracking-wider text-stone-300 transition-all duration-300 hover:border-amber-100 hover:text-amber-100 font-display"
               >
                 LEARN MORE
               </button>
             </div>
           </div>
 
-          {/* Right Side - Product Image */}
-          <div className="relative h-96 lg:h-[500px] flex items-center justify-center">
-            <img
+          <div className="relative flex h-96 items-center justify-center lg:h-[500px]">
+            <Image
               src="/mutavaatir-product.jpg"
-              alt="Mutavaatir Book Box with accessories"
-              className="w-full h-full object-cover rounded-lg shadow-2xl"
+              alt="Mutavaatir book box with curated reading materials"
+              width={1200}
+              height={900}
+              className="h-full w-full rounded-lg object-cover shadow-2xl"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
             />
           </div>
         </div>

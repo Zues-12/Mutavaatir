@@ -1,6 +1,14 @@
-import { ClipboardList, Wand2, Package, BookOpen, ChevronRight } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { ClipboardList, Wand2, Package, BookOpen } from 'lucide-react'
 
-const steps = [
+type Step = {
+  readonly number: string
+  readonly icon: LucideIcon
+  readonly title: string
+  readonly description: string
+}
+
+const steps: Step[] = [
   {
     number: '01',
     icon: ClipboardList,
@@ -29,125 +37,61 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-stone-100 py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left Section */}
-          <div className="lg:col-span-4 flex flex-col justify-start">
+    <section
+      id="how-it-works"
+      aria-labelledby="how-heading"
+      className="bg-stone-100 py-16 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+          <div className="flex flex-col justify-start lg:col-span-4">
             <h2
-              className="text-5xl lg:text-6xl font-bold text-stone-900 mb-8 leading-tight tracking-tight"
-              style={{ fontFamily: 'Oswald, sans-serif' }}
+              id="how-heading"
+              className="mb-8 text-5xl leading-tight font-bold tracking-tight text-stone-900 lg:text-6xl font-display"
             >
               HOW IT
               <br />
               WORKS
             </h2>
-
-            {/* Divider */}
-            <div className="w-12 h-px bg-stone-400 mb-8"></div>
-
-            {/* Tagline */}
-            <p
-              className="text-sm text-stone-700 font-bold tracking-wide leading-relaxed"
-              style={{ fontFamily: 'Oswald, sans-serif' }}
-            >
+            <div className="mb-8 h-px w-12 bg-stone-400" aria-hidden />
+            <p className="text-sm leading-relaxed font-bold tracking-wide text-stone-700 font-display">
               Simple. Personal.
               <br />
               Meaningful.
             </p>
           </div>
 
-          {/* Right Section - Steps */}
           <div className="lg:col-span-8">
-            <div className="space-y-12 lg:space-y-0 lg:flex lg:flex-col lg:gap-12">
-              {/* Top Row - Steps 1 & 2 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start pb-8 lg:pb-0 border-b border-stone-300 lg:border-b-0">
-                {steps.slice(0, 2).map((step, index) => {
-                  const Icon = step.icon
-                  return (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="flex items-start gap-4 flex-1">
-                        {/* Number */}
+            <ol className="m-0 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-2 md:gap-12 lg:gap-12 [&>li:nth-child(-n+2)]:border-b [&>li:nth-child(-n+2)]:border-stone-300 [&>li:nth-child(-n+2)]:pb-8 lg:[&>li:nth-child(-n+2)]:border-b-0 lg:[&>li:nth-child(-n+2)]:pb-0">
+              {steps.map((step) => {
+                const Icon = step.icon
+                return (
+                  <li key={step.number}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex flex-1 items-start gap-4">
                         <div className="flex-shrink-0 pt-1">
                           <span
-                            className="text-2xl lg:text-3xl font-bold text-stone-400"
-                            style={{ fontFamily: 'Oswald, sans-serif' }}
+                            className="text-2xl font-bold text-stone-400 lg:text-3xl font-display"
+                            aria-hidden
                           >
                             {step.number}
                           </span>
                         </div>
-
-                        {/* Content */}
                         <div className="flex-1 space-y-3">
                           <div className="flex items-center gap-3">
-                            <Icon size={28} className="text-stone-500" strokeWidth={1.5} />
+                            <Icon size={28} className="text-stone-500" strokeWidth={1.5} aria-hidden />
                           </div>
-                          <h3
-                            className="text-sm font-bold text-stone-900 tracking-wide leading-tight"
-                            style={{ fontFamily: 'Oswald, sans-serif' }}
-                          >
+                          <h3 className="text-sm leading-tight font-bold tracking-wide text-stone-900 font-display">
                             {step.title}
                           </h3>
-                          <p className="text-xs text-stone-600 leading-relaxed">
-                            {step.description}
-                          </p>
+                          <p className="text-xs leading-relaxed text-stone-600">{step.description}</p>
                         </div>
                       </div>
-                      {/* Arrow between columns */}
-                      {index === 0 && (
-                        <div className="hidden md:flex lg:hidden absolute right-4 top-1/2 transform -translate-y-1/2">
-                          <ChevronRight size={24} className="text-stone-400" strokeWidth={1.5} />
-                        </div>
-                      )}
                     </div>
-                  )
-                })}
-              </div>
-
-              {/* Bottom Row - Steps 3 & 4 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
-                {steps.slice(2, 4).map((step, index) => {
-                  const Icon = step.icon
-                  return (
-                    <div key={index + 2} className="flex items-start gap-4">
-                      <div className="flex items-start gap-4 flex-1">
-                        {/* Number */}
-                        <div className="flex-shrink-0 pt-1">
-                          <span
-                            className="text-2xl lg:text-3xl font-bold text-stone-400"
-                            style={{ fontFamily: 'Oswald, sans-serif' }}
-                          >
-                            {step.number}
-                          </span>
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex-1 space-y-3">
-                          <div className="flex items-center gap-3">
-                            <Icon size={28} className="text-stone-500" strokeWidth={1.5} />
-                          </div>
-                          <h3
-                            className="text-sm font-bold text-stone-900 tracking-wide leading-tight"
-                            style={{ fontFamily: 'Oswald, sans-serif' }}
-                          >
-                            {step.title}
-                          </h3>
-                          <p className="text-xs text-stone-600 leading-relaxed">
-                            {step.description}
-                          </p>
-                        </div>
-                      </div>
-                      {/* Arrow between columns */}
-                      {index === 0 && (
-                        <div className="hidden md:flex lg:hidden absolute right-4 top-1/2 transform -translate-y-1/2">
-                          <ChevronRight size={24} className="text-stone-400" strokeWidth={1.5} />
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+                  </li>
+                )
+              })}
+            </ol>
           </div>
         </div>
       </div>

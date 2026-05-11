@@ -3,15 +3,19 @@ import Hero from '@/components/hero'
 import Features from '@/components/features'
 import HowItWorks from '@/components/how-it-works'
 import Footer from '@/components/footer'
+import { OrganizationJsonLd } from '@/components/json-ld'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-stone-950">
+    <>
+      <OrganizationJsonLd />
       <Navbar />
-      <Hero />
-      <Features />
-      <HowItWorks />
-      <Footer />
-    </main>
+      <main id="main-content" className="min-h-screen bg-stone-950" tabIndex={-1}>
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Footer />
+      </main>
+    </>
   )
 }
