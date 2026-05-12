@@ -69,11 +69,11 @@ export default function HowItWorksHome() {
       className="bg-brand-mist py-6"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-8">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-stretch lg:gap-6">
+        <div className="flex flex-col gap-5 lg:flex-row-reverse lg:items-stretch lg:gap-6">
           <div className="max-w-md shrink-0 lg:max-w-[min(16rem,22vw)] xl:max-w-xs">
             <h2
               id="how-heading"
-              className="font-display text-4xl leading-tight font-normal tracking-normal text-brand-void sm:text-5xl lg:text-3xl xl:text-5xl mr-4"
+              className="font-display mr-4 text-4xl leading-none font-medium tracking-tight text-brand-void sm:text-5xl lg:text-3xl xl:text-5xl"
             >
               HOW IT WORKS
             </h2>

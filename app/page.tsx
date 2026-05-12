@@ -4,6 +4,8 @@ import Features from '@/components/features'
 import WhatIsMutavaatir from '@/components/what-is-mutavaatir'
 import HomeReviews from '@/components/home-reviews'
 import HowItWorksHome from '@/components/how-it-works-home'
+import WhatMakesDifferent from '@/components/what-makes-different'
+import HomeExperienceExtras from '@/components/home-experience-extras'
 import Footer from '@/components/footer'
 import { OrganizationJsonLd } from '@/components/json-ld'
 
@@ -18,6 +20,8 @@ export default function HomePage() {
         <WhatIsMutavaatir />
         <HomeReviews />
         <HowItWorksHome />
+        <WhatMakesDifferent />
+        <HomeExperienceExtras />
         <Footer />
       </main>
     </>

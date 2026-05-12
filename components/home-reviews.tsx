@@ -61,7 +61,9 @@ export default function HomeReviews() {
                   key={review.name}
                   className="w-[270px] rounded-sm bg-brand-mist p-5 text-brand-void shadow-[0_8px_25px_rgba(0,0,0,0.3)] md:w-[290px] xl:w-auto"
                 >
-                  <Quote className="h-7 w-7 text-brand-clay" strokeWidth={1.7} aria-hidden />
+                  <div className="flex items-center justify-end">
+                    <Quote className="h-7 w-7 text-brand-clay" strokeWidth={1.7} fill="currentColor" aria-hidden />
+                  </div>
                   <p className="mt-4 min-h-28 text-xl leading-relaxed text-brand-void">
                     {review.quote}
                   </p>
