@@ -2,11 +2,14 @@ import Image from 'next/image'
 
 export default function HomeExperienceExtras() {
   return (
-    <section aria-labelledby="experience-heading" className="bg-brand-dust py-0">
+    <section
+      aria-labelledby="experience-heading"
+      className="paper-texture bg-brand-mist py-0"
+    >
       <div>
         <div className="overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
-            <div className="relative min-h-[320px] overflow-hidden lg:min-h-0">
+            <div className="relative min-h-[320px] overflow-hidden bg-brand-void lg:min-h-0">
               <Image
                 src="/month-experience.png"
                 alt="Wrapped monthly book package"
@@ -14,7 +17,6 @@ export default function HomeExperienceExtras() {
                 className="object-cover object-[0%_50%]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-brand-void/20" aria-hidden />
             </div>
             <div className="flex flex-col justify-center px-6 py-8 sm:px-10 lg:px-12">
               <h2
@@ -31,7 +33,7 @@ export default function HomeExperienceExtras() {
               </p>
               <button
                 type="button"
-                className="font-display mt-6 w-fit bg-brand-clay px-7 py-3 text-sm tracking-wide text-brand-mist transition-colors duration-300 hover:bg-brand-earth"
+                className="font-display mt-6 w-fit bg-brand-void px-7 py-3 text-sm tracking-wide text-brand-mist transition-colors duration-300 hover:bg-brand-earth"
               >
                 SUBSCRIBE NOW
               </button>

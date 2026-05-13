@@ -22,6 +22,7 @@ export default function HomePage() {
         <HowItWorksHome />
         <WhatMakesDifferent />
         <HomeExperienceExtras />
+        
         <Footer />
       </main>
     </>
