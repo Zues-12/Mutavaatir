@@ -11,15 +11,15 @@ type Feature = {
 const features: Feature[] = [
   {
     icon: LibraryBig,
-    title: "HANDPICKED BOOKS",
+    title: "CURATED BOOKS",
     description:
-      "Thoughtfully chosen reads that inspire, surprise, educate and elevate.",
+      "Thoughtfully chosen reads that inspire, educate and elevate.",
   },
   {
     icon: Package,
     title: "MONTHLY DELIVERY",
     description:
-      "A carefully packed surprise, delivered to your doorstep every month.",
+      "A carefully packed surprise, delivered to your doorsteps.",
   },
   {
     icon: Bookmark,
@@ -28,9 +28,9 @@ const features: Feature[] = [
   },
   {
     icon: ShieldCheck,
-    title: "100% PERCENT ORIGINAL BOOKS",
+    title: "ORIGINAL BOOKS",
     description:
-      "Only original books, no pirated or discarded books that no one read.",
+      "Only 100% original books, no pirated or discarded books that no one read.",
   },
 ];
 
@@ -39,13 +39,13 @@ export default function Features() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="bg-brand-dust py-6"
+      className="bg-brand-dust py-10 md:py-12"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <h2 id="about-heading" className="sr-only">
           What you get with Mutavaatir
         </h2>
-        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-5 md:gap-y-8 lg:grid-cols-4 lg:gap-x-2 lg:gap-y-2">
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 md:gap-y-10 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-8">
           {features.map((feature, index) => {
             const Icon = feature.icon
             const showDividerMd = (index + 1) % 2 !== 0
@@ -54,11 +54,11 @@ export default function Features() {
               <li
                 key={feature.title}
                 className={cn(
-                  'flex flex-row items-center gap-4 lg:gap-2 pb-5 md:pb-0',
+                  'flex flex-row items-center gap-4 lg:gap-3',
                   showDividerMd &&
-                    'md:border-r md:border-brand-earth/30 md:pr-8',
+                    'md:border-r md:border-brand-earth/30 md:pr-10',
                   showDividerLg &&
-                    'lg:border-r lg:border-brand-earth/30 lg:pr-4'
+                    'lg:border-r lg:border-brand-earth/30 lg:pr-6'
                 )}
               >
                 <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-brand-earth shadow-md md:h-24 md:w-24 lg:h-20 lg:w-20 xl:h-24 xl:w-24">
@@ -72,7 +72,7 @@ export default function Features() {
                   <h3 className="font-display text-lg leading-snug font-medium tracking-normal text-brand-void md:text-xl lg:text-base xl:text-xl">
                     {feature.title}
                   </h3>
-                  <p className="text-base leading-snug text-brand-earth md:text-lg lg:text-sm xl:text-lg">
+                  <p className="text-xs leading-snug text-brand-earth md:text-sm lg:text-xs xl:text-sm">
                     {feature.description}
                   </p>
                 </article>

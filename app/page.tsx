@@ -6,6 +6,7 @@ import HomeReviews from '@/components/home-reviews'
 import HowItWorksHome from '@/components/how-it-works-home'
 import WhatMakesDifferent from '@/components/what-makes-different'
 import HomeExperienceExtras from '@/components/home-experience-extras'
+import HomeLastCtaBanner from '@/components/home-last-cta-banner'
 import Footer from '@/components/footer'
 import { OrganizationJsonLd } from '@/components/json-ld'
 
@@ -22,7 +23,7 @@ export default function HomePage() {
         <HowItWorksHome />
         <WhatMakesDifferent />
         <HomeExperienceExtras />
-        
+        <HomeLastCtaBanner />
         <Footer />
       </main>
     </>

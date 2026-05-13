@@ -28,7 +28,7 @@ export default function WhatIsMutavaatir() {
   return (
     <section
       aria-labelledby="what-is-mutavaatir-heading"
-      className="paper-texture bg-brand-mist py-8 md:py-10"
+      className="paper-texture bg-brand-mist py-10 md:py-12"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(260px,420px)_1fr] lg:gap-10">

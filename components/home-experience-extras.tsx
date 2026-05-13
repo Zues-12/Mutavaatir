@@ -4,7 +4,7 @@ export default function HomeExperienceExtras() {
   return (
     <section
       aria-labelledby="experience-heading"
-      className="paper-texture bg-brand-mist py-0"
+      className="paper-texture bg-brand-mist py-10 md:py-12"
     >
       <div>
         <div className="overflow-hidden">
