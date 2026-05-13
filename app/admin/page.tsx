@@ -144,7 +144,7 @@ export default function AdminDashboardPage() {
           </span>
         </header>
 
-        <div className="overflow-x-auto">
+        <div className="scrollbar-brand overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-brand-earth/40 text-[0.65rem] uppercase tracking-[0.2em] text-brand-earth">

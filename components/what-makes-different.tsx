@@ -54,7 +54,7 @@ export default function WhatMakesDifferent() {
             <div className="mt-4 h-px w-12 bg-brand-clay/80" aria-hidden />
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="scrollbar-brand overflow-x-auto">
             <div className="min-w-[680px] border border-brand-earth/35 bg-brand-void/40">
               <div className="grid grid-cols-[56px_1fr_1fr] border-b border-brand-earth/35">
                 <div className="border-r border-brand-earth/35" aria-hidden />

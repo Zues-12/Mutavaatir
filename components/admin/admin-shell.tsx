@@ -106,7 +106,7 @@ export default function AdminShell({ userEmail, children }: AdminShellProps) {
         <p className="px-6 pt-6 pb-2 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-brand-earth">
           Admin
         </p>
-        <div className="flex-1 overflow-y-auto pb-6">{navList}</div>
+        <div className="scrollbar-brand flex-1 overflow-y-auto pb-6">{navList}</div>
         <div className="border-t border-brand-earth p-4">
           <p className="mb-3 truncate text-xs text-brand-earth" title={userEmail ?? undefined}>
             {userEmail ?? 'Signed in'}
@@ -153,7 +153,7 @@ export default function AdminShell({ userEmail, children }: AdminShellProps) {
         {mobileOpen ? (
           <div
             id="admin-mobile-nav"
-            className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-brand-mist/15 bg-brand-void/95 backdrop-blur-md backdrop-saturate-150 lg:hidden"
+            className="scrollbar-brand fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-brand-mist/15 bg-brand-void/95 backdrop-blur-md backdrop-saturate-150 lg:hidden"
           >
             <p className="px-4 pt-6 pb-2 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-brand-earth">
               Admin

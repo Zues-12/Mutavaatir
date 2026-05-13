@@ -54,7 +54,7 @@ export default function HomeReviews() {
             </button>
           </div>
 
-          <div className="overflow-x-auto pb-2">
+          <div className="scrollbar-brand overflow-x-auto pb-2">
             <ul className="flex min-w-max gap-3 md:gap-4 xl:min-w-0 xl:grid xl:grid-cols-3">
               {reviews.map((review) => (
                 <li
@@ -88,7 +88,7 @@ export default function HomeReviews() {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-3 xl:mt-6" aria-hidden>
+        {/* <div className="mt-4 flex items-center justify-center gap-3 xl:mt-6" aria-hidden>
           <span className="h-px w-8 bg-brand-earth/45" />
           {reviews.map((review, index) => (
             <span
@@ -109,7 +109,7 @@ export default function HomeReviews() {
             </span>
           ))}
           <span className="h-px w-8 bg-brand-earth/45" />
-        </div>
+        </div> */}
       </div>
     </section>
   )

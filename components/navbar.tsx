@@ -78,7 +78,7 @@ export default function Navbar() {
         <nav
           id={MOBILE_NAV_ID}
           aria-label="Mobile primary navigation"
-          className="fixed inset-x-0 top-21 bottom-0 z-40 md:hidden overflow-y-auto border-t border-brand-mist/15 bg-brand-void/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/35"
+          className="scrollbar-brand fixed inset-x-0 top-21 bottom-0 z-40 md:hidden overflow-y-auto border-t border-brand-mist/15 bg-brand-void/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/35"
         >
           <div className="mx-auto flex max-h-full min-h-0 max-w-7xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-11 lg:px-8">
             <div className="space-y-5">
