@@ -2,40 +2,25 @@ import type { Metadata } from 'next'
 import { getSiteUrl, siteConfig } from '@/lib/site'
 
 const siteUrl = getSiteUrl()
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim()
 
+/** Root metadata merged with route-level `generateMetadata` / `metadata` exports. */
 export const rootMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: siteConfig.defaultTitle,
     template: siteConfig.titleTemplate,
   },
+  /** Fallback for routes that do not export their own description. */
   description: siteConfig.description,
-  keywords: [
-    'book subscription',
-    'monthly books',
-    'Mutavaatir',
-    'reading subscription',
-    'curated books',
-  ],
   applicationName: siteConfig.name,
-  authors: [{ name: siteConfig.name }],
+  authors: [{ name: siteConfig.name, url: siteUrl }],
   creator: siteConfig.name,
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    type: 'website',
-    locale: `${siteConfig.locale}_US`,
-    url: siteUrl,
-    siteName: siteConfig.name,
-    title: siteConfig.defaultTitle,
-    description: siteConfig.description,
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.defaultTitle,
-    description: siteConfig.description,
-    ...(siteConfig.twitterHandle ? { creator: siteConfig.twitterHandle } : {}),
+  publisher: siteConfig.name,
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
   },
   robots: {
     index: true,
@@ -43,6 +28,9 @@ export const rootMetadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
     },
   },
   icons: {
@@ -50,4 +38,7 @@ export const rootMetadata: Metadata = {
     apple: '/mutavaatir-circle.ico',
     shortcut: '/mutavaatir-circle.ico',
   },
+  ...(googleVerification
+    ? { verification: { google: googleVerification } }
+    : {}),
 }

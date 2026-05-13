@@ -11,6 +11,10 @@ export function OrganizationJsonLd() {
         name: siteConfig.name,
         url: siteUrl,
         description: siteConfig.description,
+        areaServed: {
+          '@type': 'Country',
+          name: 'Pakistan',
+        },
       },
       {
         '@type': 'WebSite',
@@ -20,7 +24,7 @@ export function OrganizationJsonLd() {
         alternateName: siteConfig.defaultTitle,
         description: siteConfig.description,
         publisher: { '@id': `${siteUrl}/#organization` },
-        inLanguage: siteConfig.locale,
+        inLanguage: ['en-PK', 'en'],
       },
       {
         '@type': 'Product',

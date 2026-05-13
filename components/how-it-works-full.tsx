@@ -59,6 +59,7 @@ export default function HowItWorksFull() {
           fill
           className="object-cover object-center"
           sizes="100vw"
+          quality={82}
           priority={false}
         />
       </div>

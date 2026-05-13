@@ -18,6 +18,7 @@ export default function Hero() {
           height={1080}
           className="h-full w-auto max-w-none object-contain object-right opacity-40 xl:opacity-100"
           priority
+          quality={100}
           sizes="(max-width: 1024px) 70vw, 55vw"
         />
       </div>
