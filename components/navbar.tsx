@@ -2,18 +2,27 @@
 
 import { useCallback, useEffect, useId, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { primaryNavLinks } from '@/lib/navigation'
+import { cn } from '@/lib/utils'
 
 const MOBILE_NAV_ID = 'primary-mobile-navigation'
 
 const navLinkClassName =
   'group relative font-display text-xs font-bold tracking-wide text-brand-mist transition-colors duration-300 hover:text-brand-clay xl:text-sm xl:tracking-wider'
 
+function navHrefIsActive(pathname: string, href: string) {
+  if (href.includes('#')) return false
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
 const ctaClassName =
   'font-display bg-brand-clay font-bold tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg px-4 py-2 text-xs xl:px-7 xl:py-3.5 xl:text-sm xl:tracking-wider'
 
 export default function Navbar() {
+  const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const disclosureId = useId()
 
@@ -47,12 +56,25 @@ export default function Navbar() {
           aria-label="Primary"
           className="hidden min-w-0 flex-1 items-center justify-center md:ml-8 md:flex md:gap-x-6 lg:ml-14 lg:gap-x-7 xl:ml-16 xl:gap-x-8"
         >
-          {primaryNavLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={navLinkClassName}>
-              {link.label}
-              <span className="absolute bottom-0 left-0 h-px w-0 bg-brand-clay transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+          {primaryNavLinks.map((link) => {
+            const active = navHrefIsActive(pathname, link.href)
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(navLinkClassName, active && 'text-brand-clay')}
+                aria-current={active ? 'page' : undefined}
+              >
+                {link.label}
+                <span
+                  className={cn(
+                    'absolute bottom-0 left-0 h-px bg-brand-clay transition-all duration-300',
+                    active ? 'w-full' : 'w-0 group-hover:w-full',
+                  )}
+                />
+              </Link>
+            )
+          })}
         </nav>
 
         <div className="hidden shrink-0 md:block">
@@ -82,16 +104,25 @@ export default function Navbar() {
         >
           <div className="mx-auto flex max-h-full min-h-0 max-w-7xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-11 lg:px-8">
             <div className="space-y-5">
-              {primaryNavLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-display block py-1 text-sm font-semibold tracking-wide text-brand-mist transition-colors hover:text-brand-dust"
-                  onClick={closeMobile}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {primaryNavLinks.map((link) => {
+                const active = navHrefIsActive(pathname, link.href)
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      'font-display block border-l-2 border-transparent py-1 pl-3 text-sm font-semibold tracking-wide transition-colors hover:text-brand-dust',
+                      active
+                        ? 'border-brand-clay text-brand-clay'
+                        : 'text-brand-mist hover:border-brand-earth/40',
+                    )}
+                    aria-current={active ? 'page' : undefined}
+                    onClick={closeMobile}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
             </div>
             <button
               type="button"
