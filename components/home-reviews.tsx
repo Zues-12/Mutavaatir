@@ -22,7 +22,7 @@ export default function HomeReviews() {
   return (
     <section
       aria-labelledby="reviews-heading"
-      className="relative overflow-hidden bg-brand-void py-10 md:py-12"
+      className="relative overflow-hidden bg-brand-void py-20 md:py-24"
     >
       <div
         className="absolute inset-0 bg-cover bg-right bg-no-repeat"

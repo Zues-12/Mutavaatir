@@ -66,7 +66,7 @@ export default function HowItWorksHome() {
     <section
       id="how-it-works"
       aria-labelledby="how-heading"
-      className="bg-brand-mist py-10 md:py-12"
+      className="bg-brand-mist py-20 md:py-24"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-stretch lg:gap-6">

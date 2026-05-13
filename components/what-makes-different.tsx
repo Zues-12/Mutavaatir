@@ -37,7 +37,7 @@ const comparisonItems: ComparisonItem[] = [
 
 export default function WhatMakesDifferent() {
   return (
-    <section aria-labelledby="difference-heading" className="bg-brand-void py-10 md:py-12">
+    <section aria-labelledby="difference-heading" className="bg-brand-void py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr] lg:items-start lg:gap-8">
           <div className="max-w-[16rem]">
