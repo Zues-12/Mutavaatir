@@ -6,6 +6,10 @@ export default function HomeLastCtaBanner() {
       aria-labelledby="last-cta-heading"
       className="relative isolate w-full overflow-hidden bg-brand-void bg-[url('/last-section-bg.png')] bg-left bg-no-repeat max-xl:min-h-[12.75rem] max-xl:bg-cover xl:aspect-[1024/116] xl:min-h-0 xl:bg-[length:100%_auto]"
     >
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-brand-void/45 xl:hidden"
+        aria-hidden
+      />
       <div className="relative z-10 mx-auto flex h-full min-h-[inherit] flex-col items-center justify-center gap-1.5 px-4 py-3 text-center max-xl:py-5 sm:gap-2 xl:min-h-0 xl:gap-1 xl:py-2 2xl:gap-2 2xl:py-3">
         <h2
           id="last-cta-heading"
