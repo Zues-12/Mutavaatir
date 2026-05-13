@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Oswald } from 'next/font/google'
 import './globals.css'
 import { OrganizationJsonLd } from '@/components/json-ld'
+import ScrollToTopOnNavigate from '@/components/scroll-to-top-on-navigate'
 import { rootMetadata } from '@/lib/metadata'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -55,6 +56,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <ScrollToTopOnNavigate />
         {children}
         <Analytics />
         <SpeedInsights />
