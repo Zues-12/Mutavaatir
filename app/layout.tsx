@@ -4,6 +4,7 @@ import './globals.css'
 import { OrganizationJsonLd } from '@/components/json-ld'
 import { rootMetadata } from '@/lib/metadata'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -56,6 +57,7 @@ export default function RootLayout({
         </a>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
