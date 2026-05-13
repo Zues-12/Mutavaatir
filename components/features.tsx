@@ -28,9 +28,9 @@ const features: Feature[] = [
   },
   {
     icon: ShieldCheck,
-    title: "TRUSTED BY READERS",
+    title: "100% PERCENT ORIGINAL BOOKS",
     description:
-      "Building a community of readers who value quality and authenticity.",
+      "Only original books, no pirated or discarded books that no one read.",
   },
 ];
 
