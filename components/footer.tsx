@@ -33,7 +33,7 @@ export default function Footer() {
       aria-labelledby="faq-heading"
     >
       <span
-        className="font-display pointer-events-none absolute bottom-0 left-0 right-0 z-0 block w-full translate-y-1/4 select-none text-center whitespace-nowrap font-medium leading-none tracking-tight text-brand-clay/5 lg:text-brand-dust/5"
+        className="font-display pointer-events-none absolute bottom-0 left-0 right-0 z-0 block w-full translate-y-1/3 select-none text-center whitespace-nowrap font-medium leading-none tracking-tight text-brand-clay/3 lg:text-brand-dust/3"
         style={{ fontSize: 'max(5.5rem, calc(100vw / 4.75))' }}
         aria-hidden
       >
