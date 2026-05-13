@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Oswald } from 'next/font/google'
 import './globals.css'
 import { OrganizationJsonLd } from '@/components/json-ld'
 import { rootMetadata } from '@/lib/metadata'
+import { Analytics } from '@vercel/analytics/next'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   )
