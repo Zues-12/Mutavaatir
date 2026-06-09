@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { Quote, Star } from 'lucide-react'
+import { OriginLink, originCircleColors } from '@/components/origin-button'
 import { allReaderReviews } from '@/lib/reviews-data'
 
 const reviews = allReaderReviews.slice(0, 3)
@@ -32,12 +32,14 @@ export default function HomeReviews() {
             <p className="max-w-[24ch] text-lg leading-relaxed text-brand-dust/95 sm:text-xl">
               Real stories from readers who found their next favorite book with us.
             </p>
-            <Link
+            <OriginLink
               href="/reviews"
-              className="font-display inline-flex border border-brand-clay/70 px-5 py-3 text-sm tracking-wide text-brand-dust transition-colors duration-300 hover:border-brand-mist hover:text-brand-mist"
+              circleColor={originCircleColors.mist}
+              labelClassName="transition-colors duration-300 group-hover:text-brand-void"
+              className="font-display inline-flex border border-brand-clay/70 bg-transparent px-5 py-3 text-sm tracking-wide text-brand-dust transition-colors duration-300 hover:border-brand-mist"
             >
               SEE ALL REVIEWS
-            </Link>
+            </OriginLink>
           </div>
 
           <div className="scrollbar-brand overflow-x-auto pb-2">

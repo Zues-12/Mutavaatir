@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Navbar from '@/components/navbar'
+import { OriginLink, originCircleColors } from '@/components/origin-button'
 
 export const metadata: Metadata = {
   title: 'Page not found',
@@ -25,12 +25,13 @@ export default function NotFound() {
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-brand-earth">
           The link may be broken, or the page may have been removed.
         </p>
-        <Link
+        <OriginLink
           href="/"
-          className="font-display mt-10 inline-block bg-brand-clay px-8 py-3.5 text-sm font-bold tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg"
+          circleColor={originCircleColors.mist}
+          className="font-display mt-10 inline-block bg-brand-clay px-8 py-3.5 text-sm font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg"
         >
           BACK TO HOME
-        </Link>
+        </OriginLink>
       </main>
     </>
   )

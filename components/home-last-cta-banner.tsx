@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { OriginLink, originCircleColors } from '@/components/origin-button'
 
 export default function HomeLastCtaBanner() {
   return (
@@ -39,12 +39,13 @@ export default function HomeLastCtaBanner() {
           </div>
         </div>
 
-        <Link
+        <OriginLink
           href="/pricing"
-          className="font-display mt-0.5 bg-brand-clay px-5 py-2.5 text-[0.65rem] font-medium tracking-wider text-brand-mist transition-colors duration-300 hover:bg-brand-earth sm:px-7 sm:py-3 sm:text-xs xl:mt-1 xl:py-2 xl:text-[0.65rem] 2xl:py-2.5 2xl:text-xs"
+          circleColor={originCircleColors.mist}
+          className="font-display mt-0.5 bg-brand-clay px-5 py-2.5 text-[0.65rem] font-medium tracking-wider text-brand-void sm:px-7 sm:py-3 sm:text-xs xl:mt-1 xl:py-2 xl:text-[0.65rem] 2xl:py-2.5 2xl:text-xs"
         >
           SUBSCRIBE NOW
-        </Link>
+        </OriginLink>
       </div>
     </section>
   )

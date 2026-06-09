@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LogOut, Menu, X } from 'lucide-react'
+import { OriginButton, originCircleColors } from '@/components/origin-button'
 import { cn } from '@/lib/utils'
 import { adminNavItems } from '@/lib/admin-nav'
 import { signOutAction } from '@/app/admin/actions'
@@ -21,8 +22,9 @@ function isActive(pathname: string, href: string) {
 function SignOutButton({ className }: { className?: string }) {
   return (
     <form action={signOutAction}>
-      <button
+      <OriginButton
         type="submit"
+        circleColor="rgb(159 134 102 / 0.22)"
         className={cn(
           'font-display inline-flex items-center gap-2 border border-brand-earth/60 bg-transparent px-4 py-2 text-xs font-medium uppercase tracking-wider text-brand-dust transition-colors duration-300 hover:border-brand-mist hover:text-brand-mist',
           className,
@@ -30,7 +32,7 @@ function SignOutButton({ className }: { className?: string }) {
       >
         <LogOut className="h-4 w-4" aria-hidden />
         Sign out
-      </button>
+      </OriginButton>
     </form>
   )
 }
@@ -120,16 +122,17 @@ export default function AdminShell({ userEmail, children }: AdminShellProps) {
         {/* Top bar */}
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-brand-earth bg-brand-void/95 px-4 backdrop-blur-md sm:px-6 lg:h-20 lg:px-8">
           <div className="flex min-w-0 items-center gap-3">
-            <button
+            <OriginButton
               type="button"
+              circleColor="rgb(159 134 102 / 0.28)"
               onClick={() => setMobileOpen((v) => !v)}
               aria-expanded={mobileOpen}
               aria-controls="admin-mobile-nav"
-              className="inline-flex h-9 w-9 items-center justify-center text-brand-dust transition-colors hover:text-brand-mist lg:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center bg-transparent text-brand-dust transition-colors hover:text-brand-mist lg:hidden"
             >
               <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+            </OriginButton>
             <Link
               href="/admin"
               className="font-display truncate text-xl font-normal leading-none tracking-normal text-brand-clay lg:hidden"

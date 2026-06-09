@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
+import { OriginButton, originCircleColors } from '@/components/origin-button'
 import { primaryNavLinks } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -19,7 +20,7 @@ function navHrefIsActive(pathname: string, href: string) {
 }
 
 const ctaClassName =
-  'font-display bg-brand-clay font-bold tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg px-4 py-2 text-xs xl:px-7 xl:py-3.5 xl:text-sm xl:tracking-wider'
+  'font-display bg-brand-clay font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg px-4 py-2 text-xs xl:px-7 xl:py-3.5 xl:text-sm xl:tracking-wider'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -78,14 +79,19 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden shrink-0 md:block">
-          <button type="button" className={ctaClassName}>
+          <OriginButton
+            type="button"
+            circleColor={originCircleColors.mist}
+            className={ctaClassName}
+          >
             SUBSCRIBE NOW
-          </button>
+          </OriginButton>
         </div>
 
-        <button
+        <OriginButton
           type="button"
-          className="relative z-60 ml-auto text-brand-dust transition-colors hover:text-brand-mist md:hidden"
+          circleColor="rgb(159 134 102 / 0.28)"
+          className="relative z-60 ml-auto bg-transparent text-brand-dust transition-colors hover:text-brand-mist md:hidden"
           aria-expanded={mobileOpen}
           aria-controls={MOBILE_NAV_ID}
           id={disclosureId}
@@ -93,7 +99,7 @@ export default function Navbar() {
         >
           <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
           {mobileOpen ? <X size={28} aria-hidden /> : <Menu size={28} aria-hidden />}
-        </button>
+        </OriginButton>
       </div>
 
       {mobileOpen ? (
@@ -124,12 +130,13 @@ export default function Navbar() {
                 )
               })}
             </div>
-            <button
+            <OriginButton
               type="button"
-              className="font-display mt-8 w-full bg-brand-clay px-6 py-3.5 text-base font-bold tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg"
+              circleColor={originCircleColors.mist}
+              className="font-display mt-8 w-full bg-brand-clay px-6 py-3.5 text-base font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg"
             >
               SUBSCRIBE NOW
-            </button>
+            </OriginButton>
           </div>
         </nav>
       ) : null}

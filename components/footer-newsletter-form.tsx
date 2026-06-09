@@ -2,6 +2,7 @@
 
 import { useCallback, type FormEvent } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { OriginButton, originCircleColors } from '@/components/origin-button'
 import { cn } from '@/lib/utils'
 
 export default function FooterNewsletterForm({ className }: { className?: string }) {
@@ -31,13 +32,14 @@ export default function FooterNewsletterForm({ className }: { className?: string
           'focus-visible:border-brand-clay/70 focus-visible:ring-2 focus-visible:ring-brand-clay/25',
         )}
       />
-      <button
+      <OriginButton
         type="submit"
-        className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand-clay text-brand-void shadow-md transition-all hover:bg-brand-mist hover:shadow-lg"
+        circleColor={originCircleColors.mist}
+        className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand-clay text-brand-void shadow-md transition-shadow hover:shadow-lg"
         aria-label="Submit email"
       >
         <ArrowRight className="h-4 w-4" strokeWidth={2} aria-hidden />
-      </button>
+      </OriginButton>
     </form>
   )
 }

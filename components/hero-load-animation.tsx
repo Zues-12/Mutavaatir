@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { OriginButton, originCircleColors } from '@/components/origin-button'
 
 /** Swap these paths for your themed book cover assets in /public/book-covers/ */
 const BOOK_COVERS = [
@@ -244,18 +245,20 @@ export default function HeroLoadAnimation() {
             delay: phase === 'reveal' ? TIMING.ctaDelaySec : 0,
           }}
         >
-          <button
+          <OriginButton
             type="button"
-            className="font-display bg-brand-clay px-7 py-3.5 text-sm font-medium tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg lg:text-[0.95rem]"
+            circleColor={originCircleColors.mist}
+            className="font-display bg-brand-clay px-7 py-3.5 text-sm font-medium tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg lg:text-[0.95rem]"
           >
             SUBSCRIBE NOW
-          </button>
-          <button
+          </OriginButton>
+          <OriginButton
             type="button"
-            className="font-display border-2 border-brand-clay px-8 py-4 text-xs font-medium tracking-normal text-brand-dust transition-all duration-300 hover:border-brand-mist hover:text-brand-mist"
+            circleColor={originCircleColors.clay}
+            className="font-display border-2 border-brand-clay bg-transparent px-8 py-4 text-xs font-medium tracking-normal text-brand-dust transition-colors duration-300 hover:border-brand-mist hover:text-brand-mist"
           >
             LEARN MORE
-          </button>
+          </OriginButton>
         </motion.div>
       </div>
     </section>

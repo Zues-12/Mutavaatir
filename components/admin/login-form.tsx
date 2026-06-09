@@ -3,6 +3,7 @@
 import { useActionState, useId } from 'react'
 import { useFormStatus } from 'react-dom'
 import { Loader2 } from 'lucide-react'
+import { OriginButton, originCircleColors } from '@/components/origin-button'
 import { signInAction } from '@/app/admin-login/actions'
 import { initialLoginState, type LoginState } from '@/app/admin-login/types'
 
@@ -13,10 +14,11 @@ type LoginFormProps = {
 function SubmitButton() {
   const { pending } = useFormStatus()
   return (
-    <button
+    <OriginButton
       type="submit"
       disabled={pending}
-      className="font-display flex w-full items-center justify-center gap-2 bg-brand-clay px-7 py-3.5 text-sm font-medium tracking-wide text-brand-void shadow-md transition-all duration-300 hover:bg-brand-mist hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-brand-clay disabled:hover:shadow-md lg:text-[0.95rem]"
+      circleColor={originCircleColors.mist}
+      className="font-display flex w-full items-center justify-center gap-2 bg-brand-clay px-7 py-3.5 text-sm font-medium tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-md lg:text-[0.95rem]"
     >
       {pending ? (
         <>
@@ -26,7 +28,7 @@ function SubmitButton() {
       ) : (
         'SIGN IN'
       )}
-    </button>
+    </OriginButton>
   )
 }
 
