@@ -216,7 +216,7 @@ export function OriginLink({
         hover.handleMouseLeave(event)
         onMouseLeave?.(event)
       }}
-      className={cn('group relative overflow-hidden', className)}
+      className={cn('group relative inline-flex overflow-hidden', className)}
       {...props}
     >
       {hover.showCircle ? (

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Instagram, Mail, Twitter } from 'lucide-react'
 import FooterNewsletterForm from '@/components/footer-newsletter-form'
+import FooterTextVideoMask from '@/components/footer-text-video-mask'
 import { siteConfig } from '@/lib/site'
 
 const learnMoreLinks = [
@@ -32,13 +33,7 @@ export default function Footer() {
       className="relative overflow-hidden border-t border-brand-earth bg-brand-void"
       aria-labelledby="faq-heading"
     >
-      <span
-        className="font-display pointer-events-none absolute bottom-0 left-0 right-0 z-0 block w-full translate-y-1/3 select-none text-center whitespace-nowrap font-medium leading-none tracking-tight text-brand-clay/3 lg:text-brand-dust/3"
-        style={{ fontSize: 'max(5.5rem, calc(100vw / 4.75))' }}
-        aria-hidden
-      >
-        MUTAVAATIR
-      </span>
+      <FooterTextVideoMask />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-11 pt-10 md:px-8 md:pb-20 md:pt-16 lg:pt-20 xl:pb-36">
         <h2 id="faq-heading" className="sr-only">

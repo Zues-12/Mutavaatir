@@ -29,5 +29,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${base}/subscribe`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.95,
+    },
+    {
+      url: `${base}/terms`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
   ]
 }

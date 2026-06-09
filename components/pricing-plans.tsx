@@ -9,7 +9,7 @@ import {
   subscriptionPlans,
   type PricingPlan,
 } from '@/lib/pricing-data'
-import { OriginButton, originCircleColors } from '@/components/origin-button'
+import { OriginLink, originCircleColors } from '@/components/origin-button'
 import { cn } from '@/lib/utils'
 
 const featureIcons = [BookMarked, Package, Truck] as const
@@ -112,14 +112,14 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
             ) : null}
           </div>
 
-          <OriginButton
-            type="button"
+          <OriginLink
+            href={`/subscribe?plan=${plan.id}`}
             circleColor={originCircleColors.mist}
             labelClassName="transition-colors duration-300 group-hover:text-brand-void"
             className="font-display w-fit bg-brand-void px-6 py-3 text-xs font-semibold tracking-widest text-brand-mist sm:text-sm"
           >
             SUBSCRIBE NOW
-          </OriginButton>
+          </OriginLink>
         </div>
 
         <div

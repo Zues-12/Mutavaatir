@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { OriginButton, originCircleColors } from '@/components/origin-button'
+import { OriginLink, originCircleColors } from '@/components/origin-button'
 
 export default function HomeExperienceExtras() {
   return (
@@ -32,14 +32,14 @@ export default function HomeExperienceExtras() {
                 <br />
                 delivered just for you.
               </p>
-              <OriginButton
-                type="button"
+              <OriginLink
+                href="/subscribe"
                 circleColor={originCircleColors.mist}
                 labelClassName="transition-colors duration-300 group-hover:text-brand-void"
                 className="font-display mt-6 w-fit bg-brand-void px-7 py-3 text-sm tracking-wide text-brand-mist"
               >
                 SUBSCRIBE NOW
-              </OriginButton>
+              </OriginLink>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
-import { OriginButton, originCircleColors } from '@/components/origin-button'
+import { OriginButton, OriginLink, originCircleColors } from '@/components/origin-button'
 import { primaryNavLinks } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -79,13 +79,13 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden shrink-0 md:block">
-          <OriginButton
-            type="button"
+          <OriginLink
+            href="/subscribe"
             circleColor={originCircleColors.mist}
             className={ctaClassName}
           >
             SUBSCRIBE NOW
-          </OriginButton>
+          </OriginLink>
         </div>
 
         <OriginButton
@@ -130,13 +130,14 @@ export default function Navbar() {
                 )
               })}
             </div>
-            <OriginButton
-              type="button"
+            <OriginLink
+              href="/subscribe"
               circleColor={originCircleColors.mist}
-              className="font-display mt-8 w-full bg-brand-clay px-6 py-3.5 text-base font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg"
+              className="font-display mt-8 flex w-full justify-center bg-brand-clay px-6 py-3.5 text-base font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg"
+              onClick={closeMobile}
             >
               SUBSCRIBE NOW
-            </OriginButton>
+            </OriginLink>
           </div>
         </nav>
       ) : null}

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { OriginButton, originCircleColors } from '@/components/origin-button'
+import { OriginButton, OriginLink, originCircleColors } from '@/components/origin-button'
 
 /** Swap these paths for your themed book cover assets in /public/book-covers/ */
 const BOOK_COVERS = [
@@ -245,13 +245,13 @@ export default function HeroLoadAnimation() {
             delay: phase === 'reveal' ? TIMING.ctaDelaySec : 0,
           }}
         >
-          <OriginButton
-            type="button"
+          <OriginLink
+            href="/subscribe"
             circleColor={originCircleColors.mist}
             className="font-display bg-brand-clay px-7 py-3.5 text-sm font-medium tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg lg:text-[0.95rem]"
           >
             SUBSCRIBE NOW
-          </OriginButton>
+          </OriginLink>
           <OriginButton
             type="button"
             circleColor={originCircleColors.clay}

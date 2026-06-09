@@ -36,7 +36,7 @@ export const siteConfig = {
   defaultTitle: 'Mutavaatir — A Book. Chosen For You. Delivered Monthly.',
   /** Meta description / SERP snippet (not the same as on-page hero copy). */
   description:
-    'Pakistan book subscription: handpicked books delivered monthly to your door. Curated reading, original copies, bookmarks & extras — book mail and monthly book boxes across Pakistan.',
+    'Pakistan book subscription: handpicked books delivered monthly to your door. Curated reading, original copies, bookmarks & extras — book mail and monthly book packages across Pakistan.',
   tagline: 'A book. Chosen for you. Delivered monthly.',
   locale: 'en',
   twitterHandle: undefined as string | undefined,
