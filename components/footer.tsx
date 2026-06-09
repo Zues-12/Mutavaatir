@@ -12,7 +12,7 @@ const learnMoreLinks = [
 
 const quickLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Plans & pricing', href: '/#pricing' },
+  { label: 'Plans & pricing', href: '/pricing' },
   { label: 'Reader reviews', href: '/reviews' },
   { label: 'FAQs', href: '/#faq' },
 ] as const
