@@ -27,8 +27,12 @@ export default function HowItWorksPageHero() {
           HOW IT WORKS
         </h1>
         <div className="mx-auto mt-6 h-px w-16 bg-brand-dust/70" aria-hidden />
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-mist sm:text-lg">
-          Simple. Personal. Meaningful. Here&apos;s how your subscription comes together—step by step.
+        <p className="mx-auto mt-6 max-w-2xl font-display text-base leading-relaxed text-brand-mist sm:text-lg">
+          Simple. Personal. Meaningful.
+        </p>
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-brand-mist/90 sm:text-lg">
+          Here&apos;s how your curated subscription comes together — tap a step to
+          expand it.
         </p>
       </div>
     </section>

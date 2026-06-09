@@ -26,8 +26,28 @@ const BOOK_COVERS = [
 
 type AnimationPhase = 'initial' | 'images' | 'reveal'
 
+const TIMING = {
+  imagesPhaseMs: 350,
+  revealPhaseMs: 750,
+  revealTransitionSec: 0.75,
+  imageBaseDelaySec: 0.05,
+  imageDurationSec: 0.4,
+  imageStaggerColumnSec: 0.03,
+  imageStaggerRowSec: 0.02,
+  textSpringSec: 0.28,
+  wordStaggerSec: 0.03,
+  titleStartDelaySec: 0.05,
+  descriptionStartDelaySec: 0.12,
+  ctaDelaySec: 0.4,
+} as const
+
 const imageEase = [0.43, 0.01, 0.17, 1] as const
-const textSpring = { type: 'spring' as const, bounce: 0, duration: 0.4 }
+const textSpring = {
+  type: 'spring' as const,
+  bounce: 0,
+  duration: TIMING.textSpringSec,
+}
+const revealEase = [0.42, -0.01, 0.06, 0.98] as const
 
 function AnimatedWords({
   text,
@@ -57,7 +77,7 @@ function AnimatedWords({
           }
           transition={{
             ...textSpring,
-            delay: visible ? startDelay + index * 0.06 : 0,
+            delay: visible ? startDelay + index * TIMING.wordStaggerSec : 0,
           }}
         >
           {word}
@@ -81,7 +101,9 @@ function BookCover({
 }) {
   const showImages = phase !== 'initial'
   const column = index % 4
-  const stagger = column * 0.08 + Math.floor(index / 4) * 0.05
+  const stagger =
+    column * TIMING.imageStaggerColumnSec +
+    Math.floor(index / 4) * TIMING.imageStaggerRowSec
 
   return (
     <motion.div
@@ -93,8 +115,8 @@ function BookCover({
           : { opacity: 0, scale: 0.6 }
       }
       transition={{
-        delay: showImages ? 0.3 + stagger : 0,
-        duration: 0.6,
+        delay: showImages ? TIMING.imageBaseDelaySec + stagger : 0,
+        duration: TIMING.imageDurationSec,
         ease: imageEase,
       }}
     >
@@ -119,8 +141,14 @@ export default function HeroLoadAnimation() {
   useEffect(() => {
     if (prefersReducedMotion) return
 
-    const imagesTimer = window.setTimeout(() => setPhase('images'), 1200)
-    const revealTimer = window.setTimeout(() => setPhase('reveal'), 1900)
+    const imagesTimer = window.setTimeout(
+      () => setPhase('images'),
+      TIMING.imagesPhaseMs,
+    )
+    const revealTimer = window.setTimeout(
+      () => setPhase('reveal'),
+      TIMING.revealPhaseMs,
+    )
 
     return () => {
       window.clearTimeout(imagesTimer)
@@ -138,7 +166,7 @@ export default function HeroLoadAnimation() {
     >
       {/* Book cover grid — size and spacing stay fixed; only a mask clears the center for text */}
       <div
-        className={`pointer-events-none absolute -inset-12 flex items-center justify-center transition-[mask-image,-webkit-mask-image] duration-[1.5s] ease-[cubic-bezier(0.42,-0.01,0.06,0.98)] sm:-inset-16 md:-inset-24 ${
+        className={`pointer-events-none absolute -inset-12 flex items-center justify-center transition-[mask-image,-webkit-mask-image] duration-[750ms] ease-[cubic-bezier(0.42,-0.01,0.06,0.98)] sm:-inset-16 md:-inset-24 ${
           revealGrid
             ? '[mask-image:linear-gradient(0deg,transparent_0%,black_22%,black_78%,transparent_100%)] [-webkit-mask-image:linear-gradient(0deg,transparent_0%,black_22%,black_78%,transparent_100%)]'
             : '[mask-image:linear-gradient(0deg,black_0%,black_100%)] [-webkit-mask-image:linear-gradient(0deg,black_0%,black_100%)]'
@@ -178,7 +206,7 @@ export default function HeroLoadAnimation() {
             ? 'radial-gradient(ellipse 75% 55% at 50% 50%, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.55) 45%, rgba(13,13,13,0.2) 70%, transparent 100%)'
             : 'radial-gradient(ellipse at center, rgba(13,13,13,0.15) 0%, rgba(13,13,13,0.85) 55%, rgba(13,13,13,1) 100%)',
         }}
-        transition={{ duration: 1.5, ease: [0.42, -0.01, 0.06, 0.98] }}
+        transition={{ duration: TIMING.revealTransitionSec, ease: revealEase }}
       />
 
       {/* Headline + copy */}
@@ -190,7 +218,7 @@ export default function HeroLoadAnimation() {
           <AnimatedWords
             text="A BOOK CHOSEN FOR YOU"
             phase={phase}
-            startDelay={0.15}
+            startDelay={TIMING.titleStartDelaySec}
           />
         </h1>
 
@@ -198,7 +226,7 @@ export default function HeroLoadAnimation() {
           <AnimatedWords
             text="Mutavaatir is a monthly book subscription box that brings you handpicked books based on meaning, value and timeless reading."
             phase={phase}
-            startDelay={0.35}
+            startDelay={TIMING.descriptionStartDelaySec}
           />
         </p>
 
@@ -211,7 +239,10 @@ export default function HeroLoadAnimation() {
               ? { opacity: 1, y: 0 }
               : { opacity: 0, y: 12 }
           }
-          transition={{ ...textSpring, delay: phase === 'reveal' ? 0.9 : 0 }}
+          transition={{
+            ...textSpring,
+            delay: phase === 'reveal' ? TIMING.ctaDelaySec : 0,
+          }}
         >
           <button
             type="button"
