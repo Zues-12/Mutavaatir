@@ -18,16 +18,17 @@ type Point = { x: number; y: number }
 
 type StepLayout = {
   align: 'left' | 'right'
+  anchorOffset: 'left' | 'right'
   phraseIndex?: number
 }
 
 const stepLayouts: StepLayout[] = [
-  { align: 'left', phraseIndex: 0 },
-  { align: 'right', phraseIndex: 1 },
-  { align: 'left', phraseIndex: 2 },
-  { align: 'right', phraseIndex: 3 },
-  { align: 'left', phraseIndex: 4 },
-  { align: 'right' },
+  { align: 'left', anchorOffset: 'left', phraseIndex: 0 },
+  { align: 'right', anchorOffset: 'right', phraseIndex: 1 },
+  { align: 'left', anchorOffset: 'left', phraseIndex: 2 },
+  { align: 'right', anchorOffset: 'right', phraseIndex: 3 },
+  { align: 'left', anchorOffset: 'left', phraseIndex: 4 },
+  { align: 'right', anchorOffset: 'right' },
 ]
 
 function getCenterInRoot(el: HTMLElement, root: HTMLElement): Point {
@@ -39,7 +40,7 @@ function getCenterInRoot(el: HTMLElement, root: HTMLElement): Point {
   }
 }
 
-function buildSmoothPath(points: Point[], tension = 0.28): string {
+function buildSmoothPath(points: Point[], tension = 0.38): string {
   if (points.length === 0) return ''
   if (points.length === 1) return `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`
 
@@ -99,7 +100,7 @@ function CheckpointAnchor({
   return (
     <span
       ref={anchorRef}
-      className="journey-anchor relative z-20 flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-earth/25 bg-[#faf6f0] text-brand-earth shadow-[0_2px_10px_-4px_rgba(13,13,13,0.18)] sm:size-12"
+      className="journey-anchor relative z-20 flex size-11 shrink-0 origin-center items-center justify-center rounded-full border border-brand-earth/25 bg-[#faf6f0] text-brand-earth shadow-[0_2px_10px_-4px_rgba(13,13,13,0.18)] sm:size-12"
     >
       <Icon className="size-[1.125rem] sm:size-5" strokeWidth={1.5} aria-hidden />
     </span>
@@ -156,12 +157,12 @@ function JourneyStep({
   const textOnLeft = layout.align === 'left'
 
   return (
-    <section className="relative flex min-h-[72vh] flex-col justify-center py-10 sm:min-h-[68vh] sm:py-14">
-      <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:gap-x-6 md:gap-x-10">
+    <section className="relative flex min-h-[70vh] flex-col justify-center overflow-visible py-10 sm:min-h-[65vh] sm:py-14">
+      <div className="grid grid-cols-1 items-center gap-8 overflow-visible sm:grid-cols-[minmax(0,1fr)_minmax(13rem,20rem)_minmax(0,1fr)] sm:gap-x-4 md:gap-x-8">
         <div
           className={cn(
-            'relative z-10 flex',
-            textOnLeft ? 'justify-center sm:justify-end sm:pr-2' : 'justify-center sm:justify-start sm:pl-2',
+            'relative z-10 flex overflow-visible',
+            textOnLeft ? 'justify-center sm:justify-end sm:pr-3' : 'justify-center sm:justify-start sm:pl-3',
           )}
         >
           {textOnLeft ? (
@@ -177,14 +178,22 @@ function JourneyStep({
           )}
         </div>
 
-        <div className="flex justify-center">
-          <CheckpointAnchor checkpoint={checkpoint} anchorRef={anchorRef} />
+        <div className="relative z-20 flex w-full items-center overflow-visible px-1 sm:px-0">
+          <div
+            className={cn(
+              'flex w-full',
+              layout.anchorOffset === 'left' && 'justify-start',
+              layout.anchorOffset === 'right' && 'justify-end',
+            )}
+          >
+            <CheckpointAnchor checkpoint={checkpoint} anchorRef={anchorRef} />
+          </div>
         </div>
 
         <div
           className={cn(
-            'relative z-10 flex',
-            textOnLeft ? 'justify-center sm:justify-start sm:pl-2' : 'justify-center sm:justify-end sm:pr-2',
+            'relative z-10 flex overflow-visible',
+            textOnLeft ? 'justify-center sm:justify-start sm:pl-3' : 'justify-center sm:justify-end sm:pr-3',
           )}
         >
           {textOnLeft ? (
@@ -324,7 +333,7 @@ export default function HowItWorksJourneyDemo() {
           borderColor: 'rgba(61, 47, 35, 0.45)',
           backgroundColor: '#7b6244',
           color: '#f5ebe0',
-          scale: 1.06,
+          scale: 1.04,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: anchor,
@@ -367,7 +376,7 @@ export default function HowItWorksJourneyDemo() {
   }, [prefersReducedMotion])
 
   return (
-    <div ref={rootRef} className="relative overflow-x-clip bg-brand-mist">
+    <div ref={rootRef} className="relative overflow-visible bg-brand-mist">
       <svg
         ref={svgRef}
         className="pointer-events-none absolute top-0 left-0 z-0 overflow-visible"
@@ -405,7 +414,7 @@ export default function HowItWorksJourneyDemo() {
         </div>
       </section>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 md:px-12">
+      <div className="relative z-10 mx-auto max-w-6xl overflow-visible px-5 sm:px-8 md:px-12">
         {journeyCheckpoints.map((checkpoint, index) => (
           <JourneyStep
             key={checkpoint.id}
