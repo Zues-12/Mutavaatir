@@ -125,8 +125,7 @@ function TermsScrollBlock({ section, index, isLast, animate }: TermsScrollBlockP
     const before = `${vpY + lineHeightPx}px`
 
     const scrollRunway = Math.max(0, lineNodes.length - 1) * lineHeightPx
-    const isMobile = window.matchMedia('(max-width: 1023px)').matches
-    const viewportPadding = vpH * (isMobile ? 0.42 : 0.72)
+    const viewportPadding = vpH * (isLg ? 0.72 : 0.3)
     sectionEl.style.minHeight = `${scrollRunway + viewportPadding}px`
 
     const ctx = gsap.context(() => {
@@ -176,7 +175,7 @@ function TermsScrollBlock({ section, index, isLast, animate }: TermsScrollBlockP
       sectionEl.style.minHeight = ''
       ctx.revert()
     }
-  }, [animate, lines, section.lines, showIntro])
+  }, [animate, isLg, lines, section.lines, showIntro])
 
   const headingId = `terms-section-${index}`
 
@@ -186,7 +185,7 @@ function TermsScrollBlock({ section, index, isLast, animate }: TermsScrollBlockP
       aria-labelledby={headingId}
       className={cn(
         animate
-          ? 'pb-14 last:pb-20 sm:pb-20 sm:last:pb-28 lg:pb-44 lg:last:pb-52'
+          ? 'pb-8 last:pb-12 sm:pb-12 sm:last:pb-16 lg:pb-44 lg:last:pb-52'
           : 'py-8 sm:py-12',
         showIntro && 'lg:min-h-[92vh]',
       )}
@@ -195,21 +194,34 @@ function TermsScrollBlock({ section, index, isLast, animate }: TermsScrollBlockP
         className={cn(
           'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8',
           animate
-            ? 'grid grid-cols-1 items-start gap-4 sm:gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-20'
+            ? 'grid grid-cols-1 items-start gap-3 sm:gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 xl:gap-20'
             : 'max-w-3xl space-y-4',
         )}
       >
-        <h2
-          id={headingId}
+        <div
           className={cn(
-            'font-display font-medium tracking-wide text-brand-void',
-            animate
-              ? 'text-3xl sm:text-4xl lg:sticky lg:top-[calc(50vh-2.75rem)] lg:self-start lg:text-5xl lg:leading-[1.08] xl:text-6xl'
-              : 'text-xl sm:text-2xl',
+            animate &&
+              'sticky top-21 z-20 -mx-4 w-[calc(100%+2rem)] self-start sm:-mx-6 sm:w-[calc(100%+3rem)] lg:contents',
           )}
         >
-          {section.title}
-        </h2>
+          <h2
+            id={headingId}
+            className={cn(
+              'font-display font-medium tracking-wide text-brand-void',
+              animate
+                ? 'bg-brand-mist px-4 py-3 text-3xl sm:px-6 sm:text-4xl sm:py-3.5 lg:sticky lg:top-[calc(50vh-2.75rem)] lg:z-auto lg:bg-transparent lg:px-0 lg:py-0 lg:text-5xl lg:leading-[1.08] xl:text-6xl'
+                : 'text-xl sm:text-2xl',
+            )}
+          >
+            {section.title}
+          </h2>
+          {animate ? (
+            <div
+              aria-hidden
+              className="pointer-events-none h-10 bg-linear-to-b from-brand-mist from-15% via-brand-mist/75 via-45% to-transparent sm:h-12 lg:hidden"
+            />
+          ) : null}
+        </div>
 
         {animate ? (
           <div className="relative lg:pt-[calc(50vh-2.75rem)]">
@@ -235,7 +247,7 @@ function TermsScrollBlock({ section, index, isLast, animate }: TermsScrollBlockP
 
             <ul
               ref={linesRef}
-              className="m-0 list-none p-0 text-lg leading-[1.55] text-brand-earth sm:text-xl lg:text-2xl lg:leading-[1.55] xl:text-[1.75rem]"
+              className="m-0 -mt-5 list-none p-0 text-lg leading-[1.55] text-brand-earth sm:-mt-6 sm:text-xl lg:mt-0 lg:text-2xl lg:leading-[1.55] xl:text-[1.75rem]"
             >
               {lines.map((line, lineIndex) => (
                 <li
@@ -303,7 +315,7 @@ export default function TermsScrollContent({ sections }: TermsScrollContentProps
     <section
       ref={rootRef}
       aria-label="Terms and conditions"
-      className="bg-brand-mist py-6 sm:py-10 lg:py-16"
+      className="bg-brand-mist py-4 sm:py-2 lg:py-16"
     >
       <div className="sr-only">
         {sections.map((section) => `${section.title}. ${section.lines.join(' ')}`).join(' ')}
