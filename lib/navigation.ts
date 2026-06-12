@@ -3,5 +3,5 @@ export const primaryNavLinks = [
   { label: 'HOW IT WORKS', href: '/how-it-works' },
   { label: 'PRICING', href: '/pricing' },
   { label: 'REVIEWS', href: '/reviews' },
-  { label: 'FAQS', href: '/#faq' },
+  { label: 'TERMS & CONDITIONS', href: '/terms' },
 ] as const

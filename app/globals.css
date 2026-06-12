@@ -218,6 +218,18 @@ html {
   }
 }
 
+@keyframes terms-scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
 .scrollbar-brand {
   scrollbar-width: thin;
   scrollbar-color: #7b6244 rgb(227 212 197 / 0.18);

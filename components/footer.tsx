@@ -15,7 +15,7 @@ const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'Plans & pricing', href: '/pricing' },
   { label: 'Reader reviews', href: '/reviews' },
-  { label: 'FAQs', href: '/#faq' },
+  { label: 'Terms & conditions', href: '/terms' },
 ] as const
 
 const socialLinkClass =
@@ -29,15 +29,14 @@ const columnTitleClass = 'font-display text-sm font-semibold tracking-wide text-
 export default function Footer() {
   return (
     <footer
-      id="faq"
       className="relative overflow-hidden border-t border-brand-earth bg-brand-void"
-      aria-labelledby="faq-heading"
+      aria-labelledby="site-footer-heading"
     >
       <FooterTextVideoMask />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-11 pt-10 md:px-8 md:pb-20 md:pt-16 lg:pt-20 xl:pb-36">
-        <h2 id="faq-heading" className="sr-only">
-          Site footer, FAQs, and newsletter
+        <h2 id="site-footer-heading" className="sr-only">
+          Site footer and newsletter
         </h2>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 lg:gap-10 xl:gap-14">

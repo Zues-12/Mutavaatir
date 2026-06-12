@@ -44,8 +44,13 @@ export default function Navbar() {
   }, [mobileOpen])
 
   return (
+    <>
     <header
-      className="site-header sticky top-0 z-50 border-b border-brand-earth bg-brand-void"
+      className={cn(
+        'site-header sticky top-0 z-50 border-b border-brand-earth bg-brand-void',
+        mobileOpen &&
+          'border-brand-mist/15 bg-brand-void/80 shadow-[inset_0_-1px_0_rgba(255,255,255,0.06)] backdrop-blur-md backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/55',
+      )}
       style={{ viewTransitionName: 'site-header' }}
     >
       <div className="mx-auto flex h-21 max-w-7xl items-center gap-3 px-4 sm:px-6 md:gap-6 lg:h-24 lg:gap-8 lg:px-8 xl:gap-10">
@@ -104,46 +109,47 @@ export default function Navbar() {
           {mobileOpen ? <X size={28} aria-hidden /> : <Menu size={28} aria-hidden />}
         </OriginButton>
       </div>
-
-      {mobileOpen ? (
-        <nav
-          id={MOBILE_NAV_ID}
-          aria-label="Mobile primary navigation"
-          className="scrollbar-brand fixed inset-x-0 top-21 bottom-0 z-40 md:hidden overflow-y-auto border-t border-brand-mist/15 bg-brand-void/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/35"
-        >
-          <div className="mx-auto flex max-h-full min-h-0 max-w-7xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-11 lg:px-8">
-            <div className="space-y-5">
-              {primaryNavLinks.map((link) => {
-                const active = navHrefIsActive(pathname, link.href)
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={cn(
-                      'font-display block border-l-2 border-transparent py-1 pl-3 text-sm font-semibold tracking-wide transition-colors hover:text-brand-dust',
-                      active
-                        ? 'border-brand-clay text-brand-clay'
-                        : 'text-brand-mist hover:border-brand-earth/40',
-                    )}
-                    aria-current={active ? 'page' : undefined}
-                    onClick={closeMobile}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              })}
-            </div>
-            <OriginLink
-              href="/subscribe"
-              circleColor={originCircleColors.mist}
-              className="font-display mt-8 flex w-full justify-center bg-brand-clay px-6 py-3.5 text-base font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg"
-              onClick={closeMobile}
-            >
-              SUBSCRIBE NOW
-            </OriginLink>
-          </div>
-        </nav>
-      ) : null}
     </header>
+
+    {mobileOpen ? (
+      <nav
+        id={MOBILE_NAV_ID}
+        aria-label="Mobile primary navigation"
+        className="scrollbar-brand fixed inset-x-0 top-21 bottom-0 z-40 md:hidden overflow-y-auto border-t border-brand-mist/15 bg-brand-void/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/30"
+      >
+        <div className="mx-auto flex max-h-full min-h-0 max-w-7xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-11 lg:px-8">
+          <div className="space-y-5">
+            {primaryNavLinks.map((link) => {
+              const active = navHrefIsActive(pathname, link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    'font-display block border-l-2 border-transparent py-1 pl-3 text-sm font-semibold tracking-wide transition-colors hover:text-brand-dust',
+                    active
+                      ? 'border-brand-clay text-brand-clay'
+                      : 'text-brand-mist hover:border-brand-earth/40',
+                  )}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={closeMobile}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+          </div>
+          <OriginLink
+            href="/subscribe"
+            circleColor={originCircleColors.mist}
+            className="font-display mt-8 flex w-full justify-center bg-brand-clay px-6 py-3.5 text-base font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg"
+            onClick={closeMobile}
+          >
+            SUBSCRIBE NOW
+          </OriginLink>
+        </div>
+      </nav>
+    ) : null}
+    </>
   )
 }
