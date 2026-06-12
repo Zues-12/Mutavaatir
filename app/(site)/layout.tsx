@@ -1,5 +1,6 @@
 import { ViewTransition } from 'react'
 import Navbar from '@/components/navbar'
+import ScrollToTopButton from '@/components/scroll-to-top-button'
 
 export default function SiteLayout({
   children,
@@ -18,6 +19,7 @@ export default function SiteLayout({
           {children}
         </ViewTransition>
       </main>
+      <ScrollToTopButton />
     </>
   )
 }
