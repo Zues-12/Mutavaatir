@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import SubscribePageHero from '@/components/subscribe-page-hero'
 import SubscribeForm from '@/components/subscribe-form'
@@ -46,22 +45,19 @@ export default async function SubscribePage({
         name={subscribeTitle}
         description={subscribeDescription}
       />
-      <Navbar />
-      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
-        <SubscribePageHero />
-        <section
-          aria-labelledby="subscribe-form-heading"
-          className="paper-texture bg-brand-mist py-14 sm:py-16 lg:py-24"
-        >
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <h2 id="subscribe-form-heading" className="sr-only">
-              Subscription sign-up form
-            </h2>
-            <SubscribeForm defaultPlan={defaultPlan} />
-          </div>
-        </section>
-        <Footer />
-      </main>
+      <SubscribePageHero />
+      <section
+        aria-labelledby="subscribe-form-heading"
+        className="paper-texture bg-brand-mist py-14 sm:py-16 lg:py-24"
+      >
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <h2 id="subscribe-form-heading" className="sr-only">
+            Subscription sign-up form
+          </h2>
+          <SubscribeForm defaultPlan={defaultPlan} />
+        </div>
+      </section>
+      <Footer />
     </>
   )
 }

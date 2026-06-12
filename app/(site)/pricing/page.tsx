@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import PricingPageHero from '@/components/pricing-page-hero'
 import PricingPlans from '@/components/pricing-plans'
@@ -31,12 +30,9 @@ export default function PricingPage() {
         name={pricingTitle}
         description={pricingDescription}
       />
-      <Navbar />
-      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
-        <PricingPageHero />
-        <PricingPlans />
-        <Footer />
-      </main>
+      <PricingPageHero />
+      <PricingPlans />
+      <Footer />
     </>
   )
 }

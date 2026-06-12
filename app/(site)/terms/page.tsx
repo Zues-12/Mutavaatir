@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { publicPageMetadata } from '@/lib/seo'
@@ -52,9 +51,7 @@ export default function TermsPage() {
   return (
     <>
       <WebPageJsonLd path="/terms" name={termsTitle} description={termsDescription} />
-      <Navbar />
-      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
-        <section className="border-b border-brand-earth/40 bg-brand-void py-14 sm:py-16 lg:py-20">
+      <section className="border-b border-brand-earth/40 bg-brand-void py-14 sm:py-16 lg:py-20">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
             <h1 className="font-display text-4xl font-medium tracking-wide text-brand-clay sm:text-5xl">
               TERMS &amp; CONDITIONS
@@ -90,8 +87,7 @@ export default function TermsPage() {
           </div>
         </section>
 
-        <Footer />
-      </main>
+      <Footer />
     </>
   )
 }

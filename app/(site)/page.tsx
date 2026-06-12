@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/navbar'
 import Hero from '@/components/hero'
 import Features from '@/components/features'
 import WhatIsMutavaatir from '@/components/what-is-mutavaatir'
@@ -23,18 +22,15 @@ export const metadata: Metadata = publicPageMetadata({
 export default function HomePage() {
   return (
     <>
-      <Navbar />
-      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
-        <Hero />
-        <Features />
-        <WhatIsMutavaatir />
-        <HomeReviews />
-        <HowItWorksHome />
-        <WhatMakesDifferent />
-        <HomeExperienceExtras />
-        <HomeLastCtaBanner />
-        <Footer />
-      </main>
+      <Hero />
+      <Features />
+      <WhatIsMutavaatir />
+      <HomeReviews />
+      <HowItWorksHome />
+      <WhatMakesDifferent />
+      <HomeExperienceExtras />
+      <HomeLastCtaBanner />
+      <Footer />
     </>
   )
 }

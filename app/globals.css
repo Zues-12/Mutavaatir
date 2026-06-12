@@ -126,7 +126,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-brand-void text-brand-dust;
   }
   button:not(:disabled),
   [type='button']:not(:disabled),
@@ -172,6 +172,50 @@
  */
 html {
   color-scheme: dark;
+  background-color: #0d0d0d;
+}
+
+/* Smooth client navigations — header stays fixed, content crossfades */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.page-fade) {
+  animation: 100ms ease-out both page-fade-out;
+}
+
+::view-transition-new(.page-fade) {
+  animation: 140ms ease-in 60ms both page-fade-in;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }
 
 .scrollbar-brand {

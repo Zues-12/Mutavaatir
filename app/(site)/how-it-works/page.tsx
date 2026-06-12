@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/navbar'
 import HowItWorksPageHero from '@/components/how-it-works-page-hero'
 import HowItWorksFull from '@/components/how-it-works-full'
 import Footer from '@/components/footer'
@@ -22,12 +21,9 @@ export default function HowItWorksPage() {
   return (
     <>
       <WebPageJsonLd path="/how-it-works" name={howTitle} description={howDescription} />
-      <Navbar />
-      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
-        <HowItWorksPageHero />
-        <HowItWorksFull />
-        <Footer />
-      </main>
+      <HowItWorksPageHero />
+      <HowItWorksFull />
+      <Footer />
     </>
   )
 }

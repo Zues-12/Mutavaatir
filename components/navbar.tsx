@@ -44,7 +44,10 @@ export default function Navbar() {
   }, [mobileOpen])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-brand-earth bg-brand-void">
+    <header
+      className="site-header sticky top-0 z-50 border-b border-brand-earth bg-brand-void"
+      style={{ viewTransitionName: 'site-header' }}
+    >
       <div className="mx-auto flex h-21 max-w-7xl items-center gap-3 px-4 sm:px-6 md:gap-6 lg:h-24 lg:gap-8 lg:px-8 xl:gap-10">
         <Link
           href="/"

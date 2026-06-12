@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import ReviewsPageHero from '@/components/reviews-page-hero'
 import ReviewsGrid from '@/components/reviews-grid'
@@ -24,13 +23,10 @@ export default function ReviewsPage() {
   return (
     <>
       <WebPageJsonLd path="/reviews" name={reviewsTitle} description={reviewsDescription} />
-      <Navbar />
-      <main id="main-content" className="min-h-screen bg-brand-void" tabIndex={-1}>
-        <ReviewsPageHero />
-        <ReviewsGrid />
-        <ReviewsCommunityNote />
-        <Footer />
-      </main>
+      <ReviewsPageHero />
+      <ReviewsGrid />
+      <ReviewsCommunityNote />
+      <Footer />
     </>
   )
 }
