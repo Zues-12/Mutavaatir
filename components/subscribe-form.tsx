@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useActionState, useId, type ReactNode } from 'react'
+import { useActionState, useEffect, useId, useRef, type ReactNode } from 'react'
 import { useFormStatus } from 'react-dom'
 import { CheckCircle2, Loader2 } from 'lucide-react'
 import { submitSubscriptionAction } from '@/app/(site)/subscribe/actions'
@@ -146,12 +146,29 @@ export default function SubscribeForm({ defaultPlan }: SubscribeFormProps) {
   const screenshotId = useId()
   const termsId = useId()
   const errorId = useId()
+  const successRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!state.success || !successRef.current) return
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    successRef.current.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    })
+    successRef.current.focus({ preventScroll: true })
+  }, [state.success])
 
   if (state.success) {
     return (
       <div
+        ref={successRef}
+        tabIndex={-1}
         role="status"
-        className={cn(cardClassName, 'mx-auto max-w-3xl text-center')}
+        className={cn(cardClassName, 'mx-auto max-w-3xl scroll-mt-24 text-center sm:scroll-mt-28')}
       >
         <CheckCircle2
           className="mx-auto h-14 w-14 text-brand-clay"

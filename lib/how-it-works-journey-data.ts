@@ -16,6 +16,18 @@ export type JourneyIllustrationId =
   | 'delivery'
   | 'reading'
 
+export const journeyIllustrationSources: Record<
+  JourneyIllustrationId,
+  string | readonly string[]
+> = {
+  preferences: '/SVGs/subscription-form.svg',
+  curating: '/SVGs/man-thinking.svg',
+  searching: '/SVGs/library.svg',
+  packing: '/SVGs/delivery-van.svg',
+  delivery: '/SVGs/package-box.svg',
+  reading: ['/SVGs/reading0.svg', '/SVGs/reading1.svg', '/SVGs/reading2.svg'],
+}
+
 export type JourneyCheckpoint = {
   readonly id: string
   readonly number: string

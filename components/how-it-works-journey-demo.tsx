@@ -27,16 +27,49 @@ type StepLayout = {
   anchorOffset: 'left' | 'right'
   phraseIndex?: number
   illustrationSide: 'left' | 'right'
+  /** Per-step illustration tweaks — only set on steps called out in design */
+  illustrationInset?: string
+  illustrationPosition?: string
+  phraseClassName?: string
 }
 
 const stepLayouts: StepLayout[] = [
-  { align: 'left', anchorOffset: 'left', phraseIndex: 0, illustrationSide: 'right' },
-  { align: 'right', anchorOffset: 'right', phraseIndex: 1, illustrationSide: 'left' },
-  { align: 'left', anchorOffset: 'left', phraseIndex: 2, illustrationSide: 'right' },
-  { align: 'right', anchorOffset: 'right', phraseIndex: 3, illustrationSide: 'left' },
-  { align: 'left', anchorOffset: 'left', phraseIndex: 4, illustrationSide: 'right' },
-  { align: 'right', anchorOffset: 'right', illustrationSide: 'left' },
-]
+  {
+    align: "left",
+    anchorOffset: "left",
+    phraseIndex: 0,
+    illustrationSide: "right",
+  },
+  {
+    align: "right",
+    anchorOffset: "right",
+    phraseIndex: 1,
+    illustrationSide: "left",
+    illustrationPosition: "top-[30%] -translate-y-1/2",
+  },
+  {
+    align: "left",
+    anchorOffset: "left",
+    phraseIndex: 2,
+    illustrationSide: "right",
+    illustrationPosition: "top-[40%] -translate-y-1/2",
+  },
+  {
+    align: "right",
+    anchorOffset: "right",
+    phraseIndex: 3,
+    illustrationSide: "left",
+    illustrationInset: "-left-6 md:-left-10 lg:-left-14",
+    illustrationPosition: "top-[35%] -translate-y-1/2",
+  },
+  {
+    align: "left",
+    anchorOffset: "left",
+    phraseIndex: 4,
+    illustrationSide: "right",
+  },
+  { align: "right", anchorOffset: "right", illustrationSide: "left" },
+];
 
 function getCenterInRoot(el: HTMLElement, root: HTMLElement): Point {
   const rootRect = root.getBoundingClientRect()
@@ -82,7 +115,7 @@ function JourneyIntro({
   return (
     <div ref={introRef} className="journey-intro relative z-10 mb-6 sm:mb-10">
       <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:mt-10 sm:gap-5">
-        {journeyHighlights.map((item, index) => (
+        {journeyHighlights.map((item: { label: string; value: string }, index: number) => (
           <div
             key={item.label}
             ref={highlightRefs(index)}
@@ -217,30 +250,39 @@ function StepIllustration({
   checkpoint,
   side,
   illustrationRef,
+  illustrationInset,
+  illustrationPosition,
 }: {
   checkpoint: JourneyCheckpoint
   side: 'left' | 'right'
   illustrationRef: React.Ref<HTMLDivElement>
+  illustrationInset?: string
+  illustrationPosition?: string
 }) {
+  const defaultInset =
+    side === 'left' ? 'left-0 md:left-2 lg:left-6' : 'right-0 md:right-2 lg:right-6'
+
   return (
     <div
       ref={illustrationRef}
       className={cn(
-        'journey-illustration pointer-events-none absolute top-1/2 z-[5] hidden -translate-y-1/2 sm:block',
-        side === 'left' && 'left-0 md:left-2 lg:left-6',
-        side === 'right' && 'right-0 md:right-2 lg:right-6',
+        'journey-illustration pointer-events-none absolute z-[5] hidden sm:block',
+        illustrationPosition ?? 'top-1/2 -translate-y-1/2',
+        illustrationInset ?? defaultInset,
       )}
     >
       <JourneyDecorDots className="absolute -top-4 left-1/2 size-16 -translate-x-1/2 opacity-80 sm:-top-6 sm:size-20" />
-      <div className="relative size-32 md:size-40 lg:size-48">
+      <div
+        className={cn(
+          'relative',
+          checkpoint.illustration === 'reading'
+            ? 'h-40 w-52 md:h-48 md:w-60 lg:h-52 lg:w-64'
+            : 'size-32 md:size-40 lg:size-48',
+        )}
+      >
         <JourneyCheckpointIllustration
           id={checkpoint.illustration}
-          className="relative z-10 h-full w-full drop-shadow-[0_8px_24px_-12px_rgba(123,98,68,0.35)]"
-        />
-        <JourneyCheckpointIllustration
-          id={checkpoint.illustration}
-          variant="background"
-          className="absolute inset-0 translate-y-3 scale-125"
+          className="h-full w-full"
         />
       </div>
       <JourneyDecorSwirl
@@ -285,6 +327,8 @@ function JourneyStep({
         checkpoint={checkpoint}
         side={layout.illustrationSide}
         illustrationRef={illustrationRef}
+        illustrationInset={layout.illustrationInset}
+        illustrationPosition={layout.illustrationPosition}
       />
 
       <div
@@ -292,12 +336,12 @@ function JourneyStep({
         className={cn(
           'journey-mobile-illustration pointer-events-none absolute z-0 sm:hidden',
           layout.illustrationSide === 'left' ? '-left-4 top-10' : '-right-4 top-10',
+          checkpoint.illustration === 'reading' ? 'h-44 w-56' : 'size-44',
         )}
       >
         <JourneyCheckpointIllustration
           id={checkpoint.illustration}
-          variant="background"
-          className="size-44 opacity-[0.1]"
+          className="h-full w-full"
         />
       </div>
 
@@ -315,7 +359,10 @@ function JourneyStep({
               <FloatingPhrase
                 phrase={phrase}
                 phraseRef={phraseRef}
-                className="max-w-[13rem] sm:max-w-[11rem]"
+                className={cn(
+                  'max-w-[13rem] sm:max-w-[11rem]',
+                  layout.phraseClassName,
+                )}
               />
             )
           )}
@@ -344,7 +391,10 @@ function JourneyStep({
               <FloatingPhrase
                 phrase={phrase}
                 phraseRef={phraseRef}
-                className="max-w-[13rem] sm:max-w-[11rem]"
+                className={cn(
+                  'max-w-[13rem] sm:max-w-[11rem]',
+                  layout.phraseClassName,
+                )}
               />
             )
           ) : (

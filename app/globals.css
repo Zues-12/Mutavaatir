@@ -230,6 +230,28 @@ html {
   }
 }
 
+@keyframes features-marquee-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.features-marquee-track {
+  animation: features-marquee-scroll 50s linear infinite;
+  will-change: transform;
+}
+
+.features-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .features-marquee-track {
+    animation: none;
+    will-change: auto;
+  }
+}
+
 .scrollbar-brand {
   scrollbar-width: thin;
   scrollbar-color: #7b6244 rgb(227 212 197 / 0.18);
