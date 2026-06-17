@@ -81,7 +81,7 @@ function JourneyIntro({
 }) {
   return (
     <div ref={introRef} className="journey-intro relative z-10 mb-6 sm:mb-10">
-      <div className="mx-auto mt-8 grid max-w-3xl grid-cols-3 gap-3 sm:mt-10 sm:gap-5">
+      <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:mt-10 sm:gap-5">
         {journeyHighlights.map((item, index) => (
           <div
             key={item.label}
@@ -91,8 +91,14 @@ function JourneyIntro({
             <p className="font-display text-2xl font-medium tracking-wide text-brand-earth sm:text-3xl">
               {item.value}
             </p>
+            {/* break line after 1 word in label */}
             <p className="mt-1 text-[10px] tracking-[0.18em] text-brand-earth/65 uppercase sm:text-[11px]">
-              {item.label}
+              {item.label.split(' ').map((word, index) => (
+                <span key={index}>
+                  {word}
+                  {index < item.label.split(' ').length - 1 && <br />}
+                </span>
+              ))}
             </p>
           </div>
         ))}

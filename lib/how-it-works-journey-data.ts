@@ -35,7 +35,8 @@ export type JourneyPhrase = {
 export const journeyHighlights = [
   { label: 'Thoughtful steps', value: '6' },
   { label: 'Handpicked titles', value: '100%' },
-  { label: 'Cities served', value: '50+' },
+  { label: 'Cities served', value: '10+' },
+  { label: 'Customers satisfied', value: '20+' },
 ] as const
 
 export const journeyCheckpoints: JourneyCheckpoint[] = [
