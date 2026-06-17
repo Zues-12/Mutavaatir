@@ -1,5 +1,8 @@
+'use client'
+
 import Image from 'next/image'
 import { BookOpen, Award, Gift, Heart } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 
 const highlights = [
   {
@@ -25,6 +28,8 @@ const highlights = [
 ] as const
 
 export default function WhatIsMutavaatir() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <section
       aria-labelledby="what-is-mutavaatir-heading"
@@ -71,7 +76,23 @@ export default function WhatIsMutavaatir() {
                       index < 2 ? 'border-b border-brand-earth/25 lg:border-b-0' : '',
                     ].join(' ')}
                   >
-                    <Icon className="h-8 w-8 text-brand-earth" strokeWidth={1.4} aria-hidden />
+                    <motion.div
+                      className="flex h-8 w-8 items-center justify-center"
+                      initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.72, y: 10 }}
+                      whileInView={
+                        prefersReducedMotion
+                          ? undefined
+                          : { opacity: 1, scale: 1, y: 0 }
+                      }
+                      viewport={{ once: true, amount: 0.55 }}
+                      transition={{
+                        duration: 1.15,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: index * 0.14,
+                      }}
+                    >
+                      <Icon className="h-8 w-8 text-brand-earth" strokeWidth={1.4} aria-hidden />
+                    </motion.div>
                     <p className="font-display text-sm leading-tight tracking-wide text-brand-void sm:text-base">
                       {item.title}
                       <br />

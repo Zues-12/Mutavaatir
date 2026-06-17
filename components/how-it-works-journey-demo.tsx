@@ -143,31 +143,35 @@ function JourneyIntro({
 function FloatingPhrase({
   phrase,
   className,
+  offsetClassName,
   phraseRef,
 }: {
   phrase: JourneyPhrase
   className?: string
+  offsetClassName?: string
   phraseRef?: React.Ref<HTMLDivElement>
 }) {
   return (
-    <div ref={phraseRef} className={cn('journey-phrase-wrap relative', className)}>
-      <JourneyDecorSwirl className="absolute -top-6 size-10 opacity-70 sm:-top-8 sm:size-12" />
-      <p
-        className={cn(
-          'journey-phrase relative z-10 rounded-xl border border-brand-earth/10 bg-[#faf6f0] px-4 py-3 font-display text-base italic tracking-wide text-brand-earth/75 shadow-[0_2px_14px_-6px_rgba(13,13,13,0.14)] sm:text-lg',
-          phrase.align === 'left' && 'text-left',
-          phrase.align === 'right' && 'text-right',
-          phrase.align === 'center' && 'text-center',
-        )}
-      >
-        <span className="text-brand-earth/45" aria-hidden>
-          &ldquo;
-        </span>
-        {phrase.text}
-        <span className="text-brand-earth/45" aria-hidden>
-          &rdquo;
-        </span>
-      </p>
+    <div className={cn('relative', offsetClassName)}>
+      <div ref={phraseRef} className={cn('journey-phrase-wrap relative', className)}>
+        <JourneyDecorSwirl className="absolute -top-6 size-10 opacity-70 sm:-top-8 sm:size-12" />
+        <p
+          className={cn(
+            'journey-phrase relative z-10 rounded-xl border border-brand-earth/10 bg-[#faf6f0] px-4 py-3 font-display text-base italic tracking-wide text-brand-earth/75 shadow-[0_2px_14px_-6px_rgba(13,13,13,0.14)] sm:text-lg',
+            phrase.align === 'left' && 'text-left',
+            phrase.align === 'right' && 'text-right',
+            phrase.align === 'center' && 'text-center',
+          )}
+        >
+          <span className="text-brand-earth/45" aria-hidden>
+            &ldquo;
+          </span>
+          {phrase.text}
+          <span className="text-brand-earth/45" aria-hidden>
+            &rdquo;
+          </span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -321,7 +325,7 @@ function JourneyStep({
   return (
     <section
       ref={sectionRef}
-      className="journey-step relative flex min-h-[72vh] flex-col justify-center overflow-visible py-10 sm:min-h-[68vh] sm:py-14"
+      className="journey-step relative flex min-h-0 flex-col justify-center overflow-visible py-10 sm:min-h-[68vh] sm:py-14"
     >
       <StepIllustration
         checkpoint={checkpoint}
@@ -334,18 +338,24 @@ function JourneyStep({
       <div
         ref={mobileIllustrationRef}
         className={cn(
-          'journey-mobile-illustration pointer-events-none absolute z-0 sm:hidden',
-          layout.illustrationSide === 'left' ? '-left-4 top-10' : '-right-4 top-10',
-          checkpoint.illustration === 'reading' ? 'h-44 w-56' : 'size-44',
+          'journey-mobile-illustration relative z-[1] mx-auto flex w-full justify-center px-4 pb-2 sm:hidden',
+          checkpoint.illustration === 'reading' ? 'max-w-xs' : 'max-w-[9rem]',
         )}
       >
-        <JourneyCheckpointIllustration
-          id={checkpoint.illustration}
-          className="h-full w-full"
-        />
+        <div
+          className={cn(
+            'relative w-full',
+            checkpoint.illustration === 'reading' ? 'h-36' : 'aspect-square max-h-36',
+          )}
+        >
+          <JourneyCheckpointIllustration
+            id={checkpoint.illustration}
+            className="h-full w-full"
+          />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 items-center gap-8 overflow-visible sm:grid-cols-[minmax(0,1fr)_minmax(13rem,20rem)_minmax(0,1fr)] sm:gap-x-4 md:gap-x-8">
+      <div className="grid grid-cols-1 items-center gap-6 overflow-visible sm:grid-cols-[minmax(0,1fr)_minmax(13rem,20rem)_minmax(0,1fr)] sm:gap-8 sm:gap-x-4 md:gap-x-8">
         <div
           className={cn(
             'relative z-10 flex overflow-visible',
@@ -359,10 +369,8 @@ function JourneyStep({
               <FloatingPhrase
                 phrase={phrase}
                 phraseRef={phraseRef}
-                className={cn(
-                  'max-w-[13rem] sm:max-w-[11rem]',
-                  layout.phraseClassName,
-                )}
+                offsetClassName={layout.phraseClassName}
+                className="max-w-[13rem] sm:max-w-[11rem]"
               />
             )
           )}
@@ -391,10 +399,8 @@ function JourneyStep({
               <FloatingPhrase
                 phrase={phrase}
                 phraseRef={phraseRef}
-                className={cn(
-                  'max-w-[13rem] sm:max-w-[11rem]',
-                  layout.phraseClassName,
-                )}
+                offsetClassName={layout.phraseClassName}
+                className="max-w-[13rem] sm:max-w-[11rem]"
               />
             )
           ) : (
