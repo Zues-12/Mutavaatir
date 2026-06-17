@@ -1,6 +1,14 @@
 import Image from 'next/image'
 
-export default function HowItWorksPageHero() {
+type HowItWorksPageHeroProps = {
+  subtitle?: string
+  description?: string
+}
+
+export default function HowItWorksPageHero({
+  subtitle = 'Simple. Personal. Meaningful.',
+  description = "Here's how your curated subscription comes together — tap a step to expand it.",
+}: HowItWorksPageHeroProps) {
   return (
     <section
       className="relative isolate overflow-hidden bg-brand-void"
@@ -28,11 +36,10 @@ export default function HowItWorksPageHero() {
         </h1>
         <div className="mx-auto mt-6 h-px w-16 bg-brand-dust/70" aria-hidden />
         <p className="mx-auto mt-6 max-w-2xl font-display text-base leading-relaxed text-brand-mist sm:text-lg">
-          Simple. Personal. Meaningful.
+          {subtitle}
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-brand-mist/90 sm:text-lg">
-          Here&apos;s how your curated subscription comes together — tap a step to
-          expand it.
+          {description}
         </p>
       </div>
     </section>

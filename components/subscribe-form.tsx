@@ -175,7 +175,6 @@ export default function SubscribeForm({ defaultPlan }: SubscribeFormProps) {
       <form
         action={formAction}
         className={cn(cardClassName, 'flex flex-col gap-12')}
-        encType="multipart/form-data"
       >
         <p className="text-sm leading-relaxed text-brand-earth sm:text-base">
           <span className="font-medium text-brand-clay" aria-hidden="true">

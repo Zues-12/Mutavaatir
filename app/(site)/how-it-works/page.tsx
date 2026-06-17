@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import HowItWorksPageHero from '@/components/how-it-works-page-hero'
-import HowItWorksFull from '@/components/how-it-works-full'
+import HowItWorksJourneyDemo from '@/components/how-it-works-journey-demo'
 import Footer from '@/components/footer'
 import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { publicPageMetadata } from '@/lib/seo'
@@ -21,8 +21,11 @@ export default function HowItWorksPage() {
   return (
     <>
       <WebPageJsonLd path="/how-it-works" name={howTitle} description={howDescription} />
-      <HowItWorksPageHero />
-      <HowItWorksFull />
+      <HowItWorksPageHero
+        subtitle="Simple. Personal. Meaningful."
+        description="Follow the journey from your first preference to the book on your shelf — scroll through each checkpoint below."
+      />
+      <HowItWorksJourneyDemo />
       <Footer />
     </>
   )

@@ -96,8 +96,8 @@ export default function AdminShell({ userEmail, children }: AdminShellProps) {
   return (
     <div className="flex min-h-screen bg-brand-void text-brand-dust">
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-brand-earth bg-brand-void lg:flex">
-        <div className="flex h-24 items-center border-b border-brand-earth px-6">
+      <aside className="hidden h-screen w-64 shrink-0 flex-col overflow-hidden border-r border-brand-earth bg-brand-void lg:sticky lg:top-0 lg:flex">
+        <div className="flex h-24 shrink-0 items-center border-b border-brand-earth px-6">
           <Link
             href="/admin"
             className="font-display text-2xl font-normal leading-none tracking-normal text-brand-clay"
@@ -105,11 +105,11 @@ export default function AdminShell({ userEmail, children }: AdminShellProps) {
             MUTAVAATIR
           </Link>
         </div>
-        <p className="px-6 pt-6 pb-2 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-brand-earth">
+        <p className="shrink-0 px-6 pt-6 pb-2 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-brand-earth">
           Admin
         </p>
-        <div className="scrollbar-brand flex-1 overflow-y-auto pb-6">{navList}</div>
-        <div className="border-t border-brand-earth p-4">
+        <div className="shrink-0 px-0 pb-4">{navList}</div>
+        <div className="mt-auto shrink-0 border-t border-brand-earth p-4">
           <p className="mb-3 truncate text-xs text-brand-earth" title={userEmail ?? undefined}>
             {userEmail ?? 'Signed in'}
           </p>
@@ -156,7 +156,7 @@ export default function AdminShell({ userEmail, children }: AdminShellProps) {
         {mobileOpen ? (
           <div
             id="admin-mobile-nav"
-            className="scrollbar-brand fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-brand-mist/15 bg-brand-void/95 backdrop-blur-md backdrop-saturate-150 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-hidden border-t border-brand-mist/15 bg-brand-void/95 backdrop-blur-md backdrop-saturate-150 lg:hidden"
           >
             <p className="px-4 pt-6 pb-2 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-brand-earth">
               Admin
