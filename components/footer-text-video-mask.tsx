@@ -46,7 +46,7 @@ export default function FooterTextVideoMask() {
       </svg>
 
       <video
-        src="/footer-vid2.mp4"
+        src="/footer-vid2.webm"
         autoPlay
         loop
         muted

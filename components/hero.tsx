@@ -1,4 +1,11 @@
-import HeroLoadAnimation from '@/components/hero-load-animation'
+import HeroCinematic from '@/components/hero-cinematic'
+
+// Previous animated hero — kept for reference
+// import HeroLoadAnimation from '@/components/hero-load-animation'
+//
+// export default function Hero() {
+//   return <HeroLoadAnimation />
+// }
 
 // Previous static hero — kept for reference
 // import Image from 'next/image'
@@ -70,5 +77,5 @@ import HeroLoadAnimation from '@/components/hero-load-animation'
 // }
 
 export default function Hero() {
-  return <HeroLoadAnimation />
+  return <HeroCinematic />
 }

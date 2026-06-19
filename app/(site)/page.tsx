@@ -22,6 +22,12 @@ export const metadata: Metadata = publicPageMetadata({
 export default function HomePage() {
   return (
     <>
+      <link
+        rel="preload"
+        href="/hero-vids/hero3.webm"
+        as="video"
+        type="video/webm"
+      />
       <Hero />
       <Features />
       <WhatIsMutavaatir />

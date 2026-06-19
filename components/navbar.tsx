@@ -22,12 +22,32 @@ function navHrefIsActive(pathname: string, href: string) {
 const ctaClassName =
   'font-display bg-brand-clay font-bold tracking-wide text-brand-void shadow-md transition-shadow duration-300 hover:shadow-lg px-4 py-2 text-xs xl:px-7 xl:py-3.5 xl:text-sm xl:tracking-wider'
 
+const HOME_NAV_SOLID_SCROLL_PX = 120
+
 export default function Navbar() {
   const pathname = usePathname()
+  const isHome = pathname === '/'
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [homeNavOpacity, setHomeNavOpacity] = useState(isHome ? 0 : 1)
   const disclosureId = useId()
 
   const closeMobile = useCallback(() => setMobileOpen(false), [])
+
+  useEffect(() => {
+    if (!isHome) {
+      setHomeNavOpacity(1)
+      return
+    }
+
+    const updateOpacity = () => {
+      const progress = Math.min(1, window.scrollY / HOME_NAV_SOLID_SCROLL_PX)
+      setHomeNavOpacity(progress)
+    }
+
+    updateOpacity()
+    window.addEventListener('scroll', updateOpacity, { passive: true })
+    return () => window.removeEventListener('scroll', updateOpacity)
+  }, [isHome])
 
   useEffect(() => {
     if (!mobileOpen) return
@@ -47,11 +67,20 @@ export default function Navbar() {
     <>
     <header
       className={cn(
-        'site-header sticky top-0 z-50 border-b border-brand-earth bg-brand-void',
+        'site-header sticky top-0 z-50 border-b',
+        !isHome && 'border-brand-earth bg-brand-void',
         mobileOpen &&
           'border-brand-mist/15 bg-brand-void/80 shadow-[inset_0_-1px_0_rgba(255,255,255,0.06)] backdrop-blur-md backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/55',
       )}
-      style={{ viewTransitionName: 'site-header' }}
+      style={{
+        viewTransitionName: 'site-header',
+        ...(isHome && !mobileOpen
+          ? {
+              backgroundColor: `rgb(13 13 13 / ${homeNavOpacity})`,
+              borderBottomColor: `rgb(123 98 68 / ${homeNavOpacity})`,
+            }
+          : undefined),
+      }}
     >
       <div className="mx-auto flex h-21 max-w-7xl items-center gap-3 px-4 sm:px-6 md:gap-6 lg:h-24 lg:gap-8 lg:px-8 xl:gap-10">
         <Link
