@@ -8,7 +8,7 @@ export default function ReviewsPageHero() {
     >
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <Image
-          src="/review-hero.png"
+          src="/review-hero.webp"
           alt=""
           fill
           className="object-cover object-right sm:object-center"

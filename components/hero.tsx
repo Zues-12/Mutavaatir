@@ -22,7 +22,7 @@ import HeroCinematic from '@/components/hero-cinematic'
 //         aria-hidden
 //       >
 //         <Image
-//           src="/hero-bg.png"
+//           src="/hero-bg.webp"
 //           alt=""
 //           width={1920}
 //           height={1080}

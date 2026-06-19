@@ -16,7 +16,7 @@ export default function HowItWorksPageHero({
     >
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <Image
-          src="/how-hero.png"
+          src="/how-hero.webp"
           alt=""
           fill
           className="object-cover object-right sm:object-center"

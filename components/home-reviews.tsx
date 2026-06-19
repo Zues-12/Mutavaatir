@@ -12,7 +12,7 @@ export default function HomeReviews() {
     >
       <div
         className="absolute inset-0 bg-cover bg-right bg-no-repeat"
-        style={{ backgroundImage: "url('/home-reviews-bg.png')", backgroundPosition: 'right center' }}
+        style={{ backgroundImage: "url('/home-reviews-bg.webp')", backgroundPosition: 'right center' }}
         aria-hidden
       />
       <div className="absolute inset-0 bg-brand-void/70" aria-hidden />

@@ -39,7 +39,7 @@ export default function WhatIsMutavaatir() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(260px,420px)_1fr] lg:gap-10">
           <div className="relative overflow-hidden bg-brand-void">
             <Image
-              src="/home-img1.png"
+              src="/home-img1.webp"
               alt="Books and reading decor"
               width={960}
               height={960}

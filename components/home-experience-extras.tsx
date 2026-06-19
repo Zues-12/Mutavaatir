@@ -12,7 +12,7 @@ export default function HomeExperienceExtras() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
             <div className="relative min-h-[320px] overflow-hidden bg-brand-void lg:min-h-0">
               <Image
-                src="/month-experience.png"
+                src="/month-experience.webp"
                 alt="Wrapped monthly book package"
                 fill
                 className="object-cover object-[0%_50%]"

@@ -4,7 +4,7 @@ export default function HomeLastCtaBanner() {
   return (
     <section
       aria-labelledby="last-cta-heading"
-      className="relative isolate w-full overflow-hidden bg-brand-void bg-[url('/last-section-bg.png')] bg-left bg-no-repeat max-xl:min-h-[12.75rem] max-xl:bg-cover xl:aspect-[1024/116] xl:min-h-0 xl:bg-[length:100%_auto]"
+      className="relative isolate w-full overflow-hidden bg-brand-void bg-[url('/last-section-bg.webp')] bg-left bg-no-repeat max-xl:min-h-[12.75rem] max-xl:bg-cover xl:aspect-[1024/116] xl:min-h-0 xl:bg-[length:100%_auto]"
     >
       <div
         className="pointer-events-none absolute inset-0 z-0 bg-brand-void/45 xl:hidden"

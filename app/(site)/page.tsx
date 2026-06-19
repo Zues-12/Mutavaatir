@@ -24,6 +24,12 @@ export default function HomePage() {
     <>
       <link
         rel="preload"
+        href="/first_frame.webp"
+        as="image"
+        type="image/webp"
+      />
+      <link
+        rel="preload"
         href="/hero-vids/hero3.webm"
         as="video"
         type="video/webm"

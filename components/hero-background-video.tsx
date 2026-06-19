@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
 const HERO_VIDEO_SRC = '/hero-vids/hero3.webm'
-const HERO_POSTER_SRC = '/first_frame.png'
+const HERO_POSTER_SRC = '/first_frame.webp'
 
 export default function HeroBackgroundVideo() {
   const prefersReducedMotion = useReducedMotion()
