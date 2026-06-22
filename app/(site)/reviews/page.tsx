@@ -26,8 +26,18 @@ export default async function ReviewsPage() {
     <>
       <WebPageJsonLd path="/reviews" name={reviewsTitle} description={reviewsDescription} />
       <ReviewsPageHero />
-      <ReviewsRatingSummary stats={stats} />
-      <ReviewsGrid reviews={reviews} />
+      <section
+        aria-labelledby="reviews-content-heading"
+        className="bg-brand-mist py-10 sm:py-12 lg:py-14"
+      >
+        <div className="mx-auto max-w-7xl space-y-5 px-4 sm:space-y-6 sm:px-6 lg:space-y-7 lg:px-8">
+          <h2 id="reviews-content-heading" className="sr-only">
+            Reader reviews and ratings
+          </h2>
+          <ReviewsRatingSummary stats={stats} />
+          <ReviewsGrid reviews={reviews} />
+        </div>
+      </section>
       <ReviewsCommunityNote />
       <Footer />
     </>

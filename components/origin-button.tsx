@@ -85,11 +85,12 @@ function useOriginHover({ circleColor, disabled = false }: OriginHoverOptions) {
     circleColor,
     handleMouseEnter,
     handleMouseLeave,
+    handleMouseMove: updateCursorPos,
     showCircle,
   }
 }
 
-function OriginCircle({
+export function OriginCircle({
   cursorPos,
   maxDimension,
   easedScale,
@@ -134,6 +135,42 @@ function OriginContent({
     >
       {children}
     </span>
+  )
+}
+
+export type OriginHoverShellProps = {
+  children: ReactNode
+  className?: string
+  contentClassName?: string
+  circleColor?: string
+}
+
+export function OriginHoverShell({
+  children,
+  className,
+  contentClassName,
+  circleColor = originCircleColors.clay,
+}: OriginHoverShellProps) {
+  const hover = useOriginHover({ circleColor })
+
+  return (
+    <div
+      ref={hover.containerRef as RefObject<HTMLDivElement>}
+      onMouseEnter={hover.handleMouseEnter}
+      onMouseLeave={hover.handleMouseLeave}
+      onMouseMove={hover.handleMouseMove}
+      className={cn('group relative overflow-hidden', className)}
+    >
+      {hover.showCircle ? (
+        <OriginCircle
+          cursorPos={hover.cursorPos}
+          maxDimension={hover.maxDimension}
+          easedScale={hover.easedScale}
+          circleColor={hover.circleColor}
+        />
+      ) : null}
+      <div className={cn('relative z-10', contentClassName)}>{children}</div>
+    </div>
   )
 }
 

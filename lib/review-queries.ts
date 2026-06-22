@@ -1,6 +1,6 @@
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { hasSupabaseEnv } from '@/lib/supabase/env'
-import { ratingOptions } from '@/lib/reviews'
+import { ratingOptions, type RecommendOption } from '@/lib/reviews'
 
 export type PublicReview = {
   readonly id: string
@@ -8,6 +8,7 @@ export type PublicReview = {
   readonly feedback: string
   readonly display_name: string | null
   readonly created_at: string
+  readonly would_recommend: RecommendOption
 }
 
 export type PublicReviewStats = {
@@ -28,7 +29,7 @@ export async function listPublicReviews(): Promise<PublicReview[]> {
   const supabase = createSupabasePublicClient()
   const { data, error } = await supabase
     .from('reviews')
-    .select('id, rating, feedback, display_name, created_at')
+    .select('id, rating, feedback, display_name, created_at, would_recommend')
     .eq('published', true)
     .order('created_at', { ascending: false })
 
