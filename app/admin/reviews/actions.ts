@@ -29,6 +29,7 @@ async function requireAdmin() {
 }
 
 function revalidateReviewPaths() {
+  revalidatePath('/')
   revalidatePath('/admin')
   revalidatePath('/admin/reviews')
   revalidatePath('/reviews')
@@ -48,6 +49,27 @@ export async function setReviewPublishedAction(
 
   if (error) {
     console.error('setReviewPublishedAction', error)
+    return { ok: false, error: 'Could not update the review.' }
+  }
+
+  revalidateReviewPaths()
+  return { ok: true }
+}
+
+export async function setReviewFeaturedAction(
+  reviewId: string,
+  featured: boolean,
+): Promise<ReviewActionResult> {
+  const auth = await requireAdmin()
+  if (!auth.ok) return auth
+
+  const { error } = await auth.supabase
+    .from('reviews')
+    .update({ featured })
+    .eq('id', reviewId)
+
+  if (error) {
+    console.error('setReviewFeaturedAction', error)
     return { ok: false, error: 'Could not update the review.' }
   }
 

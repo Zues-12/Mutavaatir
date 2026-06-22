@@ -22,7 +22,12 @@ function normalizeReview(row: ReviewRow): DashboardReview {
   const orderRaw = Array.isArray(row.order) ? row.order[0] : row.order
 
   if (!orderRaw?.application) {
-    return { ...row, published: Boolean(row.published), order: null }
+    return {
+      ...row,
+      published: Boolean(row.published),
+      featured: Boolean(row.featured),
+      order: null,
+    }
   }
 
   const application = Array.isArray(orderRaw.application)
@@ -30,12 +35,18 @@ function normalizeReview(row: ReviewRow): DashboardReview {
     : orderRaw.application
 
   if (!application) {
-    return { ...row, published: Boolean(row.published), order: null }
+    return {
+      ...row,
+      published: Boolean(row.published),
+      featured: Boolean(row.featured),
+      order: null,
+    }
   }
 
   return {
     ...row,
     published: Boolean(row.published),
+    featured: Boolean(row.featured),
     order: {
       month_number: orderRaw.month_number,
       application,

@@ -23,6 +23,27 @@ const emptyStats: PublicReviewStats = {
   counts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
 }
 
+const FEATURED_HOME_LIMIT = 5
+
+export async function listFeaturedPublicReviews(
+  limit = FEATURED_HOME_LIMIT,
+): Promise<PublicReview[]> {
+  if (!hasSupabaseEnv()) return []
+
+  const supabase = createSupabasePublicClient()
+  const { data, error } = await supabase
+    .from('reviews')
+    .select('id, rating, feedback, display_name, created_at, would_recommend')
+    .eq('published', true)
+    .eq('featured', true)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+
+  if (error || !data) return []
+
+  return data
+}
+
 export async function listPublicReviews(): Promise<PublicReview[]> {
   if (!hasSupabaseEnv()) return []
 

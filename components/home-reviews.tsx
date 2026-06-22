@@ -1,10 +1,14 @@
 import { Quote, Star } from 'lucide-react'
 import { OriginLink, originCircleColors } from '@/components/origin-button'
-import { allReaderReviews } from '@/lib/reviews-data'
+import { listFeaturedPublicReviews } from '@/lib/review-queries'
 
-const reviews = allReaderReviews.slice(0, 3)
+function reviewerLabel(displayName: string | null): string {
+  return displayName?.trim() || 'Verified Reader'
+}
 
-export default function HomeReviews() {
+export default async function HomeReviews() {
+  const reviews = await listFeaturedPublicReviews(5)
+
   return (
     <section
       aria-labelledby="reviews-heading"
@@ -32,72 +36,72 @@ export default function HomeReviews() {
             <p className="max-w-[24ch] text-lg leading-relaxed text-brand-dust/95 sm:text-xl">
               Real stories from readers who found their next favorite book with us.
             </p>
-            <OriginLink
-              href="/reviews"
-              circleColor={originCircleColors.mist}
-              labelClassName="transition-colors duration-300 group-hover:text-brand-void"
-              className="font-display inline-flex border border-brand-clay/70 bg-transparent px-5 py-3 text-sm tracking-wide text-brand-dust transition-colors duration-300 hover:border-brand-mist"
-            >
-              SEE ALL REVIEWS
-            </OriginLink>
           </div>
 
           <div className="scrollbar-brand overflow-x-auto pb-2">
-            <ul className="flex min-w-max gap-3 md:gap-4 xl:min-w-0 xl:grid xl:grid-cols-3">
-              {reviews.map((review) => (
-                <li
-                  key={review.name}
-                  className="w-[270px] rounded-sm bg-brand-mist p-5 text-brand-void shadow-[0_8px_25px_rgba(0,0,0,0.3)] md:w-[290px] xl:w-auto"
+            <ul className="flex min-w-max items-stretch gap-3 md:gap-4">
+              {reviews.map((review) => {
+                const name = reviewerLabel(review.display_name)
+
+                return (
+                  <li
+                    key={review.id}
+                    className="flex w-[270px] shrink-0 flex-col rounded-sm bg-brand-mist p-5 text-brand-void shadow-[0_8px_25px_rgba(0,0,0,0.3)] md:w-[290px]"
+                  >
+                    <div className="flex items-center justify-end">
+                      <Quote
+                        className="h-7 w-7 text-brand-clay"
+                        strokeWidth={1.7}
+                        fill="currentColor"
+                        aria-hidden
+                      />
+                    </div>
+                    <p className="mt-4 min-h-28 flex-1 text-xl leading-relaxed text-brand-void">
+                      {review.feedback}
+                    </p>
+                    <div className="mt-6 flex items-end justify-between gap-4">
+                      <div>
+                        <p className="font-display text-lg leading-none tracking-wide text-brand-void">
+                          — {name}
+                        </p>
+                        <p className="font-display mt-1 text-xs tracking-wide text-brand-earth">
+                          VERIFIED READER
+                        </p>
+                      </div>
+                      <div
+                        className="flex items-center gap-1 text-brand-void"
+                        aria-label={`${review.rating} out of 5 stars`}
+                      >
+                        {Array.from({ length: 5 }).map((_, index) => (
+                          <Star
+                            key={index}
+                            className={[
+                              'h-3.5 w-3.5',
+                              index < review.rating ? 'fill-current' : 'fill-brand-earth/25',
+                            ].join(' ')}
+                            strokeWidth={1.6}
+                            aria-hidden
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
+
+              <li className="flex w-[220px] shrink-0 md:w-[240px]">
+                <OriginLink
+                  href="/reviews"
+                  circleColor={originCircleColors.mist}
+                  labelClassName="transition-colors duration-300 group-hover:text-brand-void"
+                  className="font-display flex h-full min-h-[280px] w-full flex-col items-center justify-center border border-brand-clay/70 bg-transparent px-6 py-8 text-center text-sm tracking-wide text-brand-dust transition-colors duration-300 hover:border-brand-mist"
                 >
-                  <div className="flex items-center justify-end">
-                    <Quote className="h-7 w-7 text-brand-clay" strokeWidth={1.7} fill="currentColor" aria-hidden />
-                  </div>
-                  <p className="mt-4 min-h-28 text-xl leading-relaxed text-brand-void">
-                    {review.quote}
-                  </p>
-                  <div className="mt-6 flex items-end justify-between gap-4">
-                    <div>
-                      <p className="font-display text-lg leading-none tracking-wide text-brand-void">
-                        - {review.name}
-                      </p>
-                      <p className="font-display mt-1 text-xs tracking-wide text-brand-earth">
-                        VERIFIED READER
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1 text-brand-void" aria-label="5 stars">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <Star key={index} className="h-3.5 w-3.5 fill-current" strokeWidth={1.6} />
-                      ))}
-                    </div>
-                  </div>
-                </li>
-              ))}
+                  SEE ALL REVIEWS
+                </OriginLink>
+              </li>
             </ul>
           </div>
         </div>
-
-        {/* <div className="mt-4 flex items-center justify-center gap-3 xl:mt-6" aria-hidden>
-          <span className="h-px w-8 bg-brand-earth/45" />
-          {reviews.map((review, index) => (
-            <span
-              key={review.name}
-              className={[
-                'relative flex h-3 w-3 items-center justify-center rounded-full border',
-                index === activeReview
-                  ? 'border-brand-dust bg-brand-earth/30 shadow-[0_0_0_1px_rgba(227,212,197,0.2)]'
-                  : 'border-brand-earth/55 bg-transparent',
-              ].join(' ')}
-            >
-              <span
-                className={[
-                  'h-1.5 w-1.5 rounded-full',
-                  index === activeReview ? 'bg-brand-mist' : 'bg-brand-earth/55',
-                ].join(' ')}
-              />
-            </span>
-          ))}
-          <span className="h-px w-8 bg-brand-earth/45" />
-        </div> */}
       </div>
     </section>
   )

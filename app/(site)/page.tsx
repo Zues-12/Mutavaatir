@@ -11,8 +11,6 @@ import Footer from '@/components/footer'
 import { publicPageMetadata } from '@/lib/seo'
 import { siteConfig } from '@/lib/site'
 
-export const dynamic = 'force-static'
-
 export const metadata: Metadata = publicPageMetadata({
   title: siteConfig.defaultTitle,
   description: siteConfig.description,

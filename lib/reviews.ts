@@ -19,6 +19,7 @@ export type Review = {
   readonly submitter_email: string | null
   readonly source: ReviewSource
   readonly published: boolean
+  readonly featured: boolean
 }
 
 export const recommendLabels: Record<RecommendOption, string> = {
