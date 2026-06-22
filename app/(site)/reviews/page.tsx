@@ -4,6 +4,8 @@ import ReviewsPageHero from '@/components/reviews-page-hero'
 import ReviewsRatingSummary from '@/components/reviews-rating-summary'
 import ReviewsGrid from '@/components/reviews-grid'
 import ReviewsCommunityNote from '@/components/reviews-community-note'
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld'
+import { ReviewsAggregateJsonLd } from '@/components/reviews-aggregate-json-ld'
 import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { getPublicReviewStats, listPublicReviews } from '@/lib/review-queries'
 import { publicPageMetadata } from '@/lib/seo'
@@ -24,7 +26,14 @@ export default async function ReviewsPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Reviews', path: '/reviews' },
+        ]}
+      />
       <WebPageJsonLd path="/reviews" name={reviewsTitle} description={reviewsDescription} />
+      <ReviewsAggregateJsonLd stats={stats} />
       <ReviewsPageHero />
       <section
         aria-labelledby="reviews-content-heading"

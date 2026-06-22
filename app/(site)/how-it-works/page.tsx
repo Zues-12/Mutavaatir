@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import HowItWorksPageHero from '@/components/how-it-works-page-hero'
 import HowItWorksJourneyDemo from '@/components/how-it-works-journey-demo'
 import Footer from '@/components/footer'
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld'
 import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { publicPageMetadata } from '@/lib/seo'
 
@@ -20,6 +21,12 @@ export const metadata: Metadata = publicPageMetadata({
 export default function HowItWorksPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'How it works', path: '/how-it-works' },
+        ]}
+      />
       <WebPageJsonLd path="/how-it-works" name={howTitle} description={howDescription} />
       <HowItWorksPageHero
         subtitle="Simple. Personal. Meaningful."

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Footer from '@/components/footer'
 import SubscribePageHero from '@/components/subscribe-page-hero'
 import SubscribeForm from '@/components/subscribe-form'
+import { BreadcrumbJsonLd } from '@/components/breadcrumb-json-ld'
 import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { publicPageMetadata } from '@/lib/seo'
 import { isValidPlanId } from '@/lib/subscribe-data'
@@ -40,6 +41,12 @@ export default async function SubscribePage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Subscribe', path: '/subscribe' },
+        ]}
+      />
       <WebPageJsonLd
         path="/subscribe"
         name={subscribeTitle}

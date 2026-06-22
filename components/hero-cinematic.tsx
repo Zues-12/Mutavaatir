@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { OriginLink, originCircleColors } from '@/components/origin-button'
 import HeroBackgroundVideo from '@/components/hero-background-video'
+import { siteConfig } from '@/lib/site'
 
 export default function HeroCinematic() {
   return (
@@ -36,6 +37,7 @@ export default function HeroCinematic() {
             <span className="text-brand-clay" aria-hidden>
               *
             </span>
+            <span className="sr-only"> — {siteConfig.tagline}</span>
           </h1>
 
           <div className="flex w-full max-w-xs flex-col gap-5 sm:max-w-sm lg:w-72 lg:max-w-none lg:shrink-0 xl:w-80">

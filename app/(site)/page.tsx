@@ -8,6 +8,7 @@ import WhatMakesDifferent from '@/components/what-makes-different'
 import HomeExperienceExtras from '@/components/home-experience-extras'
 import HomeLastCtaBanner from '@/components/home-last-cta-banner'
 import Footer from '@/components/footer'
+import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { publicPageMetadata } from '@/lib/seo'
 import { siteConfig } from '@/lib/site'
 
@@ -20,6 +21,11 @@ export const metadata: Metadata = publicPageMetadata({
 export default function HomePage() {
   return (
     <>
+      <WebPageJsonLd
+        path="/"
+        name={siteConfig.defaultTitle}
+        description={siteConfig.description}
+      />
       <link
         rel="preload"
         href="/first_frame.webp"

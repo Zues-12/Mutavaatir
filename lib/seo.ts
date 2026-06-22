@@ -1,6 +1,23 @@
 import type { Metadata } from 'next'
 import { getSiteUrl, siteConfig } from '@/lib/site'
 
+export function getOgImagePath(): string {
+  return siteConfig.ogImagePath.startsWith('/')
+    ? siteConfig.ogImagePath
+    : `/${siteConfig.ogImagePath}`
+}
+
+export function getSocialImageMetadata() {
+  const ogImagePath = getOgImagePath()
+  return {
+    url: ogImagePath,
+    width: siteConfig.ogImageWidth,
+    height: siteConfig.ogImageHeight,
+    alt: `${siteConfig.name} — curated books and subscription`,
+    type: 'image/jpeg' as const,
+  }
+}
+
 /**
  * Canonical metadata for public marketing routes (homepage and inner pages).
  * Keeps OG/Twitter/hreflang aligned with the live URL from NEXT_PUBLIC_SITE_URL.
@@ -15,9 +32,7 @@ export function publicPageMetadata(options: {
   const origin = getSiteUrl()
   const absoluteUrl = `${origin}${path === '/' ? '' : path}`
 
-  const ogImagePath = siteConfig.ogImagePath.startsWith('/')
-    ? siteConfig.ogImagePath
-    : `/${siteConfig.ogImagePath}`
+  const socialImage = getSocialImageMetadata()
 
   return {
     title: {
@@ -40,21 +55,14 @@ export function publicPageMetadata(options: {
       alternateLocale: ['en'],
       type: 'website',
       siteName: siteConfig.name,
-      images: [
-        {
-          url: ogImagePath,
-          width: siteConfig.ogImageWidth,
-          height: siteConfig.ogImageHeight,
-          alt: `${siteConfig.name} — curated books and subscription`,
-          type: 'image/jpeg',
-        },
-      ],
+      images: [socialImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: options.title,
       description: options.description,
-      images: [ogImagePath],
+      images: [socialImage.url],
+      ...(siteConfig.twitterHandle ? { site: siteConfig.twitterHandle, creator: siteConfig.twitterHandle } : {}),
     },
   }
 }

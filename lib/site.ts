@@ -44,5 +44,6 @@ export const siteConfig = {
   ogImagePath: '/mutavaatir-product.jpg',
   ogImageWidth: 1024,
   ogImageHeight: 1024,
+  logoPath: '/mutavaatir-circle.ico',
   seoKeywords: [...seoKeywords],
 } as const
