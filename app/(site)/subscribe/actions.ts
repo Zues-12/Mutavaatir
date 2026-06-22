@@ -42,7 +42,7 @@ export async function submitSubscriptionAction(
     return {
       ok: false,
       error:
-        'Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local and restart the dev server.',
+        'Supabase is not configured. Add SUPABASE_URL and SUPABASE_ANON_KEY to .env.local and restart the dev server.',
     }
   }
 
