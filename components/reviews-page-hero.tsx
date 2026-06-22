@@ -1,6 +1,14 @@
 import Image from 'next/image'
 
-export default function ReviewsPageHero() {
+type ReviewsPageHeroProps = {
+  title?: string
+  description?: string
+}
+
+export default function ReviewsPageHero({
+  title = 'REVIEWS',
+  description = 'Words from our readers. Raw and unedited.',
+}: ReviewsPageHeroProps) {
   return (
     <section
       className="relative isolate overflow-hidden bg-brand-void"
@@ -24,11 +32,11 @@ export default function ReviewsPageHero() {
           id="reviews-page-hero-heading"
           className="font-display text-4xl font-medium tracking-wide text-brand-clay sm:text-5xl lg:text-6xl"
         >
-          REVIEWS
+          {title}
         </h1>
         <div className="mx-auto mt-6 h-px w-16 bg-brand-dust/70" aria-hidden />
         <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-mist sm:text-lg">
-          Words from our readers. Raw and unedited.
+          {description}
         </p>
       </div>
     </section>

@@ -8,6 +8,7 @@ import {
 import { getPlanLabel } from '@/lib/subscription-applications'
 import { ratingStars } from '@/lib/reviews'
 import { cn } from '@/lib/utils'
+import ReviewPublishedToggle from '@/components/admin/review-published-toggle'
 
 function RecommendBadge({ value }: { value: DashboardReview['would_recommend'] }) {
   const tone =
@@ -66,6 +67,9 @@ export default function AdminReviewsTable({
             </th>
             <th scope="col" className="px-5 py-3 font-medium sm:px-6">
               Code
+            </th>
+            <th scope="col" className="px-5 py-3 font-medium sm:px-6">
+              Published
             </th>
           </tr>
         </thead>
@@ -140,6 +144,9 @@ export default function AdminReviewsTable({
               </td>
               <td className="px-5 py-4 font-mono text-xs text-brand-earth sm:px-6">
                 {review.tracking_id}
+              </td>
+              <td className="px-5 py-4 sm:px-6">
+                <ReviewPublishedToggle reviewId={review.id} published={review.published} />
               </td>
             </tr>
           ))}

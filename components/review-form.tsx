@@ -1,15 +1,15 @@
 'use client'
 
-import { useActionState, useEffect, useId, useRef, type ReactNode } from 'react'
+import { useActionState, useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { useFormStatus } from 'react-dom'
-import { CheckCircle2, Loader2 } from 'lucide-react'
+import { CheckCircle2, Loader2, Star } from 'lucide-react'
 import { submitReviewAction } from '@/app/(site)/reviews/submit/actions'
 import {
   initialReviewSubmitState,
   type ReviewSubmitState,
 } from '@/app/(site)/reviews/submit/types'
 import { OriginButton, originCircleColors } from '@/components/origin-button'
-import { ratingOptions, recommendLabels, recommendOptions } from '@/lib/reviews'
+import { recommendLabels, recommendOptions } from '@/lib/reviews'
 import { cn } from '@/lib/utils'
 
 const cardClassName =
@@ -88,10 +88,23 @@ function SubmitButton() {
   )
 }
 
-function StarRatingField({ ratingId }: { ratingId: string }) {
+function StarRatingField({
+  ratingId,
+  value,
+  onChange,
+  showError,
+}: {
+  ratingId: string
+  value: number | null
+  onChange: (rating: number) => void
+  showError: boolean
+}) {
+  const [hover, setHover] = useState<number | null>(null)
+  const active = hover ?? value ?? 0
+
   return (
     <fieldset className="flex flex-col gap-3 border-0 p-0">
-      <legend className={labelClassName}>
+      <legend id={ratingId} className={labelClassName}>
         Rating
         <RequiredIndicator />
         <span className="sr-only"> (required)</span>
@@ -99,27 +112,62 @@ function StarRatingField({ ratingId }: { ratingId: string }) {
       <p className="text-base leading-relaxed text-brand-earth sm:text-lg">
         How was your Mutavaatir experience?
       </p>
-      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        {ratingOptions.map((rating) => (
-          <label
-            key={rating}
-            className="flex cursor-pointer items-center gap-3 rounded-sm border border-brand-earth/15 bg-white px-5 py-3.5 transition-colors has-checked:border-brand-clay has-checked:bg-brand-mist/35 hover:border-brand-clay/40"
-          >
-            <input
-              id={rating === 1 ? ratingId : undefined}
-              type="radio"
-              name="rating"
-              value={rating}
-              required
-              className="h-5 w-5 shrink-0 accent-brand-clay"
-            />
-            <span className="text-base text-brand-void sm:text-[1.05rem]" aria-hidden="true">
-              {'⭐'.repeat(rating)} {rating}
+
+      <div
+        role="radiogroup"
+        aria-labelledby={ratingId}
+        aria-required="true"
+        className="flex flex-col gap-2"
+        onMouseLeave={() => setHover(null)}
+      >
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {[1, 2, 3, 4, 5].map((star) => {
+            const filled = star <= active
+            return (
+              <button
+                key={star}
+                type="button"
+                role="radio"
+                aria-checked={value === star}
+                aria-label={`${star} out of 5 stars`}
+                onClick={() => onChange(star)}
+                onMouseEnter={() => setHover(star)}
+                className={cn(
+                  'rounded-sm p-1 transition-transform duration-150 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-clay/40',
+                  filled ? 'text-brand-clay' : 'text-brand-earth/35',
+                )}
+              >
+                <Star
+                  className={cn(
+                    'h-9 w-9 sm:h-10 sm:w-10',
+                    filled ? 'fill-brand-clay' : 'fill-transparent',
+                  )}
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
+              </button>
+            )
+          })}
+        </div>
+
+        <p className="text-sm text-brand-earth">
+          {value ? (
+            <span className="text-brand-void">
+              {value} out of 5 star{value === 1 ? '' : 's'} selected
             </span>
-            <span className="sr-only">{rating} out of 5 stars</span>
-          </label>
-        ))}
+          ) : (
+            'Select a rating'
+          )}
+        </p>
       </div>
+
+      <input type="hidden" name="rating" value={value ?? ''} />
+
+      {showError && !value ? (
+        <p role="alert" className="text-sm text-red-700">
+          Please select a rating from 1 to 5 stars.
+        </p>
+      ) : null}
     </fieldset>
   )
 }
@@ -137,6 +185,8 @@ export default function ReviewForm({ defaultCode }: ReviewFormProps) {
   const ratingId = useId()
   const errorId = useId()
   const successRef = useRef<HTMLDivElement>(null)
+  const [rating, setRating] = useState<number | null>(null)
+  const [showRatingError, setShowRatingError] = useState(false)
 
   const codeFromUrl = Boolean(defaultCode)
 
@@ -174,19 +224,18 @@ export default function ReviewForm({ defaultCode }: ReviewFormProps) {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
-      <header className="text-center">
-        <p className="font-display text-xs font-medium tracking-[0.35em] text-brand-clay uppercase sm:text-sm">
-          Mutavaatir — Verified Review
-        </p>
-        <h1 className="font-display mt-4 text-3xl font-medium tracking-wide text-brand-void sm:text-4xl">
-          SHARE YOUR EXPERIENCE
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-brand-earth sm:text-lg">
-          Only verified Mutavaatir subscribers can submit this form using their unique code.
-        </p>
-      </header>
-
-      <form action={formAction} className={cn(cardClassName, 'flex flex-col gap-10')}>
+      <form
+        action={formAction}
+        className={cn(cardClassName, 'flex flex-col gap-10')}
+        onSubmit={(event) => {
+          if (!rating) {
+            event.preventDefault()
+            setShowRatingError(true)
+            return
+          }
+          setShowRatingError(false)
+        }}
+      >
         <p className="text-sm leading-relaxed text-brand-earth sm:text-base">
           <span className="font-medium text-brand-clay" aria-hidden="true">
             *
@@ -218,7 +267,15 @@ export default function ReviewForm({ defaultCode }: ReviewFormProps) {
           />
         </div>
 
-        <StarRatingField ratingId={ratingId} />
+        <StarRatingField
+          ratingId={ratingId}
+          value={rating}
+          onChange={(next) => {
+            setRating(next)
+            setShowRatingError(false)
+          }}
+          showError={showRatingError}
+        />
 
         <div className="flex flex-col gap-2.5">
           <FieldLabel htmlFor={feedbackId} required>

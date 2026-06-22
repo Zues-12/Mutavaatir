@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import Footer from '@/components/footer'
 import ReviewForm from '@/components/review-form'
+import ReviewsPageHero from '@/components/reviews-page-hero'
 import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { publicPageMetadata } from '@/lib/seo'
 
@@ -36,6 +38,10 @@ export default async function ReviewSubmitPage({
   return (
     <>
       <WebPageJsonLd path="/reviews/submit" name={reviewTitle} description={reviewDescription} />
+      <ReviewsPageHero
+        title="SHARE YOUR EXPERIENCE"
+        description="Only verified Mutavaatir subscribers can submit this form using their unique code."
+      />
       <section
         aria-labelledby="review-form-heading"
         className="paper-texture bg-brand-mist py-14 sm:py-16 lg:py-24"
@@ -47,6 +53,7 @@ export default async function ReviewSubmitPage({
           <ReviewForm defaultCode={code} />
         </div>
       </section>
+      <Footer />
     </>
   )
 }

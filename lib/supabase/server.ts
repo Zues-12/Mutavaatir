@@ -2,6 +2,13 @@ import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
 import { getSupabaseEnv } from './env'
 
+const noopCookies = {
+  getAll() {
+    return []
+  },
+  setAll() {},
+}
+
 /**
  * Server-side Supabase client for Next.js App Router. Reads and writes
  * auth cookies via the Next cookie store so server components, server
@@ -30,5 +37,14 @@ export async function createSupabaseServerClient() {
         }
       },
     },
+  })
+}
+
+/** Anonymous client for public pages — ignores admin session cookies. */
+export function createSupabasePublicClient() {
+  const { url, anonKey } = getSupabaseEnv()
+
+  return createServerClient(url, anonKey, {
+    cookies: noopCookies,
   })
 }
