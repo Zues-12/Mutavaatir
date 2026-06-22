@@ -39,7 +39,7 @@ export default function HomePage() {
       <HowItWorksHome />
       <WhatMakesDifferent />
       <HomeExperienceExtras />
-      <HomeLastCtaBanner />
+      {/* <HomeLastCtaBanner /> */}
       <Footer />
     </>
   )

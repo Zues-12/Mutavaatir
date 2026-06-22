@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
-import { OriginButton, OriginLink, originCircleColors } from '@/components/origin-button'
+import { OriginLink, originCircleColors } from '@/components/origin-button'
 import { primaryNavLinks } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -69,8 +69,7 @@ export default function Navbar() {
       className={cn(
         'site-header sticky top-0 z-50 border-b',
         !isHome && 'border-brand-earth bg-brand-void',
-        mobileOpen &&
-          'border-brand-mist/15 bg-brand-void/80 shadow-[inset_0_-1px_0_rgba(255,255,255,0.06)] backdrop-blur-md backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/55',
+        mobileOpen && 'border-brand-earth bg-brand-void',
       )}
       style={{
         viewTransitionName: 'site-header',
@@ -125,10 +124,9 @@ export default function Navbar() {
           </OriginLink>
         </div>
 
-        <OriginButton
+        <button
           type="button"
-          circleColor="rgb(159 134 102 / 0.28)"
-          className="relative z-60 ml-auto bg-transparent text-brand-dust transition-colors hover:text-brand-mist md:hidden"
+          className="relative z-60 -mr-1 ml-auto flex h-11 w-11 shrink-0 items-center justify-center bg-transparent text-brand-dust [-webkit-tap-highlight-color:transparent] md:hidden"
           aria-expanded={mobileOpen}
           aria-controls={MOBILE_NAV_ID}
           id={disclosureId}
@@ -136,7 +134,7 @@ export default function Navbar() {
         >
           <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
           {mobileOpen ? <X size={28} aria-hidden /> : <Menu size={28} aria-hidden />}
-        </OriginButton>
+        </button>
       </div>
     </header>
 
@@ -144,7 +142,7 @@ export default function Navbar() {
       <nav
         id={MOBILE_NAV_ID}
         aria-label="Mobile primary navigation"
-        className="scrollbar-brand fixed inset-x-0 top-21 bottom-0 z-40 md:hidden overflow-y-auto border-t border-brand-mist/15 bg-brand-void/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl backdrop-saturate-150 supports-backdrop-filter:bg-brand-void/30"
+        className="scrollbar-brand fixed inset-x-0 top-21 bottom-0 z-40 overflow-y-auto border-t border-brand-earth bg-brand-void md:hidden"
       >
         <div className="mx-auto flex max-h-full min-h-0 max-w-7xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-11 lg:px-8">
           <div className="space-y-5">
