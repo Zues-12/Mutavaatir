@@ -62,7 +62,7 @@ export default async function AdminDashboardPage({
     {
       label: 'Active subscriptions',
       value: String(stats.active),
-      hint: `${stats.inFulfillment} in fulfillment pipeline`,
+      hint: `${stats.inFulfillment} in progress`,
       icon: Users,
       tone: 'text-emerald-300',
     },

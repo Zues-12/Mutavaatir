@@ -49,3 +49,14 @@ export const subscriptionIncludes = [
 export function formatRupee(amount: number): string {
   return `Rs. ${amount.toLocaleString('en-PK')}`
 }
+
+const planMonths: Record<string, number> = {
+  monthly: 1,
+  quarterly: 3,
+  biannual: 6,
+  yearly: 12,
+}
+
+export function getPlanMonths(planId: string): number {
+  return planMonths[planId] ?? 1
+}

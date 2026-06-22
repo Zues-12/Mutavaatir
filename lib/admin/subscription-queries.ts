@@ -156,7 +156,7 @@ export async function getSubscriptionDashboardStats(
       approvedRevenue += amount
       if (planStats) planStats.approved += 1
     }
-    if (status === 'active') {
+    if (status === 'completed') {
       active += 1
     }
     if (isInFulfillmentPipeline(status)) {

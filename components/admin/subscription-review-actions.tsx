@@ -62,8 +62,8 @@ export default function SubscriptionReviewActions({
             circleColor={originCircleColors.mist}
             onClick={() =>
               run(
-                () => updateSubscriptionStatusAction(id, 'book_searching'),
-                'Payment verified. Book sourcing started.',
+                () => updateSubscriptionStatusAction(id, 'accepted'),
+                'Subscription accepted.',
               )
             }
             className={cn(
@@ -72,7 +72,7 @@ export default function SubscriptionReviewActions({
             )}
           >
             <Check className="h-3.5 w-3.5" aria-hidden />
-            Verify
+            Accept
           </OriginButton>
         ) : null}
 

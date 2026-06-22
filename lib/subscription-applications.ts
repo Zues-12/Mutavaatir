@@ -1,24 +1,14 @@
-import { formatRupee, subscriptionPlans } from '@/lib/pricing-data'
+import { formatRupee, getPlanMonths, subscriptionPlans } from '@/lib/pricing-data'
 
 export const signupStatuses = ['pending', 'rejected'] as const
 
-export const workflowStatuses = [
-  'book_searching',
-  'book_confirmed',
-  'packaging',
-  'dispatched',
-  'delivered',
-  'active',
-] as const
+export const fulfillmentStatuses = ['accepted', 'completed'] as const
 
-export const subscriptionStatuses = [...signupStatuses, ...workflowStatuses] as const
+export const subscriptionStatuses = [...signupStatuses, ...fulfillmentStatuses] as const
 
 export type SignupStatus = (typeof signupStatuses)[number]
-export type WorkflowStatus = (typeof workflowStatuses)[number]
+export type FulfillmentStatus = (typeof fulfillmentStatuses)[number]
 export type SubscriptionStatus = (typeof subscriptionStatuses)[number]
-
-export const sourcingResults = ['found', 'not_available', 'alternative_suggested'] as const
-export type SourcingResult = (typeof sourcingResults)[number]
 
 export type SubscriptionApplication = {
   readonly id: string
@@ -39,48 +29,27 @@ export type SubscriptionApplication = {
   readonly terms_accepted: boolean
   readonly reviewed_at: string | null
   readonly reviewed_by: string | null
-  readonly sourcing_result: SourcingResult | null
-  readonly sourcing_notes: string | null
-  readonly book_title: string | null
-  readonly book_author: string | null
-  readonly book_notes: string | null
-  readonly package_id: string | null
-  readonly tracking_number: string | null
-  readonly courier: string | null
-  readonly estimated_delivery_date: string | null
-  readonly dispatched_at: string | null
-  readonly delivered_at: string | null
-  readonly workflow_updated_at: string | null
+  readonly previous_application_id: string | null
 }
 
 export function isSubscriptionStatus(value: string): value is SubscriptionStatus {
   return (subscriptionStatuses as readonly string[]).includes(value)
 }
 
-export function isSourcingResult(value: string): value is SourcingResult {
-  return (sourcingResults as readonly string[]).includes(value)
-}
-
 export function isSignupStatus(status: SubscriptionStatus): status is SignupStatus {
   return (signupStatuses as readonly string[]).includes(status)
 }
 
-export function isWorkflowStatus(status: SubscriptionStatus): status is WorkflowStatus {
-  return (workflowStatuses as readonly string[]).includes(status)
-}
-
-export function isInFulfillmentPipeline(status: SubscriptionStatus): boolean {
-  return (
-    status === 'book_searching' ||
-    status === 'book_confirmed' ||
-    status === 'packaging' ||
-    status === 'dispatched' ||
-    status === 'delivered'
-  )
+export function isFulfillmentStatus(status: SubscriptionStatus): status is FulfillmentStatus {
+  return (fulfillmentStatuses as readonly string[]).includes(status)
 }
 
 export function isApprovedSubscription(status: SubscriptionStatus): boolean {
-  return isWorkflowStatus(status)
+  return isFulfillmentStatus(status)
+}
+
+export function isInFulfillmentPipeline(status: SubscriptionStatus): boolean {
+  return status === 'accepted'
 }
 
 export function getPlanLabel(planId: string): string {
@@ -104,33 +73,14 @@ export function formatPlanPrice(planId: string): string {
   return `${formatRupee(plan.pricePerMonth)}/month`
 }
 
+export function formatPlanDuration(planId: string): string {
+  const months = getPlanMonths(planId)
+  return months === 1 ? '1 month' : `${months} months`
+}
+
 export const statusLabels: Record<SubscriptionStatus, string> = {
   pending: 'Pending review',
   rejected: 'Rejected',
-  book_searching: 'Book searching',
-  book_confirmed: 'Book confirmed',
-  packaging: 'Packaging',
-  dispatched: 'Dispatched',
-  delivered: 'Delivered',
-  active: 'Active',
+  accepted: 'Accepted',
+  completed: 'Completed',
 }
-
-export const sourcingResultLabels: Record<SourcingResult, string> = {
-  found: 'Found',
-  not_available: 'Not available',
-  alternative_suggested: 'Alternative suggested',
-}
-
-export const courierOptions = ['TCS', 'Leopards', 'PostEx', 'M&P', 'Other'] as const
-
-export const workflowSteps: ReadonlyArray<{
-  readonly status: WorkflowStatus
-  readonly label: string
-}> = [
-  { status: 'book_searching', label: 'Sourcing' },
-  { status: 'book_confirmed', label: 'Confirmed' },
-  { status: 'packaging', label: 'Packaging' },
-  { status: 'dispatched', label: 'Dispatched' },
-  { status: 'delivered', label: 'Delivered' },
-  { status: 'active', label: 'Active' },
-]

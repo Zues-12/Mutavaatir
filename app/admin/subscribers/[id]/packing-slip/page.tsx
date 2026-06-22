@@ -3,8 +3,10 @@ import PrintButton from '@/components/admin/print-button'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
+import { listOrdersForApplication } from '@/lib/admin/order-queries'
 import { getSubscriptionApplication } from '@/lib/admin/subscription-queries'
-import { formatPlanPrice, getPlanLabel } from '@/lib/subscription-applications'
+import { formatPlanPrice, getPlanLabel, isFulfillmentStatus } from '@/lib/subscription-applications'
+import { getActiveOrder } from '@/lib/subscription-orders'
 
 export const metadata: Metadata = {
   title: 'Packing slip',
@@ -19,16 +21,14 @@ export default async function PackingSlipPage({ params }: PageProps) {
   const { id } = await params
   const application = await getSubscriptionApplication(id)
 
-  if (!application) {
+  if (!application || !isFulfillmentStatus(application.status)) {
     notFound()
   }
 
-  if (
-    application.status !== 'packaging' &&
-    application.status !== 'dispatched' &&
-    application.status !== 'delivered' &&
-    application.status !== 'active'
-  ) {
+  const orders = await listOrdersForApplication(application.id)
+  const activeOrder = getActiveOrder(orders)
+
+  if (!activeOrder || activeOrder.status === 'delivered') {
     notFound()
   }
 
@@ -69,8 +69,12 @@ export default async function PackingSlipPage({ params }: PageProps) {
           </h2>
           <dl className="mt-2 space-y-2 text-sm">
             <div className="flex justify-between gap-4">
-              <dt className="text-black/60">Package ID</dt>
-              <dd>{application.package_id ?? '—'}</dd>
+              <dt className="text-black/60">Month</dt>
+              <dd>{activeOrder.month_number}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-black/60">Tracking</dt>
+              <dd>{activeOrder.tracking_id ?? '—'}</dd>
             </div>
             <div className="flex justify-between gap-4">
               <dt className="text-black/60">Plan</dt>
@@ -89,13 +93,10 @@ export default async function PackingSlipPage({ params }: PageProps) {
           Contents
         </h2>
         <p className="mt-2 text-lg font-medium">
-          {application.book_title ?? 'Book title pending'}
+          {activeOrder.sent_book ?? 'Book pending'}
         </p>
-        {application.book_author ? (
-          <p className="text-sm text-black/70">by {application.book_author}</p>
-        ) : null}
-        {application.book_notes ? (
-          <p className="mt-2 text-sm text-black/70">{application.book_notes}</p>
+        {activeOrder.options ? (
+          <p className="mt-2 text-sm text-black/70">{activeOrder.options}</p>
         ) : null}
       </section>
 

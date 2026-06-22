@@ -37,16 +37,8 @@ function statusCount(
   if (status === 'all') return stats.total
   if (status === 'pending') return stats.pending
   if (status === 'rejected') return stats.rejected
-  if (status === 'active') return stats.active
-  if (
-    status === 'book_searching' ||
-    status === 'book_confirmed' ||
-    status === 'packaging' ||
-    status === 'dispatched' ||
-    status === 'delivered'
-  ) {
-    return null
-  }
+  if (status === 'accepted') return stats.inFulfillment
+  if (status === 'completed') return stats.active
   return null
 }
 
