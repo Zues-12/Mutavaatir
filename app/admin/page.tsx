@@ -11,11 +11,16 @@ import {
   XCircle,
 } from 'lucide-react'
 import { format } from 'date-fns'
+import AdminReviewsSection from '@/components/admin/admin-reviews-section'
 import DashboardDateRangePicker from '@/components/admin/dashboard-date-range-picker'
 import SubscriptionFilters from '@/components/admin/subscription-filters'
 import SubscriptionReviewActions from '@/components/admin/subscription-review-actions'
 import SubscriptionStatusBadge from '@/components/admin/subscription-status-badge'
 import { formatDateRangeLabel } from '@/lib/admin/date-range'
+import {
+  getReviewDashboardStats,
+  listDashboardReviews,
+} from '@/lib/admin/review-queries'
 import {
   buildAdminFilterHref,
   getSubscriptionDashboardStats,
@@ -53,9 +58,11 @@ export default async function AdminDashboardPage({
   const dateRange = parseDateRangeFilter(fromParam, toParam)
   const rangeLabel = formatDateRangeLabel(dateRange)
 
-  const [stats, applications] = await Promise.all([
+  const [stats, applications, reviewStats, reviews] = await Promise.all([
     getSubscriptionDashboardStats(dateRange),
     listSubscriptionApplications(statusFilter, planFilter, dateRange),
+    getReviewDashboardStats(dateRange),
+    listDashboardReviews(dateRange, 5),
   ])
 
   const statCards = [
@@ -106,6 +113,14 @@ export default async function AdminDashboardPage({
   ] as const
 
   const activePlans = stats.byPlan.filter((item) => item.total > 0)
+
+  const reviewsHref = (() => {
+    const params = new URLSearchParams()
+    if (fromParam) params.set('from', fromParam)
+    if (toParam) params.set('to', toParam)
+    const query = params.toString()
+    return query ? `/admin/reviews?${query}` : '/admin/reviews'
+  })()
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
@@ -317,6 +332,13 @@ export default async function AdminDashboardPage({
           </Link>
         </p>
       ) : null}
+
+      <AdminReviewsSection
+        reviews={reviews}
+        stats={reviewStats}
+        dateRange={dateRange}
+        viewAllHref={reviewsHref}
+      />
     </div>
   )
 }
