@@ -84,24 +84,38 @@ export default function AdminReviewsTable({
                 </p>
               </td>
               <td className="px-5 py-4 sm:px-6">
-                <Link
-                  href={`/admin/subscribers/${review.order.application.id}`}
-                  className="font-medium text-brand-mist hover:text-brand-clay"
-                >
-                  {review.display_name ?? review.order.application.full_name}
-                </Link>
-                {review.display_name ? (
-                  <p className="mt-0.5 text-xs text-brand-earth">
-                    {review.order.application.full_name}
-                  </p>
-                ) : null}
-                <p className="mt-0.5 text-xs text-brand-dust">
-                  {review.order.application.email}
-                </p>
-                <p className="text-xs text-brand-earth">
-                  {getPlanLabel(review.order.application.plan_id)} · Month{' '}
-                  {review.order.month_number}
-                </p>
+                {review.order ? (
+                  <>
+                    <Link
+                      href={`/admin/subscribers/${review.order.application.id}`}
+                      className="font-medium text-brand-mist hover:text-brand-clay"
+                    >
+                      {review.display_name ?? review.order.application.full_name}
+                    </Link>
+                    {review.display_name ? (
+                      <p className="mt-0.5 text-xs text-brand-earth">
+                        {review.order.application.full_name}
+                      </p>
+                    ) : null}
+                    <p className="mt-0.5 text-xs text-brand-dust">
+                      {review.order.application.email}
+                    </p>
+                    <p className="text-xs text-brand-earth">
+                      {getPlanLabel(review.order.application.plan_id)} · Month{' '}
+                      {review.order.month_number}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-medium text-brand-mist">
+                      {review.display_name ?? review.submitter_email ?? 'Legacy review'}
+                    </p>
+                    {review.display_name && review.submitter_email ? (
+                      <p className="mt-0.5 text-xs text-brand-dust">{review.submitter_email}</p>
+                    ) : null}
+                    <p className="mt-1 text-xs text-brand-earth">Imported from Google Form</p>
+                  </>
+                )}
               </td>
               <td className="px-5 py-4 sm:px-6">
                 <div className="flex items-center gap-2">

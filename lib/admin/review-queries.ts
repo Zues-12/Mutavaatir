@@ -11,6 +11,34 @@ export type DashboardReview = Review & {
       readonly email: string
       readonly plan_id: string
     }
+  } | null
+}
+
+type ReviewRow = Review & {
+  order: NonNullable<DashboardReview['order']> | NonNullable<DashboardReview['order']>[] | null
+}
+
+function normalizeReview(row: ReviewRow): DashboardReview {
+  const orderRaw = Array.isArray(row.order) ? row.order[0] : row.order
+
+  if (!orderRaw?.application) {
+    return { ...row, order: null }
+  }
+
+  const application = Array.isArray(orderRaw.application)
+    ? orderRaw.application[0]
+    : orderRaw.application
+
+  if (!application) {
+    return { ...row, order: null }
+  }
+
+  return {
+    ...row,
+    order: {
+      month_number: orderRaw.month_number,
+      application,
+    },
   }
 }
 
@@ -18,26 +46,6 @@ export type ReviewDashboardStats = {
   readonly total: number
   readonly averageRating: number
   readonly wouldRecommendYes: number
-}
-
-type ReviewRow = Review & {
-  order: DashboardReview['order'] | DashboardReview['order'][] | null
-}
-
-function normalizeReview(row: ReviewRow): DashboardReview | null {
-  const order = Array.isArray(row.order) ? row.order[0] : row.order
-  if (!order?.application) return null
-
-  const application = Array.isArray(order.application) ? order.application[0] : order.application
-  if (!application) return null
-
-  return {
-    ...row,
-    order: {
-      month_number: order.month_number,
-      application,
-    },
-  }
 }
 
 export async function getReviewDashboardStats(
@@ -105,9 +113,7 @@ export async function listDashboardReviews(
 
   if (error || !data) return []
 
-  return data
-    .map((row) => normalizeReview(row as ReviewRow))
-    .filter((row): row is DashboardReview => row !== null)
+  return data.map((row) => normalizeReview(row as ReviewRow))
 }
 
 export function formatRecommendLabel(value: RecommendOption): string {
