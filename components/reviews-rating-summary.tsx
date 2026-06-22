@@ -47,7 +47,7 @@ export default function ReviewsRatingSummary({ stats }: ReviewsRatingSummaryProp
                 />
               </div>
 
-              <span className="min-w-10 text-right text-sm font-medium tabular-nums text-brand-void">
+              <span className="min-w-1 text-right text-sm font-medium tabular-nums text-brand-void">
                 {count}
               </span>
             </li>
@@ -55,20 +55,20 @@ export default function ReviewsRatingSummary({ stats }: ReviewsRatingSummaryProp
         })}
       </ol>
 
-      <div className="flex shrink-0 flex-col items-center text-center">
-        <p className="font-display text-5xl font-medium leading-none text-brand-void sm:text-6xl">
+      <div className="flex shrink-0 flex-col items-center px-2 text-center sm:px-4 lg:min-w-[11rem] lg:px-6">
+        <p className="font-display text-6xl font-medium leading-none text-brand-void sm:text-7xl">
           {stats.averageRating.toFixed(1)}
         </p>
 
         <div
-          className="mt-4 flex items-center gap-1 text-brand-earth"
+          className="mt-5 flex items-center gap-1.5 text-brand-earth"
           aria-label={`${stats.averageRating} out of 5 stars`}
         >
           {ratingOptions.map((star) => (
             <Star
               key={star}
               className={[
-                'h-4 w-4 sm:h-5 sm:w-5',
+                'h-5 w-5 sm:h-6 sm:w-6',
                 star <= Math.round(stats.averageRating)
                   ? 'fill-current'
                   : 'fill-transparent text-brand-earth/30',
@@ -79,7 +79,7 @@ export default function ReviewsRatingSummary({ stats }: ReviewsRatingSummaryProp
           ))}
         </div>
 
-        <p className="mt-4 text-sm font-medium text-brand-earth">
+        <p className="mt-5 text-base font-medium text-brand-earth">
           {stats.total} {stats.total === 1 ? 'rating' : 'ratings'}
         </p>
       </div>
