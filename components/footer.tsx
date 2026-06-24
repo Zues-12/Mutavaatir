@@ -19,12 +19,12 @@ const quickLinks = [
 ] as const
 
 const socialLinkClass =
-  'flex h-10 w-10 items-center justify-center rounded-full border border-brand-mist/25 text-brand-mist transition-colors hover:border-brand-clay hover:text-brand-clay'
+  'flex h-10 w-10 items-center justify-center rounded-full border border-brand-dust/40 text-brand-dust transition-colors hover:border-brand-clay hover:text-brand-clay'
 
 const navLinkClass =
-  'text-sm leading-relaxed text-brand-earth transition-colors hover:text-brand-mist'
+  'text-sm leading-relaxed text-brand-dust transition-colors hover:text-brand-clay'
 
-const columnTitleClass = 'font-display text-sm font-semibold tracking-wide text-brand-mist'
+const columnTitleClass = 'font-display text-sm font-semibold tracking-wide text-brand-clay'
 
 export default function Footer() {
   return (
@@ -48,10 +48,10 @@ export default function Footer() {
             >
               MUTAVAATIR
             </Link>
-            <p className="font-display mt-2 text-sm font-normal tracking-wider text-brand-earth lg:text-base">
+            <p className="font-display mt-2 text-sm font-normal tracking-wider text-brand-clay lg:text-base">
               A BOOK. CHOSEN FOR YOU.
             </p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-brand-earth/95 hidden md:block">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-brand-dust hidden md:block">
               {siteConfig.description}
             </p>
           </div>
@@ -91,7 +91,7 @@ export default function Footer() {
           {/* Newsletter */}
           <div className="flex flex-col items-center text-center sm:col-span-2 sm:items-start sm:text-left lg:col-span-1">
             <h3 className={columnTitleClass}>Join the community</h3>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-brand-earth/95">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-brand-dust">
               Occasional updates on new drops, reading notes, and subscription news. No spam.
             </p>
             <FooterNewsletterForm className="mt-6 w-full max-w-md lg:max-w-none" />
@@ -100,7 +100,7 @@ export default function Footer() {
 
         <div className="mt-8 flex w-full flex-row items-center justify-between gap-3 pt-0 md:mt-10 xl:mt-14">
           <div className="flex min-w-0 flex-wrap items-center gap-2.5 sm:gap-4">
-            <p className="shrink-0 text-xs font-medium tracking-wide text-brand-dust">Follow us on</p>
+            <p className="shrink-0 text-xs font-medium tracking-wide text-brand-clay">Follow us on</p>
             <nav aria-label="Social links" className="flex shrink-0 items-center gap-2.5 sm:gap-3">
               <Link href="#" className={socialLinkClass} aria-label="Instagram (link coming soon)">
                 <Instagram size={18} strokeWidth={1.5} aria-hidden />
@@ -113,7 +113,7 @@ export default function Footer() {
               </Link>
             </nav>
           </div>
-          <p className="max-w-[min(100%,11rem)] shrink-0 text-right text-[0.65rem] leading-snug tracking-normal text-brand-earth/90 sm:max-w-none sm:text-xs md:text-sm">
+          <p className="max-w-[min(100%,11rem)] shrink-0 text-right text-[0.65rem] leading-snug tracking-normal text-brand-dust sm:max-w-none sm:text-xs md:text-sm">
             © <time dateTime="2026">2026</time> {siteConfig.name}. All rights reserved.
           </p>
         </div>

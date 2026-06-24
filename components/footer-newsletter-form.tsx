@@ -27,8 +27,8 @@ export default function FooterNewsletterForm({ className }: { className?: string
         placeholder="Enter email address"
         required
         className={cn(
-          'h-12 w-full rounded-lg border border-brand-earth/40 bg-brand-void/70 pr-14 pl-4 text-sm text-brand-mist shadow-inner outline-none',
-          'placeholder:text-brand-earth/70',
+          'h-12 w-full rounded-lg border border-brand-dust/45 bg-brand-void/70 pr-14 pl-4 text-sm text-brand-dust shadow-inner outline-none',
+          'placeholder:text-brand-dust/65',
           'focus-visible:border-brand-clay/70 focus-visible:ring-2 focus-visible:ring-brand-clay/25',
         )}
       />
