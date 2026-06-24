@@ -135,7 +135,7 @@ export const termsSections: TermsSection[] = [
   {
     title: "Contact",
     lines: [
-      "For questions regarding subscriptions, deliveries, cancellations, or any other concerns, please contact us through the suggestions field on the subscription form or via our official Instagram account.",
+      "For questions regarding subscriptions, deliveries, cancellations, or any other concerns, please use our contact form or reach us via our official Instagram account.",
     ],
   },
 ];
