@@ -1,9 +1,9 @@
 /**
  * Central site constants for metadata, canonical URLs, and structured data.
- * Set NEXT_PUBLIC_SITE_URL in production (e.g. https://mutavaatir.com).
+ * Set NEXT_PUBLIC_SITE_URL in production (e.g. https://www.mutavaatir.pk).
  */
 
-const fallbackSiteUrl = 'https://mutavaatir.marsols.org'
+const fallbackSiteUrl = 'https://www.mutavaatir.pk'
 
 export function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL?.trim()

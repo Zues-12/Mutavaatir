@@ -61,7 +61,7 @@ export default function LoginForm({ next }: LoginFormProps) {
           aria-invalid={state.error ? true : undefined}
           aria-describedby={state.error ? errorId : undefined}
           className="w-full border border-brand-earth/60 bg-brand-void/40 px-4 py-3 text-base text-brand-mist placeholder:text-brand-earth/70 outline-none transition-colors duration-200 focus:border-brand-clay focus:bg-brand-void/70"
-          placeholder="you@mutavaatir.com"
+          placeholder="you@mutavaatir.pk"
         />
       </div>
 

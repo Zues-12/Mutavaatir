@@ -102,7 +102,13 @@ export default function Footer() {
           <div className="flex min-w-0 flex-wrap items-center gap-2.5 sm:gap-4">
             <p className="shrink-0 text-xs font-medium tracking-wide text-brand-clay">Follow us on</p>
             <nav aria-label="Social links" className="flex shrink-0 items-center gap-2.5 sm:gap-3">
-              <Link href="#" className={socialLinkClass} aria-label="Instagram (link coming soon)">
+              <Link
+                href="https://www.instagram.com/mutavaatir/"
+                className={socialLinkClass}
+                aria-label="Mutavaatir on Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram size={18} strokeWidth={1.5} aria-hidden />
               </Link>
               <Link href="#" className={socialLinkClass} aria-label="X / Twitter (link coming soon)">
