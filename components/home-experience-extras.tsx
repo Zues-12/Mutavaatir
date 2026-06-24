@@ -5,21 +5,21 @@ export default function HomeExperienceExtras() {
   return (
     <section
       aria-labelledby="experience-heading"
-      className="paper-texture bg-brand-mist hidden lg:block lg:py-24"
+      className="paper-texture bg-brand-mist py-12 lg:py-24"
     >
       <div>
         <div className="overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
-            <div className="relative min-h-[320px] overflow-hidden bg-brand-void lg:min-h-0">
+          <div className="grid grid-cols-1 px-10 lg:grid-cols-[1.05fr_1fr] lg:px-0">
+            <div className="relative min-h-[320px] overflow-hidden  bg-brand-void lg:min-h-0 lg:rounded-none">
               <Image
                 src="/month-experience.webp"
                 alt="Wrapped monthly book package"
                 fill
                 className="object-cover object-[0%_50%]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1024px) calc(100vw - 5rem), 50vw"
               />
             </div>
-            <div className="flex flex-col justify-center px-6 py-8 sm:px-10 lg:px-12">
+            <div className="flex flex-col justify-center py-8 lg:px-12">
               <h2
                 id="experience-heading"
                 className="font-display text-4xl leading-none font-medium tracking-tight text-brand-void sm:text-5xl"

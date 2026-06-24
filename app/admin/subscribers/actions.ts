@@ -57,6 +57,23 @@ async function createFirstOrder(
 ) {
   const previousOrder = await findLastDeliveredOrderForEmail(email, applicationId)
 
+  const { data: existing } = await supabase
+    .from('subscription_orders')
+    .select('id, previous_order_id')
+    .eq('application_id', applicationId)
+    .eq('month_number', 1)
+    .maybeSingle()
+
+  if (existing) {
+    if (previousOrder && !existing.previous_order_id) {
+      await supabase
+        .from('subscription_orders')
+        .update({ previous_order_id: previousOrder.id })
+        .eq('id', existing.id)
+    }
+    return null
+  }
+
   const { error } = await supabase.from('subscription_orders').insert({
     application_id: applicationId,
     month_number: 1,
