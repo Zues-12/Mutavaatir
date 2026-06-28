@@ -8,7 +8,7 @@ export default function ContactPageHero() {
     >
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <Image
-          src="/bookmarks-bg.webp"
+          src="/contact-header.webp"
           alt=""
           fill
           className="object-cover object-center"
