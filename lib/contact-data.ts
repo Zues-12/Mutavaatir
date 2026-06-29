@@ -13,7 +13,6 @@ export function isValidContactSubject(value: string): value is ContactSubjectId 
 }
 
 export const contactConfig = {
-  instagramUrl: 'https://www.instagram.com/mutavaatir/',
   responseNote: 'We typically respond within 2–3 business days.',
   /** Left-panel artwork on the contact page */
   visualImagePath: '/contact-phone.png',

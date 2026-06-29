@@ -47,3 +47,9 @@ export const siteConfig = {
   logoPath: '/mutavaatir-circle.ico',
   seoKeywords: [...seoKeywords],
 } as const
+
+export const socialLinks = {
+  instagram: 'https://www.instagram.com/mutavaatir/',
+  facebook: 'https://www.facebook.com/mutavaatir',
+  linkedin: 'https://www.linkedin.com/company/mutavaatir/',
+} as const

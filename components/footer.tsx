@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { Instagram, Mail, Twitter } from 'lucide-react'
 import FooterNewsletterForm from '@/components/footer-newsletter-form'
 import FooterTextVideoMask from '@/components/footer-text-video-mask'
+import SocialLinks from '@/components/social-links'
 import { siteConfig } from '@/lib/site'
 
 const learnMoreLinks = [
@@ -19,9 +19,6 @@ const quickLinks = [
   { label: 'Contact us', href: '/contact' },
   { label: 'Terms & conditions', href: '/terms' },
 ] as const
-
-const socialLinkClass =
-  'flex h-10 w-10 items-center justify-center rounded-full border border-brand-dust/40 text-brand-dust transition-colors hover:border-brand-clay hover:text-brand-clay'
 
 const navLinkClass =
   'text-sm leading-relaxed text-brand-dust transition-colors hover:text-brand-clay'
@@ -103,23 +100,7 @@ export default function Footer() {
         <div className="mt-8 flex w-full flex-row items-center justify-between gap-3 pt-0 md:mt-10 xl:mt-14">
           <div className="flex min-w-0 flex-wrap items-center gap-2.5 sm:gap-4">
             <p className="shrink-0 text-xs font-medium tracking-wide text-brand-clay">Follow us on</p>
-            <nav aria-label="Social links" className="flex shrink-0 items-center gap-2.5 sm:gap-3">
-              <Link
-                href="https://www.instagram.com/mutavaatir/"
-                className={socialLinkClass}
-                aria-label="Mutavaatir on Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram size={18} strokeWidth={1.5} aria-hidden />
-              </Link>
-              <Link href="#" className={socialLinkClass} aria-label="X / Twitter (link coming soon)">
-                <Twitter size={18} strokeWidth={1.5} aria-hidden />
-              </Link>
-              <Link href="#" className={socialLinkClass} aria-label="Email (link coming soon)">
-                <Mail size={18} strokeWidth={1.5} aria-hidden />
-              </Link>
-            </nav>
+            <SocialLinks />
           </div>
           <p className="max-w-[min(100%,11rem)] shrink-0 text-right text-[0.65rem] leading-snug tracking-normal text-brand-dust sm:max-w-none sm:text-xs md:text-sm">
             © <time dateTime="2026">2026</time> {siteConfig.name}. All rights reserved.

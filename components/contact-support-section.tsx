@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ContactForm from '@/components/contact-form'
+import SocialLinks from '@/components/social-links'
 import { contactConfig } from '@/lib/contact-data'
 
 const CONTACT_IMAGE_WIDTH = 1448
@@ -37,6 +38,12 @@ export default function ContactSupportSection() {
               </p>
               <div className="mt-7 sm:mt-8">
                 <ContactForm />
+              </div>
+              <div className="mt-8 border-t border-brand-earth/20 pt-6">
+                <p className="text-xs font-medium tracking-wide text-brand-void/80 sm:text-sm">
+                  Follow us
+                </p>
+                <SocialLinks variant="contact" className="mt-3" />
               </div>
             </div>
           </div>
