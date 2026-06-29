@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { LayoutDashboard, MessageSquareQuote, Settings, Users } from 'lucide-react'
+import { LayoutDashboard, MessageSquareQuote, PenLine, Settings, Users } from 'lucide-react'
 
 export type AdminNavItem = {
   readonly href: string
@@ -11,5 +11,6 @@ export const adminNavItems: readonly AdminNavItem[] = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/subscribers', label: 'Subscribers', icon: Users },
   { href: '/admin/reviews', label: 'Reviews', icon: MessageSquareQuote },
+  { href: '/admin/blog', label: 'Blog', icon: PenLine },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ] as const

@@ -15,6 +15,7 @@ const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'Plans & pricing', href: '/pricing' },
   { label: 'Reader reviews', href: '/reviews' },
+  { label: 'Reading notes', href: '/blog' },
   { label: 'Contact us', href: '/contact' },
   { label: 'Terms & conditions', href: '/terms' },
 ] as const
