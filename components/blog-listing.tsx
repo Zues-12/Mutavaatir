@@ -13,7 +13,7 @@ const POSTS_PER_PAGE = 10
 function estimateReadingTime(html: string | null): number {
   if (!html) return 1
   const wordCount = html.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length
-  return Math.max(1, Math.ceil(wordCount / 200))
+  return Math.max(1, Math.ceil(wordCount / 20))
 }
 
 /* ── Helpers ─────────────────────────────────────────────────────────────── */
@@ -121,7 +121,7 @@ function BlogListItem({
 
         {/* Subtitle / excerpt */}
         {(post.subtitle || post.excerpt) && (
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brand-dust/80">
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brand-dust/80 pb-2">
             {post.subtitle ?? post.excerpt}
           </p>
         )}
