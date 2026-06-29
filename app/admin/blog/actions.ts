@@ -20,9 +20,20 @@ async function getAdminClient() {
   return { supabase, user, isAdmin: Boolean(isAdmin) }
 }
 
-function revalidateBlogPaths(id?: string) {
+function revalidateBlogPaths(post?: {
+  id?: string
+  slug?: string | null
+  previousSlug?: string | null
+}) {
   revalidatePath('/admin/blog')
-  if (id) revalidatePath(`/admin/blog/${id}/edit`)
+  revalidatePath('/blog')
+
+  if (post?.id) revalidatePath(`/admin/blog/${post.id}/edit`)
+
+  const publicSlugs = new Set([post?.slug, post?.previousSlug].filter(Boolean))
+  for (const slug of publicSlugs) {
+    revalidatePath(`/blog/${slug}`)
+  }
 }
 
 export type BlogPostInput = {
@@ -102,7 +113,7 @@ export async function createBlogPostAction(
     return { ok: false, error: 'Could not create blog post.' }
   }
 
-  revalidateBlogPaths()
+  revalidateBlogPaths({ id: data.id, slug: input.slug.trim() })
   return { ok: true, id: data.id }
 }
 
@@ -120,6 +131,12 @@ export async function updateBlogPostAction(
   if (!input.title?.trim()) return { ok: false, error: 'Title is required.' }
   if (!input.slug?.trim()) return { ok: false, error: 'Slug is required.' }
   if (!input.author_name?.trim()) return { ok: false, error: 'Author name is required.' }
+
+  const { data: existingPost } = await supabase
+    .from('blog_posts')
+    .select('slug')
+    .eq('id', id)
+    .maybeSingle()
 
   const { error } = await supabase
     .from('blog_posts')
@@ -154,7 +171,11 @@ export async function updateBlogPostAction(
     return { ok: false, error: 'Could not update blog post.' }
   }
 
-  revalidateBlogPaths(id)
+  revalidateBlogPaths({
+    id,
+    slug: input.slug.trim(),
+    previousSlug: existingPost?.slug ?? null,
+  })
   return { ok: true }
 }
 
@@ -166,6 +187,12 @@ export async function deleteBlogPostAction(id: string): Promise<ActionResult> {
     return { ok: false, error: 'You must be signed in as an admin.' }
   }
 
+  const { data: existingPost } = await supabase
+    .from('blog_posts')
+    .select('slug')
+    .eq('id', id)
+    .maybeSingle()
+
   const { error } = await supabase.from('blog_posts').delete().eq('id', id)
 
   if (error) {
@@ -173,7 +200,7 @@ export async function deleteBlogPostAction(id: string): Promise<ActionResult> {
     return { ok: false, error: 'Could not delete blog post.' }
   }
 
-  revalidateBlogPaths()
+  revalidateBlogPaths({ id, slug: existingPost?.slug ?? null })
   redirect('/admin/blog')
 }
 

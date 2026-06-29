@@ -11,6 +11,8 @@ const blogTitle = 'Editorial — Essays & Reflections by Mutavaatir'
 const blogDescription =
   "Discover thoughtful reviews, curated reading lists, literary essays, conversations about literature and everything in between. - the Mutavaatir Editorial.";
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = publicPageMetadata({
   title: blogTitle,
   description: blogDescription,
