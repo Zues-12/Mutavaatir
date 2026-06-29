@@ -432,6 +432,7 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
               onChange={setContent}
               disabled={pending}
               placeholder="Start writing your post…"
+              language={language}
             />
           </div>
         </div>

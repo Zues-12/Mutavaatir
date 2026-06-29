@@ -7,15 +7,15 @@ import { WebPageJsonLd } from '@/components/web-page-json-ld'
 import { listPublicBlogPosts } from '@/lib/blog-queries'
 import { publicPageMetadata } from '@/lib/seo'
 
-const blogTitle = 'Reading Notes — Essays & Reflections by Mutavaatir'
+const blogTitle = 'Editorial — Essays & Reflections by Mutavaatir'
 const blogDescription =
-  'Essays, reflections, and letters on books, reading, and the stories that stay with you — from the Mutavaatir team.'
+  "Discover thoughtful reviews, curated reading lists, literary essays, conversations about literature and everything in between. - the Mutavaatir Editorial.";
 
 export const metadata: Metadata = publicPageMetadata({
   title: blogTitle,
   description: blogDescription,
   path: '/blog',
-  extraKeywords: ['Mutavaatir blog', 'book essays', 'reading notes', 'book reviews Pakistan'],
+  extraKeywords: ['Mutavaatir blog', 'book essays', 'editorial', 'book reviews Pakistan'],
 })
 
 export default async function BlogPage() {

@@ -45,6 +45,7 @@ type BlogEditorProps = {
   onChange: (html: string) => void
   placeholder?: string
   disabled?: boolean
+  language?: string
 }
 
 type ToolbarButtonProps = {
@@ -89,7 +90,9 @@ export default function BlogEditor({
   onChange,
   placeholder = 'Start writing your post…',
   disabled = false,
+  language = 'en',
 }: BlogEditorProps) {
+  const isRtl = language === 'ur' || language === 'ar' || language === 'fa'
   const imageInputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
@@ -112,6 +115,12 @@ export default function BlogEditor({
       }),
       Placeholder.configure({ placeholder }),
     ],
+    editorProps: {
+      attributes: {
+        lang: language,
+        ...(isRtl ? { dir: 'rtl' } : {}),
+      },
+    },
     content: value,
     editable: !disabled,
     onUpdate: ({ editor: ed }) => {
@@ -389,10 +398,12 @@ export default function BlogEditor({
         </div>
       )}
 
-      {/* Editor content */}
+      {/* Editor content — lang/dir on wrapper so CSS cascade applies Nastaliq */}
       <EditorContent
         editor={editor}
         className="blog-editor-content scrollbar-brand min-h-[420px] overflow-y-auto"
+        lang={language}
+        dir={isRtl ? 'rtl' : undefined}
       />
 
       {/* Hidden file input for image upload */}

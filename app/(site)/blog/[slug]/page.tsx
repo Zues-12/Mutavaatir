@@ -13,6 +13,7 @@ import {
 } from '@/lib/blog-queries'
 import { publicPageMetadata } from '@/lib/seo'
 import { getSiteUrl } from '@/lib/site'
+import { cn } from '@/lib/utils'
 
 type Params = Promise<{ slug: string }>
 
@@ -39,10 +40,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
   const title = post.seo_title ?? post.title
   const description =
-    post.seo_description ?? post.excerpt ?? `Read "${post.title}" on Mutavaatir Reading Notes.`
+    post.seo_description ?? post.excerpt ?? `Read "${post.title}" on Mutavaatir Editorial.`
 
   const base = publicPageMetadata({
-    title: `${title} — Mutavaatir Reading Notes`,
+    title: `${title} — Mutavaatir Editorial`,
     description,
     path: `/blog/${post.slug}`,
   })
@@ -138,23 +139,24 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <section className="relative isolate overflow-hidden bg-brand-void" aria-labelledby="post-title">
         {post.cover_image_url && (
           <>
-            <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+            <div className="pointer-events-none absolute inset-0 z-0 opacity-75" aria-hidden>
               <Image
                 src={post.cover_image_url}
                 alt=""
                 fill
-                className="object-cover"
+                className="object-cover object-center"
                 sizes="100vw"
                 priority
                 quality={85}
               />
             </div>
+            {/* Stronger scrim at bottom where text sits */}
             <div
               className="pointer-events-none absolute inset-0 z-1"
               aria-hidden
               style={{
                 background:
-                  'linear-gradient(to bottom, rgb(13 13 13 / 0.70) 0%, rgb(13 13 13 / 0.50) 40%, rgb(13 13 13 / 0.88) 100%)',
+                  'linear-gradient(to bottom, rgb(13 13 13 / 0.45) 0%, rgb(13 13 13 / 0.35) 35%, rgb(13 13 13 / 0.82) 75%, rgb(13 13 13 / 0.96) 100%)',
               }}
             />
           </>
@@ -166,48 +168,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             aria-hidden
             style={{
               background:
-                'radial-gradient(ellipse 70% 50% at 50% 100%, rgb(123 98 68 / 0.22) 0%, transparent 70%)',
+                'radial-gradient(ellipse 80% 60% at 0% 100%, rgb(123 98 68 / 0.25) 0%, transparent 65%)',
             }}
           />
         )}
 
-        {/* Hero content — wider max-w-5xl */}
-        <div className="relative z-10 mx-auto max-w-5xl px-4 pb-16 pt-12 text-center sm:px-6 sm:pb-20 sm:pt-16 lg:px-8 lg:pb-24 lg:pt-20">
-          {/* Back */}
-          <div className="mb-8 flex justify-center">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-1.5 text-xs text-brand-earth transition-colors hover:text-brand-dust"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              <span className="font-display uppercase tracking-wider">Reading Notes</span>
-            </Link>
-          </div>
-
-          {/* Categories + featured */}
-          {(post.categories.length > 0 || post.featured) && (
-            <div className="mb-5 flex flex-wrap justify-center gap-2">
-              {post.categories.map((cat) => (
-                <span
-                  key={cat}
-                  className="border border-brand-clay/40 px-3 py-1 font-display text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-clay"
-                >
-                  {cat}
-                </span>
-              ))}
-              {post.featured && (
-                <span className="flex items-center gap-1 border border-brand-clay bg-brand-clay px-3 py-1 font-display text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-brand-void">
-                  <Star className="h-2.5 w-2.5 fill-brand-void" aria-hidden />
-                  Featured
-                </span>
-              )}
-            </div>
-          )}
-
-          {/* Title — bigger on larger screens */}
+        {/* Hero content — full max-w-7xl, left-aligned */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 pt-16 sm:px-6 sm:pb-18 sm:pt-20 lg:px-8 lg:pb-20 lg:pt-28">
+          {/* Title */}
           <h1
             id="post-title"
-            className="font-display text-3xl font-medium leading-tight tracking-wide text-brand-mist sm:text-4xl lg:text-5xl xl:text-6xl"
+            className="max-w-4xl font-display text-3xl font-medium leading-tight tracking-wide text-brand-mist sm:text-4xl lg:text-5xl xl:text-6xl"
             lang={post.language}
             dir={isRtl ? 'rtl' : undefined}
           >
@@ -217,7 +188,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           {/* Subtitle */}
           {post.subtitle && (
             <p
-              className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-brand-dust sm:text-lg lg:text-xl"
+              className="mt-4 max-w-2xl text-base leading-relaxed text-brand-dust/90 sm:text-lg lg:text-xl"
               lang={post.language}
               dir={isRtl ? 'rtl' : undefined}
             >
@@ -225,12 +196,19 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             </p>
           )}
 
-          <div className="mx-auto mt-8 h-px w-14 bg-brand-earth/50" aria-hidden />
+          {/* Divider */}
+          <div className="mt-7 h-px w-12 bg-brand-earth/50" aria-hidden />
 
-          {/* Meta */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-brand-earth">
+          {/* Meta row */}
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-brand-earth">
             {post.author_name && (
-              <span className="font-medium text-brand-dust">{post.author_name}</span>
+              <span
+                className="font-medium text-brand-dust"
+                lang={post.language}
+                dir={isRtl ? 'rtl' : undefined}
+              >
+                {post.author_name}
+              </span>
             )}
             <time dateTime={publishedDate}>
               {format(new Date(publishedDate), 'MMMM d, yyyy')}
@@ -240,22 +218,55 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               {readingTime} min read
             </span>
             {post.language !== 'en' && (
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5" lang={post.language} dir={isRtl ? 'rtl' : undefined}>
                 <Globe className="h-3.5 w-3.5" aria-hidden />
                 {LANG_LABELS[post.language] ?? post.language.toUpperCase()}
               </span>
             )}
           </div>
+
+          {/* Categories + featured — bottom of hero */}
+          {(post.categories.length > 0 || post.featured) && (
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              {post.featured && (
+                <span className="flex items-center gap-1 border border-brand-clay bg-brand-clay px-3 py-1 font-display text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-brand-void">
+                  <Star className="h-2.5 w-2.5 fill-brand-void" aria-hidden />
+                  Featured
+                </span>
+              )}
+              {post.categories.map((cat) => (
+                <span
+                  key={cat}
+                  className="border border-brand-clay/40 px-3 py-1 font-display text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-clay"
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* ── Content + Sidebar ─────────────────────────────────────────────── */}
       <section className="bg-brand-void py-14 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_300px] lg:gap-16 xl:grid-cols-[1fr_340px] xl:gap-20">
+          {/*
+            English: [article 1fr | sidebar 300px] — sidebar RIGHT
+            Urdu/RTL: [sidebar 300px | article 1fr] — sidebar LEFT
+            We swap the grid template AND use explicit column placement so the
+            sidebar always occupies the narrow column and the article the wide one.
+          */}
+          <div
+            className={cn(
+              'grid grid-cols-1 gap-10 lg:gap-16 xl:gap-20',
+              isRtl
+                ? 'lg:grid-cols-[300px_1fr] xl:grid-cols-[340px_1fr]'
+                : 'lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px]',
+            )}
+          >
 
             {/* ── Article body ── */}
-            <article>
+            <article className={cn(isRtl && 'lg:col-start-2 lg:row-start-1')}>
               {post.content ? (
                 <div
                   className="blog-preview-content p-0!"
@@ -269,7 +280,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             </article>
 
             {/* ── Sticky sidebar ── */}
-            <aside className="flex flex-col gap-4 lg:sticky lg:top-28 lg:self-start">
+            <aside
+              className={cn(
+                'flex flex-col gap-4 lg:sticky lg:top-28 lg:self-start',
+                isRtl && 'lg:col-start-1 lg:row-start-1',
+              )}
+            >
 
               {/* Author card */}
               {(post.author_name || post.author_bio) && (
@@ -296,11 +312,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                       </div>
                     )}
                     <div className="min-w-0">
-                      <p className="font-display text-sm font-medium tracking-wide text-brand-mist">
+                      <p
+                        className="font-display text-sm font-medium tracking-wide text-brand-mist"
+                        lang={post.language}
+                      >
                         {post.author_name}
                       </p>
                       {post.author_bio && (
-                        <p className="mt-1.5 text-xs leading-relaxed text-brand-dust/80">
+                        <p
+                          className="mt-1.5 text-xs leading-relaxed text-brand-dust/80"
+                          lang={post.language}
+                        >
                           {post.author_bio}
                         </p>
                       )}
@@ -378,7 +400,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                   {readingTime} min read
                 </p>
                 {post.language !== 'en' && (
-                  <p className="mt-1 flex items-center gap-1.5">
+                  <p className="mt-1 flex items-center gap-1.5" lang={post.language}>
                     <Globe className="h-3 w-3" aria-hidden />
                     {LANG_LABELS[post.language] ?? post.language.toUpperCase()}
                   </p>
@@ -392,7 +414,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                   className="flex items-center justify-center gap-2 border border-brand-earth/40 py-3 font-display text-xs uppercase tracking-wider text-brand-dust transition-colors hover:border-brand-mist hover:text-brand-mist"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" />
-                  All posts
+                  Editorial
                 </Link>
                 <Link
                   href="/subscribe"
