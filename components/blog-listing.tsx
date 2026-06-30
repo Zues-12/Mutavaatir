@@ -33,6 +33,82 @@ function groupByMonth(posts: PublicBlogPost[]): [string, PublicBlogPost[]][] {
 
 /* ── Single list item (horizontal card) ─────────────────────────────────── */
 
+function BlogPostTags({ post }: { post: PublicBlogPost }) {
+  if (post.categories.length === 0 && !post.featured) return null
+
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {post.featured && (
+        <span className="flex items-center gap-1 bg-brand-clay px-2 py-0.5 font-display text-[0.6rem] font-semibold uppercase tracking-wider text-brand-void">
+          <Star className="h-2.5 w-2.5 fill-brand-void" aria-hidden />
+          Featured
+        </span>
+      )}
+      {post.categories.slice(0, 2).map((cat) => (
+        <span
+          key={cat}
+          className="border border-brand-earth/35 px-2.5 py-0.5 font-display text-[0.6rem] font-medium uppercase tracking-[0.15em] text-brand-earth"
+        >
+          {cat}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function BlogPostDate({ dayName, dayNum }: { dayName: string; dayNum: string }) {
+  return (
+    <div className="w-12 shrink-0 text-center sm:w-14">
+      <p className="font-display text-[0.65rem] font-medium uppercase tracking-[0.15em] text-brand-earth">
+        {dayName}
+      </p>
+      <p className="mt-1 font-display text-3xl font-medium leading-none text-brand-mist sm:text-4xl">
+        {dayNum}
+      </p>
+    </div>
+  )
+}
+
+function BlogPostThumbnail({ post }: { post: PublicBlogPost }) {
+  return (
+    <div className="relative h-24 w-32 shrink-0 overflow-hidden sm:h-28 sm:w-36">
+      {post.cover_image_url ? (
+        <Image
+          src={post.cover_image_url}
+          alt={post.cover_image_alt ?? post.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+          sizes="144px"
+        />
+      ) : (
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            background:
+              'radial-gradient(ellipse at 30% 60%, rgb(123 98 68 / 0.4), rgb(13 13 13 / 0.8))',
+          }}
+        >
+          <span
+            className="font-display text-3xl font-medium text-brand-earth/35"
+            aria-hidden
+          >
+            M
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function BlogPostArrow() {
+  return (
+    <ArrowUpRight
+      className="h-5 w-5 text-brand-clay/60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-clay"
+      aria-hidden
+    />
+  )
+}
+
 function BlogListItem({
   post,
   hasDivider,
@@ -50,98 +126,79 @@ function BlogListItem({
     <Link
       href={`/blog/${post.slug}`}
       className={cn(
-        'group flex items-start gap-4 border-b border-brand-earth/20 px-5 py-7 transition-colors duration-200 hover:bg-brand-earth/6 sm:gap-6 sm:px-8 sm:py-8',
+        'group block border-b border-brand-earth/20 px-5 py-7 transition-colors duration-200 hover:bg-brand-earth/6 sm:px-8 sm:py-8',
         hasDivider && 'lg:border-r lg:border-brand-earth/20',
       )}
     >
-      {/* Date column */}
-      <div className="w-12 shrink-0 text-center sm:w-14">
-        <p className="font-display text-[0.65rem] font-medium uppercase tracking-[0.15em] text-brand-earth">
-          {dayName}
-        </p>
-        <p className="mt-1 font-display text-3xl font-medium leading-none text-brand-mist sm:text-4xl">
-          {dayNum}
-        </p>
-      </div>
-
-      {/* Thumbnail */}
-      <div className="relative h-24 w-32 shrink-0 overflow-hidden sm:h-28 sm:w-36">
-        {post.cover_image_url ? (
-          <Image
-            src={post.cover_image_url}
-            alt={post.cover_image_alt ?? post.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-            sizes="144px"
-          />
-        ) : (
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{
-              background:
-                'radial-gradient(ellipse at 30% 60%, rgb(123 98 68 / 0.4), rgb(13 13 13 / 0.8))',
-            }}
-          >
-            <span
-              className="font-display text-3xl font-medium text-brand-earth/35"
-              aria-hidden
-            >
-              M
-            </span>
+      {/* Mobile layout */}
+      <div className="flex flex-col sm:hidden">
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <BlogPostTags post={post} />
           </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="min-w-0 flex-1" dir={isRtl ? 'rtl' : undefined} lang={post.language}>
-        {/* Categories + featured */}
-        {(post.categories.length > 0 || post.featured) && (
-          <div className="mb-2.5 flex flex-wrap items-center gap-2">
-            {post.featured && (
-              <span className="flex items-center gap-1 bg-brand-clay px-2 py-0.5 font-display text-[0.6rem] font-semibold uppercase tracking-wider text-brand-void">
-                <Star className="h-2.5 w-2.5 fill-brand-void" aria-hidden />
-                Featured
-              </span>
-            )}
-            {post.categories.slice(0, 2).map((cat) => (
-              <span
-                key={cat}
-                className="border border-brand-earth/35 px-2.5 py-0.5 font-display text-[0.6rem] font-medium uppercase tracking-[0.15em] text-brand-earth"
-              >
-                {cat}
-              </span>
-            ))}
+          <div className="shrink-0">
+            <BlogPostArrow />
           </div>
-        )}
+        </div>
 
-        {/* Title */}
-        <h2 className="font-display text-base font-medium leading-snug tracking-wide text-brand-mist transition-colors duration-150 group-hover:text-brand-clay sm:text-lg">
-          {post.title}
-        </h2>
+        <div className="mb-4 flex items-start gap-4">
+          <BlogPostDate dayName={dayName} dayNum={dayNum} />
+          <BlogPostThumbnail post={post} />
+        </div>
 
-        {/* Subtitle / excerpt */}
-        {(post.subtitle || post.excerpt) && (
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brand-dust/80 pb-2">
-            {post.subtitle ?? post.excerpt}
-          </p>
-        )}
+        <div dir={isRtl ? 'rtl' : undefined} lang={post.language}>
+          <h2 className="font-display text-base font-medium leading-snug tracking-wide text-brand-mist transition-colors duration-150 group-hover:text-brand-clay">
+            {post.title}
+          </h2>
 
-        {/* Author + read time */}
-        <p className="mt-3 text-xs text-brand-earth">
-          {post.author_name && (
-            <span className="text-brand-earth/70">{post.author_name}</span>
+          {(post.subtitle || post.excerpt) && (
+            <p className="py-2 line-clamp-3 text-sm leading-relaxed text-brand-dust/80">
+              {post.subtitle ?? post.excerpt}
+            </p>
           )}
-          {post.author_name && <span className="mx-1.5 opacity-40">·</span>}
-          <span>{readingTime} min read</span>
-        </p>
+
+          <p className="mt-3 text-xs text-brand-earth">
+            {post.author_name && (
+              <span className="text-brand-earth/70">{post.author_name}</span>
+            )}
+            {post.author_name && <span className="mx-1.5 opacity-40">·</span>}
+            <span>{readingTime} min read</span>
+          </p>
+        </div>
       </div>
 
-      {/* Arrow */}
-      <div className="shrink-0 pt-1">
-        <ArrowUpRight
-          className="h-5 w-5 text-brand-clay/60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-clay"
-          aria-hidden
-        />
+      {/* Desktop layout */}
+      <div className="hidden items-start gap-6 sm:flex">
+        <BlogPostDate dayName={dayName} dayNum={dayNum} />
+        <BlogPostThumbnail post={post} />
+
+        <div className="min-w-0 flex-1" dir={isRtl ? 'rtl' : undefined} lang={post.language}>
+          <div className="mb-2.5">
+            <BlogPostTags post={post} />
+          </div>
+
+          <h2 className="font-display text-lg font-medium leading-snug tracking-wide text-brand-mist transition-colors duration-150 group-hover:text-brand-clay">
+            {post.title}
+          </h2>
+
+          {(post.subtitle || post.excerpt) && (
+            <p className="p-2 line-clamp-3 text-sm leading-relaxed text-brand-dust/80">
+              {post.subtitle ?? post.excerpt}
+            </p>
+          )}
+
+          <p className="mt-3 text-xs text-brand-earth">
+            {post.author_name && (
+              <span className="text-brand-earth/70">{post.author_name}</span>
+            )}
+            {post.author_name && <span className="mx-1.5 opacity-40">·</span>}
+            <span>{readingTime} min read</span>
+          </p>
+        </div>
+
+        <div className="shrink-0 pt-1">
+          <BlogPostArrow />
+        </div>
       </div>
     </Link>
   )
