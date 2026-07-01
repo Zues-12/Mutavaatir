@@ -415,12 +415,54 @@ html {
   margin: 2rem 0;
 }
 
-.blog-editor-content .tiptap img,
-.blog-preview-content img {
+.blog-editor-content .tiptap img:not(.blog-image-figure__img),
+.blog-preview-content img:not(.blog-image-figure__img) {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
+  border-radius: 0.375rem;
+}
+
+.blog-editor-content .tiptap .blog-image-figure,
+.blog-preview-content .blog-image-figure {
+  position: relative;
+  max-width: 100%;
+  margin-block: 1.25rem;
+  margin-inline: auto;
+}
+
+.blog-editor-content .tiptap .blog-image-figure--align-left,
+.blog-preview-content .blog-image-figure--align-left {
+  margin-inline: 0 auto 0;
+}
+
+.blog-editor-content .tiptap .blog-image-figure--align-center,
+.blog-preview-content .blog-image-figure--align-center {
+  margin-inline: auto;
+}
+
+.blog-editor-content .tiptap .blog-image-figure--align-right,
+.blog-preview-content .blog-image-figure--align-right {
+  margin-inline: 0 0 auto;
+}
+
+.blog-editor-content .tiptap .blog-image-figure__img,
+.blog-preview-content .blog-image-figure__img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+}
+
+.blog-editor-content .tiptap .blog-image-figure__caption,
+.blog-preview-content .blog-image-figure__caption {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgb(159 134 102 / 0.85);
 }
 
 .blog-editor-content .tiptap mark,
